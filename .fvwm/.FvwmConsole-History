@@ -1,0 +1,100 @@
+All (State 0) Maximize EWMHiWa True
+Style "edesk" ResizeHintOverride,ResizeHintOverride
+All (State 0) Maximize EWMHiWa True 100 100
+All (State 0) Maximize EWMHiWa True 100 90
+All (State 0) Maximize EWMHiWa True 100 100
+All (State 0) Maximize EWMHiWa True 1280p 1024p
+All (State 0) Maximize EWMHiWa True 1280p 1023p
+Restart ~/.xinitrc
+StartEmacs
+StartEmacs
+StartEmacs
+StartEmacs
+StartEmacs
+StartEmacs
+DestroyFunc StartEmacs 
+AddToFunc StartEmacs
++ I Exec exec emacs -name edesk --debug-init
++ I Wait edesk
++ I All (State 0) Maximize EWMHiWa True
+StartEmacs
+StartEmacs
+StartEmacs
+StartEmacs
+StartEmacs
+StartEmacs
+StartEmacs
+Restart ion3
+StartEmacs
+Restart ion3
+Style * MwmDescore
+Style * MwmDecor
+restart fvwm
+Style * MwmDecor
+Style (edesk) !WinListSkip
+Style (edesk) !SkipWinList
+Style (edesk) !UseSkipList
+Style "edesk" !WindowSkipList
+Style "edesk" !SkipWindowList
+Style "edesk" !WindowListSkip
+Style "edesk" WindowListSkip
+Style "edesk" WindowSkipList
+Style "edesk" SkipWindowList
+restart fvwm
+restart fvwm
+restart
+Exec exec xbattbar
+restart
+Style "edesk" !ResizeHintOverride
+All (State 0) Maximize EWMHiWa True 1280p 1024p
+BugOpts RaiseOverUnmanaged
+restart fvwm
+restart fvwm
+restart fvwm
+restart fvwm
+restart fvwm
+restart
+EchoFunc StartFunction
+EchoFuncDefinition StartFunction
+DestroyFunc StartFunction
+AddToFunc StartFunction I Module FvwmCommandS
+AddToFunc StartFunction I Module FvwmAuto 1 -menter enter_handler
+AddToFunc StartFunction I Module FvwmButtons Launcher -g -0+0
+AddToFunc StartFunction I Module FvwmWindowMenu
+DestroyFunc InitFunction
+AddToFunc InitFunction I Function StartEmacs
+Restart
+All (State 0) Maximize EWMHiWa True
+Restart
+Restart
+Restart
+Restart
+Restart
+Restart
+Restart
+FvwmIdent
+FvwmIdent
+FvwmIdent
+WindowId  0x400001 FvwmIdent
+WindowId  0x400001 Module FvwmIdent
+WindowId  0x400001 Recapture
+WindowId  0x400001 PlaceAgain
+Restart
+xrandr -s 1280x1024
+All (Maximized) Maximize
+All (Maximized) Maximize
+xrandr -s 1024x768
+All (Maximized) Maximize True
+All (Maximized) Maximize 
+All (Maximized) Maximize True
+xrandr -s 1280x1024
+All (Maximized) Maximize True
+Restart
+Test (F /home/thequux/lisp) Exec exec xmessage foo
+Restart
+Restart
+Restart
+Restart
+Restart
+Restart
+Restart

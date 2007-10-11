@@ -1,0 +1,34 @@
+# Frame
+
+Colorset 1 fg rgb:7b/a5/ff, bg rgb:29/63/b5
+Colorset 2 fg rgb:ff/ff/ff, bg rgb:52/94/f7
+ColorSet 3 bg rgb:31/73/d6
+Style * BorderWidth 4, FVWMBorder, !Handles, Colorset 1, HilightColorset 2
+
+AddToDecor Default
++ TitleStyle LeftJustified Height 20
++ TitleStyle Active     ( MultiPixmap RightOfText '$./title.png', \
+                                      LeftMain Colorset 2, \
+                                      UnderText Colorset 2, \
+                                      RightButtons Simple, \
+                                      RightMain Solid rgb:31/73/d6 \
+                          -- flat ) \
+             Inactive   ( MultiPixmap RightOfText '$./title-inactive.png', \
+                                      Main Colorset 1 \
+                          -- flat )
++ TitleStyle -- flat
++ BorderStyle  -- NoInset HiddenHandles 
+#+ BorderStyle Inactive ( -- NoInset HiddenHandles )
++ AddButtonStyle All Active ( -- flat UseTitleStyle ) Inactive ( -- flat UseTitleStyle )
++ AddButtonStyle Right Active ( -- Colorset 3 )
++ AddButtonStyle 1 ActiveUp     ( Pixmap '$./menu.png' -- flat ) \
+                   ActiveDown   ( Pixmap '$./menu-clicked.png' -- flat  ) \
+                   Inactive     ( Pixmap '$./menu-inactive.png' -- flat )
++ AddButtonStyle 2 ActiveUp     ( Pixmap '$./maximize.png' -- flat ) \
+                   ActiveDown   ( Pixmap '$./maximize-clicked.png' -- flat ) \
+                   Inactive     ( Pixmap '$./maximize-inactive.png' -- flat )
++ AddButtonStyle 4 ActiveUp     ( Pixmap '$./iconify.png' -- flat ) \
+                   ActiveDown   ( Pixmap '$./iconify-clicked.png' -- flat ) \
+                   Inactive     ( Pixmap '$./iconify-inactive.png' -- flat )
+
+Echo foo

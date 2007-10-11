@@ -1,0 +1,18 @@
+DestroyModuleConfig	QuitVerify:	*
+*QuitVerify:	GrabServer
+*QuitVerify:	WarpPointer
+*QuitVerify:	Command Nop
+
+*QuitVerify:	Line	center
+*QuitVerify:	Text 	"Do you really want to exit?"
+
+*QuitVerify:	Line	expand
+*QuitVerify:	Button	quit	"Quit"		^M
+*QuitVerify:	Command Quit
+
+*QuitVerify:	Button	quit	"Cancel"	^[
+*QuitVerify:	Command Nop
+
+*QuitVerify:	Button	restart	"Restart"	^I
+*QuitVerify:	Command Restart
+

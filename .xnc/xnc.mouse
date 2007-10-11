@@ -1,0 +1,12 @@
+# Mouse actions config file for X Northern Captain
+# This file is generated automatically by xnc
+button_1_pressed              : AMouseSetCurrent
+button_1_double_click         : AExecute
+button_2_pressed              : AShowContextMenu
+button_3_pressed              : ASelectCurrent
+ctrl+button_1_pressed         : ASelectCurrent
+ctrl+button_1_motion          : ASelectCurrent
+button_3_motion               : ASelectCurrent
+button_4_pressed              : AMoveLeft
+button_5_pressed              : AMoveRight
+# ===================== End of file ==================

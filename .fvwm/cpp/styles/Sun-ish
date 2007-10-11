@@ -1,0 +1,33 @@
+Setenv c.bg1	rgb:33/33/66
+SetEnv c.bg2	rgb:66/66/99
+Setenv c.bg3	rgb:99/99/cc
+setenv c.bg4	rgb:cc/cc/ff
+SetEnv c.fg	white
+Style * BorderWidth 10,HandleWidth 7,SloppyFocus, MouseFocusClickRaises
+Style * DecorateTransient, MwmBorder, HandleWidth 5, BorderWidth 5, Colorset 1, HilightColorset 2, IconTitleRelief 1
+MenuStyle * Fvwm,MenuColorset 3, ActiveColorset 4, AutomaticHotkeys, PopupOffset -2 100
+
+CleanupColorsets
+# default
+Colorset 0	fg white,	bg rgb:66/66/99 
+# bg window
+Colorset 1	fg white, 	bg rgb:66/66/99
+#fg window
+Colorset 2	fg black, 	bg rgb:99/99/cc, \
+		hi rgb:cc/cc/ff,sh rgb:66/66/99
+# menu background
+Colorset 3	fg white,	bg rgb:66/66/99
+#Colorset 3	fg white,	Tint rgb:66/66/99 50, RootTransparent, bg average, bgTint rgb:66/66/99 50
+# menu selected
+Colorset 4	fb white,	bg $[bg.cs3]
+#Colorset 4	fg white,	Tint rgb:66/66/99 50, RootTransparent, bg average, bgTint rgb:66/66/99 50
+# menu disabled
+Colorset 5	fb rgb:cc/cc/ff,bg $[bg.cs3]
+#Colorset 5	fg rgb:cc/cc/ff,Tint rgb:66/66/99 50, RootTransparent, bg average, bgTint rgb:66/66/99 50
+# Module
+Colorset 6	fg white,	bg $[bg.cs3]
+#Colorset 6	fg white,	Tint rgb:66/66/99 50, RootTransparent, bg average, bgTint rgb:66/66/99 50
+# Hilight?
+# Colorset 7
+
+# vim:ft=fvwm

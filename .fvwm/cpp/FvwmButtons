@@ -1,0 +1,46 @@
+# vim: ft=fvwm
+AddToFunc StartFunction "I" Module FvwmButtons Launcher -g -0+0
+Style "Launcher" Sticky,StaysOnTop,WindowListSkip,NoTitle,HandleWidth 1
+
+#*Launcher: Fore $[fg.cs]
+#*Launcher: Back $[c.bg2]
+DestroyFunc StartPanelPager
+AddToFunc StartPanelPager
++ I Module FvwmPager PanelPager 0 $[maxdesk]
+
+*Launcher: Colorset 6
+*Launcher: BoxSize fixed
+*Launcher: Rows 2/usr/share/doc/wmbiff-0.4.27/sample.wmbiffrc.bz2
+*Launcher: Columns 7
+*Launcher: (4x2+0+0, Swallow "FvwmIconMan" "FvwmIconMan", Size 256 128)
+*Launcher: (1x1+4+0, Panel(left,indicator, position Button top) "FvwmPager" "StartPanelPager")
+#"FvwmPager PanelPager 0 $[maxdesk]")
+*Launcher: (1x1+5+1, Swallow(UseOld,NoHints,Respawn) "oclock" "Exec oclock -bg $[bg.cs6] -shape -bd $[fg.cs6] -fg $[fg.cs6] ")
+*Launcher: (2x1+5+0, Swallow(UseOld,NoHints,Respawn) "xload" "Exec xload -bg $[bg.cs6] -fg $[fg.cs6]")
+*Launcher: (1x1+4+1, Panel(Down,indicator,position Button right) "FvwmConsole" "FvwmConsole")
+*Launcher: (1x1+6+1, Swallow(UseOld,NoHints,Respawn) "wmbsdbatt" "Exec wmbsdbatt")
+*FvwmIconMan: Colorset		6
+*FvwmIconMan: Action      Mouse   1 N sendcommand "Iconify false", sendcommand Raise, sendcommand FlipFocus
+*FvwmIconMan: Action      Mouse   2 N sendcommand "Iconify 1"
+*FvwmIconMan: Action      Mouse   3 N sendcommand "FvwmIdent"
+*FvwmIconMan: IconButton	flat 
+*FvwmIconMan: IconColorset	5
+*FvwmIconMan: PlainButton	flat 
+*FvwmIconMan: PlainColorset	3
+*FvwmIconMan: SelectButton	down 
+*FvwmIconMan: SelectColorset	4
+*FvwmIconMan: FocusButton	up 
+*FvwmIconMan: FocusColorset	3
+*FvwmIconMan: FocusAndSelectButton	up 
+*FvwmIconMan: FocusAndSelectColorset	3
+*FvwmIconMan: ReliefThickness	1
+*FvwmIconMan: ButtonGeometry  300x0
+*FvwmIconMan: ManagerGeometry 1x5
+*PanelPager:	Columns		1
+Style FvwmConsole	StickyAcrossDesks
+
+Function autohide Launcher 500 N
+Style "FvwmPager" Sticky,StaysOnTop,MwmDecor
+
+
+

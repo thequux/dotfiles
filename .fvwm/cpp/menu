@@ -1,0 +1,46 @@
+#vim ft=fvwm:foldmethod=marker
+
+DestroyMenu Main
+AddToMenu Main Main Title
++ "&1 Xterm"		Terminal 
++ "&2 Firefox"		Exec exec firefox
++ "&R Remote"		Popup Remote
++ "&F File Manager"	Exec exec xnc
++ ""			Nop
++ "&X Exit"		Popup ExitMenu
+
+DestroyMenu ExitMenu
+AddToMenu ExitMenu
++ Title			"Exit?"
++ "&X Exit..."		Module FvwmForm QuitVerify
++ "&1 Only xterm"	Restart xterm
+DestroyMenu Remote
+AddToMenu Remote Remote Title
++ "&X Xorn"	Terminal "Xorn"		ssh thequux@linux.ucla.edu
++ "&U Ugrad"	Terminal "SEAS Ugrad"	ssh -D1080 hirsch@ugrad.seas.ucla.edu
++ "&S Spark"	Terminal "Spark"	ssh thequux@169.232.89.14
+
+AddToFunc StartFunction I Module FvwmWindowMenu
+*FvwmWindowMenu: AllDesks off
+*FvwmWindowMenu: AllPages Off
+*FvwmWindowMenu: MenuName WindowMenu
+
+DestroyMenu WindowOps
+AddToMenu WindowOps
++ "Close"	Close
++ "Iconify"	Iconify
++ "Shade"	Shade
++ "Maximize"	Maximize
++ "Destroy"	Destroy
++ "Stick"	Stick
++ ""		Nop
++ "Move to desk" Popup MoveToDesk
+
+
+Mouse 2 R A 	Menu Main Nop
+Key Space A 4	Menu Main Nop
+Key Space A M	Read '$./menu'
+Key Tab	  A M	-
+Key Tab   A 4   WindowList Root c c CurrentAtEnd,SelectOnRelease Super_L
+Key Tab	  A 4S  WindowList Root c c CurrentAtEnd,SelectOnRelease Super_L,ReverseOrder
+Key Tab M 4S	MenuMoveCursor -1

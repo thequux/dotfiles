@@ -1,0 +1,52 @@
+# autohiding stuff {{{
+# autohide {{{
+DestroyFunc autohide
+AddToFunc autohide
++ I AddToFunc enter_handler I autohide_show $0 $1 $2
++ I Style $0 WindowShadeSteps 1p,WindowShadeShrinks
+# }}}
+# autohide_show {{{
+DestroyFunc autohide_show
+AddToFunc autohide_show
++ I ThisWindow ($0) Deschedule $[w.id]
++ I ThisWindow ($0) KeepRc ThisWindow (shaded) WindowShade off
++ I TestRc (!Match) All ($0, !shaded) autohide_hide $1 $2
+#}}}
+# autohide_hide {{{
+DestroyFunc autohide_hide
+AddToFunc autohide_hide
++ I Schedule $0 $[w.id] WindowShade $1
++ I Schedule $0 $[w.id] Deschedule $[w.id]
+# }}}
+# Setup... {{{
+DestroyFunc enter_handler
+AddToFunc StartFunction
++ I Module FvwmAuto 1 -menter enter_handler
+# }}}
+# }}} 
+# Terminal
+DestroyFunc Terminal
+AddToFunc Terminal
++ I Exec Term.sh $*
+
+DestroyFunc	GenMoveToDesk
+AddToFunc	GenMoveToDesk
++ I DestroyMenu	MoveToDesk
++ I AddToMenu	MoveToDesk "Move to desk" Title
++ I + "&N Next"	MoveToDesk 1 0 $[maxdesk]
++ I + "&P Prev"	MoveToDesk -1 0 $[maxdesk]
++ I + ""	Nop
+SetEnv maxdesk -1
+
+DestroyFunc NewDesk
+AddToFunc NewDesk
++ I PipeRead "echo SetEnv maxdesk $(( $[maxdesk] + 1 ))"
++ I DesktopName $[maxdesk] $0
++ I PipeRead "echo \'AddToFunc GenMoveToDesk I AddToMenu MoveToDesk \'\\\'\'&$[maxdesk] $0\'\\\'\' MoveToDesk 0 $[maxdesk]\'"
++ I GenMoveToDesk
+
+DestroyFunc xrandr
+AddToFunc   xrandr
++ I Exec xrandr $*
++ I Restart
+# vim: ft=fvwm:foldmethod=marker

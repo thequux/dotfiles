@@ -1,0 +1,65 @@
+#this must come first
+Exec echo -ne "\x1b[2J\x1b[1;1H"
+AddToFunc StartFunction "I" Module FvwmCommandS
+
+Read '$./style'
+Read '$./functions'
+Read '$./forms'
+
+Read '$./snapping'
+Read '$./keymouse'
+Read '$./desks'
+
+Read '$./FvwmButtons'
+Read '$./menu'
+
+#Key Space A M 		Read "$./config"
+Key Space A C4		Restart
+#-bg $[c.bg] -fg $[c.fg]"
+EdgeScroll 100 0 
+EdgeResistance 10 10
+EdgeThickness 1
+Style * MwmDecor
+
+
+
+DeskTopSize 4x1
+
+# Taskbars
+Style FvwmTaskBar Sticky,NoTitle,BorderWidth 1,HandleWidth 1,StaysOnTop,WindowListSkip,CirculateSkip
+
+#AddToFunc StartFunction "I" Module FvwmTaskBar
+*FvwmTaskBar: Back $[c.bg4]
+*FvwmTaskBar: IconBack $[c.bg3]
+*FvwmTaskBar: UseSkipList
+*FvwmTaskBar: PageOnly 
+*FvwmTaskBar: DeskOnly
+*FvwmTaskBar: UseIconNames
+*FvwmTaskBar: Pad 0
+*FvwmTaskBar: 3DFvwm
+*FvwmTaskBar: HighlightFocus
+*FvwmTaskBar: StartCommand Popup Main rectangle $widthx$height+$left+$top 0 -100m
+#l r t b
+EwmhBaseStruts 0 0 2 0
+
+# Give me EMACS!!!
+
+# The state 0 is JUST for emacs in edesk mode.
+Style "edesk" !borders,StaysOnBottom,NoTitle,WindowListSkip,CirculateSkip,StaysPut,FixedPosition,FixedPPosition,FixedSize,FixedPSize,!Closable,AllowMaximizeFixedSize,StartsOnPage 0 0,SkipMapping,State 0
+
+DestroyFunc StartEmacs
+AddToFunc StartEmacs
++ I Exec exec emacs -name edesk --debug-init
++ I Wait edesk
++ I All (State 0) Maximize EWMHiWa True
+
+AddToFunc RestartFunction
++ I All (State 0) Maximize EWMHiWa True
+
+AddToFunc InitFunction
++ I Function StartEmacs
+
+
+AddToFunc ExitFunction
++ I Exec exec 
+# vim: ft=fvwm 

@@ -1,0 +1,12 @@
+#vim: ft-fvwm
+DestroyFunc FvwmMenuOrDelete
+AddToFunc FvwmMenuOrDelete
++ H Nop
++ M Nop
++ C Menu WindowOps
++ D Delete
+
+Mouse 	1 1 N		FvwmMenuOrDelete
+Mouse	1 2 N		Maximize
+Mouse	1 4I N		Iconify
+Mouse	1 3 N		WindowShade
