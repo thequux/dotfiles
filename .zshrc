@@ -19,7 +19,8 @@ unsetopt beep nomatch
 bindkey -e
 # End of lines configured by zsh-newuser-install
 
-PROMPT=$'%{\e[1;32m%}%n%{\e[0;39m%}@%{\e[1;31m%}%m%{\e[0;39m%} <%{\e[1;36m%}%~%{\e[0;39m%}>\n%{\e[1m%}[%?]%{\e[0m%} '
+
+PROMPT=$'%{\e[1;32m%}%n%{\e[0;39m%}@%{\e[1;31m%}%m%{\e[0;39m%} <%{\e[1;36m%}%~%{\e[0;39m%}>\n%{\e[%(#.31.1)m%}[%?]%{\e[0m%} '
 
 export EDITOR=emacsclient
 export ALTERNATE_EDITOR=emacs

@@ -1,4 +1,4 @@
 #!/bin/sh
 xmodmap ~/.Xmodmaprc
 
-exec fvwm
+exec startxfce4
