@@ -49,11 +49,12 @@
  '(cperl-lazy-help-time 3)
  '(font-lock-verbose nil)
  '(inferior-lisp-program "/usr/bin/sbcl")
+ '(inhibit-splash-screen t)
  '(inhibit-startup-screen t)
  '(jit-lock-context-time 0.1)
  '(mouse-autoselect-window t)
  '(mouse-yank-at-point t)
- '(muse-project-alist (quote (("WikiPlanner" ("~/plans" :default "index" :major-mode planner-mode :visit-link planner-visit-link)))))
+ '(muse-project-alist (quote (("WikiPlanner" ("~/plans" :default "index" :major-mode planner-mode :visit-link planner-visit-link)))) t)
  '(predictive-add-to-dict-ask nil)
  '(predictive-auto-add-to-dict t)
  '(predictive-auto-learn t)
@@ -62,9 +63,10 @@
  '(predictive-main-dict (quote dict-local))
  '(predictive-use-buffer-local-dict t)
  '(scalable-fonts-allowed t)
+ '(sclang-library-configuration-file "~/.sclang.cfg")
  '(show-paren-mode t nil (paren))
  '(show-paren-style (quote mixed))
- '(vc-handled-backends (quote (RCS CVS SVN SCCS HG Arch MCVS))))
+ '(vc-handled-backends (quote (RCS CVS SVN SCCS Arch MCVS))))
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.

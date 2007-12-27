@@ -1,4 +1,4 @@
 #!/bin/sh
 xmodmap ~/.Xmodmaprc
 
-exec startxfce4
+exec ion3

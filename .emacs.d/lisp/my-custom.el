@@ -24,7 +24,7 @@
  '(scalable-fonts-allowed t)
  '(show-paren-mode t nil (paren))
  '(show-paren-style (quote mixed))
- '(vc-handled-backends (quote (RCS CVS SVN SCCS HG Arch MCVS))))
+ '(vc-handled-backends (quote (RCS CVS SVN SCCS Arch MCVS))))
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.

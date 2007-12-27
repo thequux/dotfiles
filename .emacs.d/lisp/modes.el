@@ -41,6 +41,7 @@
 	     (setq timer
 		   (run-at-time .5 nil
 				(lambda () (setq tab-mode 0))))))))
+(setq ispell-program-name "aspell")
 (add-hook 'lisp-mode-hook
 	  'my-lisp-mode-hook)
 (add-hook 'emacs-lisp-mode-hook
