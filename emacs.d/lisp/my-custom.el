@@ -4,16 +4,18 @@
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
+ '(c-basic-offset 8)
  '(cperl-autoindent-on-semi t)
  '(cperl-font-lock t)
  '(cperl-hairy nil)
  '(cperl-indent-wrt-brace nil)
  '(cperl-lazy-help-time 3)
  '(font-lock-verbose nil)
- '(inhibit-splash-screen t)
+ '(inhibit-startup-screen t)
  '(jit-lock-context-time 0.1)
  '(mouse-autoselect-window t)
  '(mouse-yank-at-point t)
+ '(muse-project-alist (quote (("WikiPlanner" ("~/plans" "index")))))
  '(predictive-add-to-dict-ask nil)
  '(predictive-auto-add-to-dict t)
  '(predictive-auto-learn t)
@@ -21,17 +23,21 @@
  '(predictive-flush-auto-learn-delay 1)
  '(predictive-main-dict (quote dict-local))
  '(predictive-use-buffer-local-dict t)
+ '(safe-local-variable-values (quote ((add-log-time-zone-rule . t))))
  '(scalable-fonts-allowed t)
  '(show-paren-mode t nil (paren))
  '(show-paren-style (quote mixed))
- '(vc-handled-backends (quote (RCS CVS SVN SCCS HG Arch MCVS))))
+ '(standard-indent 8)
+ '(vc-handled-backends (quote (RCS CVS SVN SCCS HG Arch MCVS)))
+ '(version-control t))
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
- '(default ((t (:stipple nil :background "grey20" :foreground "white" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 109 :width normal :family "Consolas"))))
+ '(default ((t (:stipple nil :background "grey20" :foreground "white" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 140 :width normal :family "xos4-terminus"))))
  '(cursor ((t (:background "white"))))
+ '(custom-button ((((type x w32 mac) (class color)) (:background "lightgrey" :foreground "black" :box (:line-width -1 :style released-button)))))
  '(fixed-pitch ((t (:family "Consolas"))))
  '(font-lock-builtin-face ((((class color) (min-colors 88) (background dark)) (:foreground "#ff80ff" :weight bold))))
  '(font-lock-comment-face ((((class color) (min-colors 88) (background dark)) (:foreground "#80a0ff"))))
