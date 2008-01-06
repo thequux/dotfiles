@@ -1,11 +1,11 @@
 ;;; Lisp mode
 (require 'paredit)
-
+(require 'verilog-mode)
 ; Set up slime
-(setq inferior-lisp-program "/usr/local/bin/lisp")
+(setq inferior-lisp-program "/usr/bin/sbcl")
 (require 'slime)
 (slime-setup)
-
+(setq slime-net-coding-system 'utf-8-unix)
 ;; Fix indentation
 (defun gimme-local-map ()
   (or (current-local-map)
@@ -41,7 +41,29 @@
 	     (setq timer
 		   (run-at-time .5 nil
 				(lambda () (setq tab-mode 0))))))))
+
+
+(defface page-pp '((default :weight bold :slant italic :foreground "green" :box (:line-width 2 :style pressed-button)))
+  "Pretty-printed page break (^L)")
+
+(defun page-pp-display-vec ()
+  (map 'vector (lambda (x) (make-glyph-code x 'page-pp))
+       "          Page Break          "))
+
+(progn
+  (unless standard-display-table
+    (setf standard-display-table (make-display-table)))
+  (aset standard-display-table ?\C-L
+	(page-pp-display-vec)))
+
 (add-hook 'lisp-mode-hook
 	  'my-lisp-mode-hook)
 (add-hook 'emacs-lisp-mode-hook
 	  'my-lisp-mode-hook)
+
+;; Add verilog mode to auto-mode-alist.
+(setq auto-mode-alist
+      (append
+       ;; Verilog mode...
+       '(("\\.v\\'" . verilog-mode))
+       auto-mode-alist))
