@@ -6,6 +6,7 @@
 ;(load custom-file)
 
 (add-to-list 'load-path "/home/thequux/.emacs.d/lisp")
+(add-to-list 'load-path "/home/thequux/.emacs.d/lisp/slime-2.0")
 (add-to-list 'load-path "/home/thequux/.emacs.d")
 ;(require 'site-gentoo)
 (load "modes")
