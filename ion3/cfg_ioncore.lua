@@ -344,6 +344,7 @@ defmenu("sessionmenu", {
     menuentry("Save",           "ioncore.snapshot()"),
     menuentry("Restart",        "ioncore.restart()"),
     menuentry("Restart TWM",    "ioncore.restart_other('twm')"),
+    menuentry("Restart XMonad",    "ioncore.restart_other('xmonad')"),
     menuentry("Exit",           "ioncore.shutdown()"),
 })
 
