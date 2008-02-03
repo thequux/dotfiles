@@ -1,4 +1,5 @@
 !XTerm.vt100.background:	rgb:6B/81/92
-XTerm.vt100.background:		rgb:32/5b/58
+!XTerm.vt100.background:	rgb:32/5b/58
+XTerm.vt100.background:		rgb:1E/36/35
 XTerm.vt100.foreground:		white
 XTerm*allowSendEvents:		true
