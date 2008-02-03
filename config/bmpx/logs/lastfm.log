@@ -1,0 +1,9 @@
+2007-07-15 21:03:21 LastFM: Logging started for [LastFM] at [2007-07-15 21:03:21], PID[27292]
+2007-07-15 21:03:53 LastFM: ConnectionError: Please check your username and password!
+2007-07-15 21:04:55 LastFM: Logging started for [LastFM] at [2007-07-15 21:04:55], PID[29318]
+2007-07-15 21:05:08 LastFM: ConnectionError: Please check your username and password!
+2007-07-15 21:07:36 LastFM: Logging started for [LastFM] at [2007-07-15 21:07:36], PID[13881]
+2007-07-15 21:08:10 LastFM: Logging started for [LastFM] at [2007-07-15 21:08:10], PID[17662]
+2007-07-15 21:08:22 LastFM: Logging started for [LastFM] at [2007-07-15 21:08:22], PID[18872]
+2007-07-15 21:09:36 LastFM: Logging started for [LastFM] at [2007-07-15 21:09:36], PID[22187]
+2007-07-15 21:10:19 LastFM: NetworkError: Could not read status line: connection was closed by server.

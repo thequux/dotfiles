@@ -4,7 +4,7 @@
 	  :default "index"
 	  :major-mode planner-mode
 	  :visit-link planner-visit-link))))
-(require 'planner)
+;(require 'planner)
 
 ;;; setup bindings
 ;; Note that f1 is bound to the help keymap by default, and if I don't change it, all

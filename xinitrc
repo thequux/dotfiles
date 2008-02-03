@@ -1,6 +1,6 @@
 #!/bin/sh
 export PATH="$HOME/bin:$PATH"
 xmodmap ~/.Xmodmaprc
-ion3
+xmonad
 exec xterm
 #exec startxfce4
