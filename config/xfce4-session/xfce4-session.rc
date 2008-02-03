@@ -1,0 +1,7 @@
+[Splash Screen]
+Engine=balou
+
+[General]
+SessionName=Default
+SaveOnExit=true
+

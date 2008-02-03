@@ -7,7 +7,6 @@
 
 (add-to-list 'load-path "/home/thequux/.emacs.d/lisp")
 (add-to-list 'load-path "/home/thequux/.emacs.d")
-;(require 'site-gentoo)
 (load "modes")
 (load "planner-rc")
 (load "my-custom")

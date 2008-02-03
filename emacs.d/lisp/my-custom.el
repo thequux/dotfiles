@@ -11,6 +11,7 @@
  '(cperl-indent-wrt-brace nil)
  '(cperl-lazy-help-time 3)
  '(font-lock-verbose nil)
+ '(inhibit-splash-screen t)
  '(inhibit-startup-screen t)
  '(jit-lock-context-time 0.1)
  '(mouse-autoselect-window t)
@@ -35,7 +36,7 @@
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
- '(default ((t (:stipple nil :background "grey20" :foreground "white" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 140 :width normal :family "xos4-terminus"))))
+ '(default ((t (:stipple nil :background "grey20" :foreground "white" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 109 :width normal :family "Consolas"))))
  '(cursor ((t (:background "white"))))
  '(custom-button ((((type x w32 mac) (class color)) (:background "lightgrey" :foreground "black" :box (:line-width -1 :style released-button)))))
  '(fixed-pitch ((t (:family "Consolas"))))

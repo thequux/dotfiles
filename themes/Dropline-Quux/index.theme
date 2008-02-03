@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Dropline-Quux
+Type=X-GNOME-Metatheme
+Comment=
+Encoding=UTF-8
+
+[X-GNOME-Metatheme]
+GtkTheme=ClearLime
+MetacityTheme=
+IconTheme=dlg-neu

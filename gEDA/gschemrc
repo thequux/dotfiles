@@ -1,0 +1,1 @@
+;(load (string-append gedadatarc "/gschem-lightbg")) ; light background

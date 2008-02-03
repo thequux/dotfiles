@@ -1,0 +1,144 @@
+2007-07-15 21:03:21 BMP: Logging started for [BMP] at [2007-07-15 21:03:21], PID[27292]
+2007-07-15 21:03:21 BMP: Unable to parse configuration file
+2007-07-15 21:03:22 BMP: sm.cc:286: Unable to open SM connection: SESSION_MANAGER environment variable not defined
+2007-07-15 21:03:23 BMP: Running: CServiceCore (DBus:org.beepmediaplayer.bmp)
+2007-07-15 21:03:23 BMP: (II) Taglib plugin load SUCCESS '/usr/lib/bmpx/plugins/taglib/libtaglib_plugin_mp3.so'
+2007-07-15 21:03:23 BMP:      >> Registered mp3
+2007-07-15 21:03:24 BMP: (II) Taglib plugin load SUCCESS '/usr/lib/bmpx/plugins/taglib/libtaglib_plugin_mp4.so'
+2007-07-15 21:03:24 BMP:      >> Registered mp4
+2007-07-15 21:03:24 BMP: (II) Taglib plugin load SUCCESS '/usr/lib/bmpx/plugins/taglib/libtaglib_plugin_mpc.so'
+2007-07-15 21:03:24 BMP:      >> Registered mpc
+2007-07-15 21:03:24 BMP: (II) Taglib plugin load SUCCESS '/usr/lib/bmpx/plugins/taglib/libtaglib_plugin_ogg.so'
+2007-07-15 21:03:24 BMP:      >> Registered ogg
+2007-07-15 21:03:24 BMP: (II) Taglib plugin load SUCCESS '/usr/lib/bmpx/plugins/taglib/libtaglib_plugin_flac.so'
+2007-07-15 21:03:24 BMP:      >> Registered flac
+2007-07-15 21:03:24 BMP: (II) Taglib plugin load SUCCESS '/usr/lib/bmpx/plugins/taglib/libtaglib_plugin_wma.so'
+2007-07-15 21:03:24 BMP:      >> Registered wma
+2007-07-15 21:03:24 BMP: (II) Taglib plugin load SUCCESS '/usr/lib/bmpx/plugins/taglib/libtaglib_plugin_rmff.so'
+2007-07-15 21:03:24 BMP: (II) Taglib plugin load SUCCESS '/usr/lib/bmpx/plugins/taglib/libtaglib_plugin_audible.so'
+2007-07-15 21:03:42 BMP: Transport plugin 'file' loaded.
+2007-07-15 21:03:42 BMP: Transport plugin 'http' loaded.
+2007-07-15 21:03:42 BMP: Container plugin 'PLS Playlist' loaded
+2007-07-15 21:03:42 BMP: Container plugin 'Query Parser' loaded
+2007-07-15 21:03:42 BMP: Container plugin 'XSPF Playlist' loaded
+2007-07-15 21:03:42 BMP: Container plugin 'Folder Container Plugin' loaded
+2007-07-15 21:03:42 BMP: Container plugin 'M3U Playlist' loaded
+2007-07-15 21:03:42 BMP: Container plugin 'MLQ Playlist' loaded
+2007-07-15 21:03:42 BMP: Running: Monitor
+2007-07-15 21:03:44 BMP: Starting UI
+2007-07-15 21:04:45 BMP: Saving LQM to /home/thequux/.config/bmpx/lastfm.lqm
+2007-07-15 21:04:45 BMP: Saved 204 characters
+2007-07-15 21:04:55 BMP: Logging started for [BMP] at [2007-07-15 21:04:55], PID[29318]
+2007-07-15 21:04:55 BMP: Unable to parse configuration file
+2007-07-15 21:04:55 BMP: sm.cc:286: Unable to open SM connection: SESSION_MANAGER environment variable not defined
+2007-07-15 21:04:55 BMP: Running: CServiceCore (DBus:org.beepmediaplayer.bmp)
+2007-07-15 21:04:56 BMP: (II) Taglib plugin load SUCCESS '/usr/lib/bmpx/plugins/taglib/libtaglib_plugin_mp3.so'
+2007-07-15 21:04:56 BMP:      >> Registered mp3
+2007-07-15 21:04:56 BMP: (II) Taglib plugin load SUCCESS '/usr/lib/bmpx/plugins/taglib/libtaglib_plugin_mp4.so'
+2007-07-15 21:04:56 BMP:      >> Registered mp4
+2007-07-15 21:04:56 BMP: (II) Taglib plugin load SUCCESS '/usr/lib/bmpx/plugins/taglib/libtaglib_plugin_mpc.so'
+2007-07-15 21:04:56 BMP:      >> Registered mpc
+2007-07-15 21:04:56 BMP: (II) Taglib plugin load SUCCESS '/usr/lib/bmpx/plugins/taglib/libtaglib_plugin_ogg.so'
+2007-07-15 21:04:56 BMP:      >> Registered ogg
+2007-07-15 21:04:56 BMP: (II) Taglib plugin load SUCCESS '/usr/lib/bmpx/plugins/taglib/libtaglib_plugin_flac.so'
+2007-07-15 21:04:56 BMP:      >> Registered flac
+2007-07-15 21:04:56 BMP: (II) Taglib plugin load SUCCESS '/usr/lib/bmpx/plugins/taglib/libtaglib_plugin_wma.so'
+2007-07-15 21:04:56 BMP:      >> Registered wma
+2007-07-15 21:04:56 BMP: (II) Taglib plugin load SUCCESS '/usr/lib/bmpx/plugins/taglib/libtaglib_plugin_rmff.so'
+2007-07-15 21:04:56 BMP: (II) Taglib plugin load SUCCESS '/usr/lib/bmpx/plugins/taglib/libtaglib_plugin_audible.so'
+2007-07-15 21:05:00 BMP: Transport plugin 'file' loaded.
+2007-07-15 21:05:00 BMP: Transport plugin 'http' loaded.
+2007-07-15 21:05:00 BMP: Container plugin 'PLS Playlist' loaded
+2007-07-15 21:05:00 BMP: Container plugin 'Query Parser' loaded
+2007-07-15 21:05:00 BMP: Container plugin 'XSPF Playlist' loaded
+2007-07-15 21:05:00 BMP: Container plugin 'Folder Container Plugin' loaded
+2007-07-15 21:05:00 BMP: Container plugin 'M3U Playlist' loaded
+2007-07-15 21:05:00 BMP: Container plugin 'MLQ Playlist' loaded
+2007-07-15 21:05:00 BMP: Running: Monitor
+2007-07-15 21:05:01 BMP: Starting UI
+2007-07-15 21:05:20 BMP: Saving LQM to /home/thequux/.config/bmpx/lastfm.lqm
+2007-07-15 21:05:20 BMP: Saved 204 characters
+2007-07-15 21:07:36 BMP: Logging started for [BMP] at [2007-07-15 21:07:36], PID[13881]
+2007-07-15 21:07:36 BMP: Unable to parse configuration file
+2007-07-15 21:07:37 BMP: sm.cc:286: Unable to open SM connection: SESSION_MANAGER environment variable not defined
+2007-07-15 21:07:37 BMP: Running: CServiceCore (DBus:org.beepmediaplayer.bmp)
+2007-07-15 21:07:37 BMP: (II) Taglib plugin load SUCCESS '/usr/lib/bmpx/plugins/taglib/libtaglib_plugin_mp3.so'
+2007-07-15 21:07:37 BMP:      >> Registered mp3
+2007-07-15 21:07:38 BMP: (II) Taglib plugin load SUCCESS '/usr/lib/bmpx/plugins/taglib/libtaglib_plugin_mp4.so'
+2007-07-15 21:07:38 BMP:      >> Registered mp4
+2007-07-15 21:07:38 BMP: (II) Taglib plugin load SUCCESS '/usr/lib/bmpx/plugins/taglib/libtaglib_plugin_mpc.so'
+2007-07-15 21:07:38 BMP:      >> Registered mpc
+2007-07-15 21:07:38 BMP: (II) Taglib plugin load SUCCESS '/usr/lib/bmpx/plugins/taglib/libtaglib_plugin_ogg.so'
+2007-07-15 21:07:38 BMP:      >> Registered ogg
+2007-07-15 21:07:38 BMP: (II) Taglib plugin load SUCCESS '/usr/lib/bmpx/plugins/taglib/libtaglib_plugin_flac.so'
+2007-07-15 21:07:38 BMP:      >> Registered flac
+2007-07-15 21:07:38 BMP: (II) Taglib plugin load SUCCESS '/usr/lib/bmpx/plugins/taglib/libtaglib_plugin_wma.so'
+2007-07-15 21:07:38 BMP:      >> Registered wma
+2007-07-15 21:07:38 BMP: (II) Taglib plugin load SUCCESS '/usr/lib/bmpx/plugins/taglib/libtaglib_plugin_rmff.so'
+2007-07-15 21:07:38 BMP: (II) Taglib plugin load SUCCESS '/usr/lib/bmpx/plugins/taglib/libtaglib_plugin_audible.so'
+2007-07-15 21:08:10 BMP: Logging started for [BMP] at [2007-07-15 21:08:10], PID[17662]
+2007-07-15 21:08:10 BMP: Unable to parse configuration file
+2007-07-15 21:08:10 BMP: sm.cc:286: Unable to open SM connection: SESSION_MANAGER environment variable not defined
+2007-07-15 21:08:10 BMP: Running: CServiceCore (DBus:org.beepmediaplayer.bmp)
+2007-07-15 21:08:11 BMP: (II) Taglib plugin load SUCCESS '/usr/lib/bmpx/plugins/taglib/libtaglib_plugin_mp3.so'
+2007-07-15 21:08:11 BMP:      >> Registered mp3
+2007-07-15 21:08:11 BMP: (II) Taglib plugin load SUCCESS '/usr/lib/bmpx/plugins/taglib/libtaglib_plugin_mp4.so'
+2007-07-15 21:08:11 BMP:      >> Registered mp4
+2007-07-15 21:08:11 BMP: (II) Taglib plugin load SUCCESS '/usr/lib/bmpx/plugins/taglib/libtaglib_plugin_mpc.so'
+2007-07-15 21:08:11 BMP:      >> Registered mpc
+2007-07-15 21:08:11 BMP: (II) Taglib plugin load SUCCESS '/usr/lib/bmpx/plugins/taglib/libtaglib_plugin_ogg.so'
+2007-07-15 21:08:11 BMP:      >> Registered ogg
+2007-07-15 21:08:11 BMP: (II) Taglib plugin load SUCCESS '/usr/lib/bmpx/plugins/taglib/libtaglib_plugin_flac.so'
+2007-07-15 21:08:11 BMP:      >> Registered flac
+2007-07-15 21:08:11 BMP: (II) Taglib plugin load SUCCESS '/usr/lib/bmpx/plugins/taglib/libtaglib_plugin_wma.so'
+2007-07-15 21:08:11 BMP:      >> Registered wma
+2007-07-15 21:08:11 BMP: (II) Taglib plugin load SUCCESS '/usr/lib/bmpx/plugins/taglib/libtaglib_plugin_rmff.so'
+2007-07-15 21:08:11 BMP: (II) Taglib plugin load SUCCESS '/usr/lib/bmpx/plugins/taglib/libtaglib_plugin_audible.so'
+2007-07-15 21:08:22 BMP: Logging started for [BMP] at [2007-07-15 21:08:22], PID[18872]
+2007-07-15 21:08:22 BMP: Unable to parse configuration file
+2007-07-15 21:08:22 BMP: sm.cc:286: Unable to open SM connection: SESSION_MANAGER environment variable not defined
+2007-07-15 21:08:22 BMP: Running: CServiceCore (DBus:org.beepmediaplayer.bmp)
+2007-07-15 21:08:22 BMP: (II) Taglib plugin load SUCCESS '/usr/lib/bmpx/plugins/taglib/libtaglib_plugin_mp3.so'
+2007-07-15 21:08:22 BMP:      >> Registered mp3
+2007-07-15 21:08:22 BMP: (II) Taglib plugin load SUCCESS '/usr/lib/bmpx/plugins/taglib/libtaglib_plugin_mp4.so'
+2007-07-15 21:08:22 BMP:      >> Registered mp4
+2007-07-15 21:08:22 BMP: (II) Taglib plugin load SUCCESS '/usr/lib/bmpx/plugins/taglib/libtaglib_plugin_mpc.so'
+2007-07-15 21:08:22 BMP:      >> Registered mpc
+2007-07-15 21:08:22 BMP: (II) Taglib plugin load SUCCESS '/usr/lib/bmpx/plugins/taglib/libtaglib_plugin_ogg.so'
+2007-07-15 21:08:22 BMP:      >> Registered ogg
+2007-07-15 21:08:22 BMP: (II) Taglib plugin load SUCCESS '/usr/lib/bmpx/plugins/taglib/libtaglib_plugin_flac.so'
+2007-07-15 21:08:22 BMP:      >> Registered flac
+2007-07-15 21:08:22 BMP: (II) Taglib plugin load SUCCESS '/usr/lib/bmpx/plugins/taglib/libtaglib_plugin_wma.so'
+2007-07-15 21:08:22 BMP:      >> Registered wma
+2007-07-15 21:08:22 BMP: (II) Taglib plugin load SUCCESS '/usr/lib/bmpx/plugins/taglib/libtaglib_plugin_rmff.so'
+2007-07-15 21:08:22 BMP: (II) Taglib plugin load SUCCESS '/usr/lib/bmpx/plugins/taglib/libtaglib_plugin_audible.so'
+2007-07-15 21:09:36 BMP: Logging started for [BMP] at [2007-07-15 21:09:36], PID[22187]
+2007-07-15 21:09:36 BMP: Unable to parse configuration file
+2007-07-15 21:09:37 BMP: sm.cc:286: Unable to open SM connection: SESSION_MANAGER environment variable not defined
+2007-07-15 21:09:37 BMP: Running: CServiceCore (DBus:org.beepmediaplayer.bmp)
+2007-07-15 21:09:37 BMP: (II) Taglib plugin load SUCCESS '/usr/lib/bmpx/plugins/taglib/libtaglib_plugin_mp3.so'
+2007-07-15 21:09:37 BMP:      >> Registered mp3
+2007-07-15 21:09:37 BMP: (II) Taglib plugin load SUCCESS '/usr/lib/bmpx/plugins/taglib/libtaglib_plugin_mp4.so'
+2007-07-15 21:09:37 BMP:      >> Registered mp4
+2007-07-15 21:09:37 BMP: (II) Taglib plugin load SUCCESS '/usr/lib/bmpx/plugins/taglib/libtaglib_plugin_mpc.so'
+2007-07-15 21:09:37 BMP:      >> Registered mpc
+2007-07-15 21:09:37 BMP: (II) Taglib plugin load SUCCESS '/usr/lib/bmpx/plugins/taglib/libtaglib_plugin_ogg.so'
+2007-07-15 21:09:37 BMP:      >> Registered ogg
+2007-07-15 21:09:37 BMP: (II) Taglib plugin load SUCCESS '/usr/lib/bmpx/plugins/taglib/libtaglib_plugin_flac.so'
+2007-07-15 21:09:37 BMP:      >> Registered flac
+2007-07-15 21:09:37 BMP: (II) Taglib plugin load SUCCESS '/usr/lib/bmpx/plugins/taglib/libtaglib_plugin_wma.so'
+2007-07-15 21:09:37 BMP:      >> Registered wma
+2007-07-15 21:09:37 BMP: (II) Taglib plugin load SUCCESS '/usr/lib/bmpx/plugins/taglib/libtaglib_plugin_rmff.so'
+2007-07-15 21:09:37 BMP: (II) Taglib plugin load SUCCESS '/usr/lib/bmpx/plugins/taglib/libtaglib_plugin_audible.so'
+2007-07-15 21:09:37 BMP: Transport plugin 'file' loaded.
+2007-07-15 21:09:37 BMP: Transport plugin 'http' loaded.
+2007-07-15 21:09:37 BMP: Container plugin 'PLS Playlist' loaded
+2007-07-15 21:09:37 BMP: Container plugin 'Query Parser' loaded
+2007-07-15 21:09:37 BMP: Container plugin 'XSPF Playlist' loaded
+2007-07-15 21:09:37 BMP: Container plugin 'Folder Container Plugin' loaded
+2007-07-15 21:09:37 BMP: Container plugin 'M3U Playlist' loaded
+2007-07-15 21:09:37 BMP: Container plugin 'MLQ Playlist' loaded
+2007-07-15 21:09:37 BMP: Running: Monitor
+2007-07-15 21:09:38 BMP: Starting UI
+2007-07-16 10:57:34 BMP: Saving LQM to /home/thequux/.config/bmpx/lastfm.lqm
+2007-07-16 10:57:34 BMP: Saved 204 characters

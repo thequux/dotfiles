@@ -1,6 +1,6 @@
 ;;; Lisp mode
 (require 'paredit)
-(require 'verilog-mode)
+
 ; Set up slime
 (setq inferior-lisp-program "/usr/bin/sbcl")
 (require 'slime)
@@ -41,6 +41,7 @@
 	     (setq timer
 		   (run-at-time .5 nil
 				(lambda () (setq tab-mode 0))))))))
+(setq ispell-program-name "aspell")
 
 
 (defface page-pp '((default :weight bold :slant italic :foreground "green" :box (:line-width 2 :style pressed-button)))
@@ -60,10 +61,3 @@
 	  'my-lisp-mode-hook)
 (add-hook 'emacs-lisp-mode-hook
 	  'my-lisp-mode-hook)
-
-;; Add verilog mode to auto-mode-alist.
-(setq auto-mode-alist
-      (append
-       ;; Verilog mode...
-       '(("\\.v\\'" . verilog-mode))
-       auto-mode-alist))

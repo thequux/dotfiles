@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<playlist version="1" xmlns="http://xspf.org/ns/0/">
+  <creator>audacious-plugins-1.4.2</creator>
+  <trackList>
+    <track>
+      <location>file:///home/thequux/torrents/The%20Who-Discography-/1978%20-%20Who%20Are%20You/04%20-%20Sister%20Disco.mp3</location>
+      <title>Sister Disco</title>
+      <creator>The Who</creator>
+      <album>Who Are You</album>
+      <trackNum>4</trackNum>
+      <duration>262817</duration>
+      <meta rel="year">1978</meta>
+      <meta rel="genre">Rock</meta>
+      <meta rel="mtime">1184677576</meta>
+    </track>
+  </trackList>
+</playlist>
