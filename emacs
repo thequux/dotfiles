@@ -1,12 +1,14 @@
-;;; Basic setup...
 
+
+;;; Basic setup...
 (require 'cl)
 
 (setq custom-file "~/.emacs.d/lisp/my-custom.el")
 ;(load custom-file)
 
-(add-to-list 'load-path "/home/thequux/.emacs.d/lisp")
-(add-to-list 'load-path "/home/thequux/.emacs.d")
+
+(add-to-list 'load-path "~/.emacs.d/lisp")
+(add-to-list 'load-path "~/.emacs.d")
 (load "modes")
 (load "planner-rc")
 (load "my-custom")
@@ -22,9 +24,10 @@
   (beep))
 (defun noop ()
   (interactive))
-(global-set-key [?\r ] 'newline-and-indent)
+;; This sucks with literate haskell
+;(global-set-key [?\r ] 'newline-and-indent)
 (global-set-key [?\M-: ] 'vim-warning)
-(global-set-key [?\C-w ] 'backward-kill-word)
+;(global-set-key [?\C-w ] 'backward-kill-word)
 (global-set-key [?\e ?`] 'noop)
 (global-set-key [?\e ?\e ?`] 'noop)
 
@@ -32,6 +35,14 @@
 ;	  (lambda ()
 ;    (set (make-local-variable 'lisp-indent-function)
 ; 'common-lisp-indent-function)))
+
+(autoload 'predictive-mode "predictive" "predictive" t)
+(set-default 'predictive-auto-add-to-dict t)
+(setq predictive-main-dict 'tq-dict
+      predictive-auto-learn t
+      predictive-add-to-dict-ask nil
+      predictive-use-auto-learn-cache nil
+      predictive-which-dict t)
 
 
 (setq visible-bell 'top-bottom)
