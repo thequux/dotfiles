@@ -1,6 +1,5 @@
-
-
 ;;; Basic setup...
+
 (require 'cl)
 
 (setq custom-file "~/.emacs.d/lisp/my-custom.el")
@@ -9,6 +8,7 @@
 
 (add-to-list 'load-path "~/.emacs.d/lisp")
 (add-to-list 'load-path "~/.emacs.d/externs/clojure-mode")
+(add-to-list 'load-path "~/.emacs.d/lisp/slime-2.0")
 (add-to-list 'load-path "~/.emacs.d/externs/swank-clojure")
 ;(add-to-list 'load-path "~/.emacs.d/externs/slime")
 (load "modes")

@@ -352,3 +352,5 @@
 
 # Don't you want to start programs which need a DISPLAY ?
 # setenv DISPLAY ''
+
+caption always '%{+r}%-w%{dg} %n %t %{dd} %+w'
