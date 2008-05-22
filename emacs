@@ -8,7 +8,9 @@
 
 
 (add-to-list 'load-path "~/.emacs.d/lisp")
-(add-to-list 'load-path "~/.emacs.d")
+(add-to-list 'load-path "~/.emacs.d/externs/clojure-mode")
+(add-to-list 'load-path "~/.emacs.d/externs/swank-clojure")
+;(add-to-list 'load-path "~/.emacs.d/externs/slime")
 (load "modes")
 (load "planner-rc")
 (load "my-custom")

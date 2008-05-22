@@ -34,6 +34,7 @@
  '(prolog-program-name "gprolog")
  '(safe-local-variable-values (quote ((haskell-literate . latex) (add-log-time-zone-rule . t))))
  '(scalable-fonts-allowed t)
+ '(scheme-program-name "mzscheme")
  '(show-paren-mode t nil (paren))
  '(show-paren-style (quote mixed))
  '(standard-indent 8)
