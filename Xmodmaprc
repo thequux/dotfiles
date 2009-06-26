@@ -1,2 +1,6 @@
-clear lock
-add control = Caps_Lock
+#clear lock
+#add lock = Control_L
+#remove control = Control_L
+#add control = Caps_Lock
+add mod4 = Alt_R
+remove mod1 = Alt_R

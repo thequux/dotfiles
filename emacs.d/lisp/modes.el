@@ -61,3 +61,9 @@
 	  'my-lisp-mode-hook)
 (add-hook 'emacs-lisp-mode-hook
 	  'my-lisp-mode-hook)
+
+; load haskell
+(load-library "haskell-mode")
+(load-library "haskell-indent")
+(load-library "haskell-doc")
+(load-library "haskell-ghci")

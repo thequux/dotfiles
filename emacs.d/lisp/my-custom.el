@@ -17,6 +17,10 @@
  '(cperl-lazy-help-time 3)
  '(delete-old-versions t)
  '(font-lock-verbose nil)
+ '(frame-background-mode (quote dark))
+ '(haskell-doc-show-global-types t)
+ '(haskell-font-lock-symbols nil)
+ '(haskell-mode-hook (quote (turn-on-haskell-indent turn-on-eldoc-mode)))
  '(inhibit-startup-screen t)
  '(jit-lock-context-time 0.1)
  '(kept-new-versions 4)
@@ -32,7 +36,7 @@
  '(predictive-main-dict (quote dict-local) t)
  '(predictive-use-buffer-local-dict t)
  '(prolog-program-name "gprolog")
- '(safe-local-variable-values (quote ((haskell-literate . latex) (add-log-time-zone-rule . t))))
+ '(safe-local-variable-values (quote ((tab-always-indent) (haskell-literate . latex) (add-log-time-zone-rule . t))))
  '(scalable-fonts-allowed t)
  '(scheme-program-name "mzscheme")
  '(show-paren-mode t nil (paren))
@@ -45,10 +49,10 @@
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
- '(default ((t (:stipple nil :background "grey20" :foreground "white" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 109 :width normal :family "Consolas"))))
+ '(default ((t (:stipple nil :background "grey20" :foreground "white" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 101 :width normal :foundry "unknown" :family "Monaco"))))
  '(cursor ((t (:background "white"))))
  '(custom-button ((((type x w32 mac) (class color)) (:background "lightgrey" :foreground "black" :box (:line-width -1 :style released-button)))))
- '(fixed-pitch ((t (:family "Consolas"))))
+ '(fixed-pitch ((t (:foundry "unknown" :family "Monaco"))))
  '(font-lock-builtin-face ((((class color) (min-colors 88) (background dark)) (:foreground "#ff80ff" :weight bold))))
  '(font-lock-comment-face ((((class color) (min-colors 88) (background dark)) (:foreground "#80a0ff"))))
  '(font-lock-constant-face ((((class color) (min-colors 88) (background dark)) (:foreground "#ff80ff"))))
@@ -66,6 +70,7 @@
  '(mode-line-inactive ((default (:inherit mode-line)) (((class color) (min-colors 88) (background dark)) (:background "grey70" :box nil :weight light))))
  '(mouse ((t (:background "White"))))
  '(region ((t (:foreground "grey60" :inverse-video t))))
+ '(tooltip ((((class color)) (:inherit variable-pitch :background "lightyellow" :foreground "black" :foundry "unknown" :family "DejaVu Sans"))))
  '(underline ((((supports :underline t)) (:inherit default :underline t))))
- '(variable-pitch ((t (:family "Corbel")))))
+ '(variable-pitch ((t (:family "DejaVu Sans")))))
 

@@ -9,7 +9,6 @@ function first_executable() {
 	fi
     done
 }
-vvvvvvvvvvvvvvvvvvvv
 
 case `hostname -f` in
     peewee.dorm-thequux.com)
@@ -24,12 +23,11 @@ case `hostname -f` in
 	WM=xmonad
 	;;
     *)
-	WM="`first_executable xmonad ion3 fluxbox twm`"
+	WM="`first_executable xmonad fluxbox ion3 fluxbox twm`"
 	;;
 esac
 	
 $WM
-^^^^^^^^^^^^^^^^^^^^
 
 exec xterm
 #exec startxfce4
