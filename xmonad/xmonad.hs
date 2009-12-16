@@ -4,7 +4,6 @@ import qualified XMonad.Layout.LayoutHints as LayoutHints
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Layout.Reflect
 import XMonad.Layout.LayoutScreens
-import XMonad.Layout.DragPane
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.UrgencyHook
@@ -13,7 +12,21 @@ import qualified XMonad.Layout.Named
 import Data.IORef
 import qualified XMonad.StackSet as W
 import System.IO.Unsafe (unsafePerformIO)
-import Data.List (isPrefixOf)
+import Data.List (isPrefixOf,intercalate)
+import Graphics.X11.ExtraTypes.XF86
+import XMonad.Hooks.ManageHelpers
+
+data Amixer = SSet String String
+
+spawnS = spawn . flip (++) " >/dev/null 2>&1"
+
+shellQuote foo = "'" ++ concatMap quote1 foo ++ "\'"
+	where quote1 '\'' = "'\\''"
+	      quote1  x   = [x]
+
+instance Show Amixer where
+	show (SSet control param) = intercalate " " $ map shellQuote ["sset",control,param]
+
 layouts = LayoutHints.layoutHints $ 
           avoidStruts $ 
           ((Mirror tiled `named` "Horiz")
@@ -24,7 +37,7 @@ layouts = LayoutHints.layoutHints $
   	nmaster = 2
 	ratio = 3/4
 	delta = 3/100
-        threecol = dragPaneSp Horizontal 0.2 0.5 2
+        -- threecol = dragPaneSp Horizontal 0.2 0.5 2
 
 named = flip XMonad.Layout.Named.named -- This way it can be used as an operator, and look normal
 
@@ -102,6 +115,9 @@ toggle ref ifTrue ifFalse =
 screenMode :: IORef Bool
 screenMode = unsafePerformIO $ newIORef True
 
+amixer :: Amixer -> X ()
+amixer cmd = spawnS $ "amixer " ++ show cmd
+
 mykeys (XConfig {modMask = modm}) = M.fromList $
    [ ((modm, xK_p), spawn dmenu_cmd) -- %! Launch dmenu
    , ((mod4Mask, xK_F2), spawn "xscreensaver-command -lock") -- %! Start screensaver
@@ -109,7 +125,17 @@ mykeys (XConfig {modMask = modm}) = M.fromList $
    --, ((modm .|. shiftMask .|. controlMask , xK_space), rescreen)
    , ((modm, xK_b), sendMessage ToggleStruts)
    , ((modm, xK_0), windows $ W.greedyView "IM")
+   -- Audio
+   , ((0, xF86XK_AudioLowerVolume), amixer (SSet mixer "1-"))
+   , ((0, xF86XK_AudioRaiseVolume), amixer (SSet mixer "1+"))
+   , ((0, xF86XK_AudioMute),        amixer (SSet mixer "toggle"))
+   -- MPC
+   , ((0, xF86XK_AudioPrev),	    spawnS "mpc prev")
+   , ((0, xF86XK_AudioPlay),	    spawnS "mpc toggle")
+   , ((0, xF86XK_AudioNext),	    spawnS "mpc next")
+     
    ]
+	where mixer = "Master,0"
 
 -- border controls...
 
@@ -122,22 +148,27 @@ addGap desk part start =
 
 mkGaps = map $ foldl (flip iGap) (0,0,0,0)
 
+myManageHook = composeOne $
+	[ isFullscreen -?> doFullFloat
+	]
+
 gaps = mkGaps $
   [ [ (16,0,0,0)	-- dzen
     , (0,3,0,0)		-- xbattbar
    -- , (0,0,0,24) 	-- pager
     ] ]
 main = xmonad $ withUrgencyHook NoUrgencyHook $ defaultConfig
-    { borderWidth        = 1
+    { borderWidth        = 2
     , terminal           = "urxvt"
     , modMask		 = mod4Mask
-    , workspaces         = [ show a | a <- [1..9]] ++ ["IM"]
+    , workspaces         = [ "E" ] ++ [ show a | a <- [2..9]] ++ ["IM"]
     -- , workspaces         = words "A B C" ++ [ "d" ++ show x | x <- [4..10] ]
     --                       t b l r
     -- , defaultGaps        = gaps -- [(16,3,0,0)]
     , keys		 = (\c -> mykeys c `M.union` keys defaultConfig c) 
+    , manageHook = myManageHook
     , layoutHook = layouts
     , logHook		 = myLogHook
-    , focusedBorderColor = "red"
+    , focusedBorderColor = "green"
     --, manageHook         = manageDocks
     }

@@ -15,22 +15,27 @@ compinit
 # End of lines added by compinstall
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
-HISTSIZE=1000
-SAVEHIST=1000
+HISTSIZE=100000
+SAVEHIST=100000
 setopt appendhistory autocd HIST_IGNORE_DUPS	INTERACTIVE_COMMENTS
-unsetopt beep nomatch
+unsetopt beep nomatch bang_hist
 bindkey -e
 # End of lines configured by zsh-newuser-install
 
+env_name="`cat /.chroot-name 2>/dev/null || echo "jailbroken"`"
+
 # if I'm in emacs, certain things should be changed...
 if [[ -z "${INSIDE_EMACS}" ]]; then
-   PROMPT=$'%{\e[1;32m%}%n%{\e[0;39m%}@%{\e[1;31m%}%m%{\e[0;39m%} <%{\e[1;36m%}%~%{\e[0;39m%}>\n%{\e[%(#.31.1)m%}[%?]%{\e[0m%}$ '
+   PROMPT=$'%{\e[1;32m%}%n%{\e[0;39m%}@%{\e[1;31m%}%m%{\e[0;39m%} <%{\e[1;36m%}%~%{\e[0;39m%}> (%{\e[1;33m%}'"$env_name"$'%{\e[0m%})\n%{\e[%(#.31.1)m%}[%?]%{\e[0m%}$ '
    export EDITOR=emacsclient
    export ALTERNATE_EDITOR=emacs
 else
-    PROMPT=$'%n@%m <%~>\n[%?] '
+    PROMPT=$'%n@%m <%~> ('"$env_name"')\n[%?] '
     alias ls='ls --color=never'
 fi
+unset env_name
+
+
 
 export PATH="/home/thequux/bin:/home/thequux/local/bin:$PATH"
 export LD_LIBRARY_PATH="/home/thequux/lib:/home/thequux/local/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"
@@ -46,4 +51,10 @@ if test -n "$HOME"; then
     fi
 
     export PATH="$NIX_LINK/bin:/nix/bin:$PATH"
+fi
+
+
+alias vi=mg
+if [[ "$TERM" == vt100 ]]; then
+	setopt NO_PROMPT_SP
 fi

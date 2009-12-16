@@ -1,6 +1,6 @@
 #!/bin/sh
 export PATH="$HOME/bin:$PATH"
-xmodmap ~/.Xmodmaprc
+xmodmap ~/.xmodmaprc
 function first_executable() {
     for x in "$@"; do
 	if command which "$x" &>/dev/null; then
@@ -9,6 +9,10 @@ function first_executable() {
 	fi
     done
 }
+
+if test -z "$DBUS_SESSION_BUS_ADDRESS"; then
+	eval `dbus-launch --sh-syntax --exit-with-session`
+fi
 
 case `hostname -f` in
     peewee.dorm-thequux.com)
@@ -21,6 +25,11 @@ case `hostname -f` in
 	;;
     krogoth.dorm-thequux.com)
 	WM=xmonad
+	;;
+    vulcan.home.thequux.com)
+	WM=fluxbox
+	xmobar &
+	fbsetbg -l
 	;;
     *)
 	WM="`first_executable xmonad fluxbox ion3 fluxbox twm`"
