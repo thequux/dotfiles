@@ -3,9 +3,9 @@
 \#*#
 .#*
 *.elc
-xmonad/xmonad-x86_64-linux
-xmonad/xmonad.errors
-xmonad/xmonad.hi
-xmonad/xmonad.o
+conffiles/xmonad/xmonad-x86_64-linux
+conffiles/xmonad/xmonad.errors
+conffiles/xmonad/xmonad.hi
+conffiles/xmonad/xmonad.o
 *.orig
 
