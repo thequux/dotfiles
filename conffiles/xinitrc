@@ -27,7 +27,7 @@ case `hostname -f` in
 	WM=xmonad
 	;;
     vulcan.home.thequux.com)
-	WM=fluxbox
+	WM=xmonad
 	xmobar &
 	fbsetbg -l
 	;;
