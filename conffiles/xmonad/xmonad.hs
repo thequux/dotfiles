@@ -15,7 +15,6 @@ import System.IO.Unsafe (unsafePerformIO)
 import Data.List (isPrefixOf,intercalate)
 import Graphics.X11.ExtraTypes.XF86
 import XMonad.Hooks.ManageHelpers
-
 data Amixer = SSet String String
 
 spawnS = spawn . flip (++) " >/dev/null 2>&1"
@@ -51,16 +50,11 @@ dmenu_cmd = "exe=`dmenu_path | dmenu -fn "
 
 shescape :: String -> String
 shescape [] = []
-shescape ('\'':a) = '\\':'\'':shescape a
-shescape ('\\':a) = '\\':'\\':shescape a
+shescape ('\'':a) = '\'':'\\':'\'':'\'':shescape a
 shescape (a0:a) = a0:shescape a
 
-xmobarWrite :: String -> X ()
-xmobarWrite str = spawn $ "/home/thequux/local/bin/xmobar-write '" ++ shescape str ++ "'"
-
 myLogHook :: X ()
-myLogHook = do ewmhDesktopsLogHook
-               dynamicLogString logPP >>= xmobarWrite
+myLogHook = do dynamicLogString logPP >>= xmonadPropLog
                return ()
     where logPP = xmobarPP{ppCurrent=xmobarColor "green" ""
                           ,ppVisible=xmobarColor "#c0ffc0" ""
@@ -157,7 +151,7 @@ gaps = mkGaps $
     , (0,3,0,0)		-- xbattbar
    -- , (0,0,0,24) 	-- pager
     ] ]
-main = xmonad $ withUrgencyHook NoUrgencyHook $ defaultConfig
+main = xmonad $ withUrgencyHook NoUrgencyHook $ ewmh $ defaultConfig
     { borderWidth        = 2
     , terminal           = "urxvt"
     , modMask		 = mod4Mask
