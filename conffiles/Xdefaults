@@ -1,13 +1,34 @@
+! vim: nolist
+#define TERM_BG		rgb:1E/36/35
+#define TERM_FG		rgb:ff/ff/ff
+
+#define TERM_FONT(mid)	-xos4-terminus-mid-*-*-16-*-*-*-*-*-iso10646-1
+
 !XTerm.vt100.background:	rgb:6B/81/92
 !XTerm.vt100.background:	rgb:32/5b/58
-XTerm.vt100.background:		rgb:1E/36/35
-XTerm.vt100.foreground:		white
+XTerm*vt100.background:		TERM_BG
+XTerm*vt100.foreground:		TERM_FG
 XTerm*allowSendEvents:		true
+XTerm*vt100.font: 		TERM_FONT(medium-r)
+Xft.dpi:	96
+Xft.antialias:	1
+Xft.hinting:	1
+Xft.hintstyle:	hintmedium
+Xft.rgba:	rgb
+Xft.lcdfilter:	lcddefault
+
 Rxvt.background:	rgb:1E/36/35
 Rxvt.foreground:	rgb:ff/ff/ff
 !Rxvt.font:		xft:Monaco-10
-Rxvt.font:		-xos4-terminus-medium-r-*-*-20-*-*-*-*-*-iso10646-1
-Rxvt.boldFont:		-xos4-terminus-bold-r-*-*-20-*-*-*-*-*-iso10646-1
-Rxvt.boldItalicFont:	-xos4-terminus-bold-o-*-*-20-*-*-*-*-*-iso10646-1
-Rxvt.italicFont:	-xos4-terminus-medium-o-*-*-20-*-*-*-*-*-iso10646-1
+Rxvt.font:		TERM_FONT(medium-r)
+Rxvt.boldFont:		TERM_FONT(bold-r)
+Rxvt.boldItalicFont:	TERM_FONT(bold-o)
+Rxvt.italicFont:	TERM_FONT(medium-o)
 XTerm*metaSendsEscape:		true
+
+Rxvt.color4:	rgb:40/90/c0
+Rxvt.color8:	rgb:60/60/60
+Rxvt.color12:	rgb:00/90/ff
+Rxvt.saveLines:	4096
+Rxvt.secondaryScroll: no
+
