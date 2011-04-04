@@ -1,5 +1,6 @@
 #!/bin/sh
-export PATH="$HOME/bin:$PATH"
+# vim: nolist
+export PATH="$HOME/bin:$HOME/local/bin:$HOME/.cabal/bin:$PATH"
 xmodmap ~/.xmodmaprc
 function first_executable() {
     for x in "$@"; do
@@ -36,7 +37,7 @@ case `hostname -f` in
 	;;
 esac
 	
-$WM
+$WM &>.xsession-errors-wm
 
 exec xterm
 #exec startxfce4

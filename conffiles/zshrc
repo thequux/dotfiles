@@ -1,14 +1,17 @@
 # -*- mode: sh; sh-shell-file: /bin/zsh -*-
 # The following lines were added by compinstall
 
-[[ "$TERM" == "dumb" ]] && return
+if [[ "$TERM" == "dumb" ]]; then
+	unsetopt prompt_cr prompt_sp
+	return
+fi
 
-zstyle ':completion:*' completer _expand _complete _correct _approximate
+zstyle ':completion:*' completer _expand _complete
+zstyle ':completion:*' accept-exact-dirs true
 zstyle ':completion:*' completions 1
 zstyle ':completion:*' glob 1
-zstyle ':completion:*' max-errors 2 numeric
 zstyle ':completion:*' substitute 1
-zstyle :compinstall filename '/home/thequux/.../zshrc'
+zstyle :compinstall filename "$HOME/.../conffiles/zshrc"
 
 autoload -Uz compinit
 compinit
@@ -17,7 +20,7 @@ compinit
 HISTFILE=~/.histfile
 HISTSIZE=100000
 SAVEHIST=100000
-setopt appendhistory autocd HIST_IGNORE_DUPS	INTERACTIVE_COMMENTS
+setopt appendhistory autocd HIST_IGNORE_DUPS INTERACTIVE_COMMENTS extendedglob
 unsetopt beep nomatch bang_hist
 bindkey -e
 # End of lines configured by zsh-newuser-install
@@ -28,33 +31,18 @@ env_name="`cat /.chroot-name 2>/dev/null || echo "jailbroken"`"
 if [[ -z "${INSIDE_EMACS}" ]]; then
    PROMPT=$'%{\e[1;32m%}%n%{\e[0;39m%}@%{\e[1;31m%}%m%{\e[0;39m%} <%{\e[1;36m%}%~%{\e[0;39m%}> (%{\e[1;33m%}'"$env_name"$'%{\e[0m%})\n%{\e[%(#.31.1)m%}[%?]%{\e[0m%}$ '
    export EDITOR=emacsclient
-   export ALTERNATE_EDITOR=emacs
+   export ALTERNATE_EDITOR=""
 else
     PROMPT=$'%n@%m <%~> ('"$env_name"')\n[%?] '
     alias ls='ls --color=never'
 fi
 unset env_name
 
+export PATH="$HOME/bin:$HOME/local/bin:$PATH"
+export LD_LIBRARY_PATH="$HOME/lib:$HOME/local/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"
 
-
-export PATH="/home/thequux/bin:/home/thequux/local/bin:$PATH"
-export LD_LIBRARY_PATH="/home/thequux/lib:/home/thequux/local/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"
-
-
-if test -n "$HOME"; then
-    NIX_LINK="$HOME/.nix-profile"
-
-    if ! test -L "$NIX_LINK"; then
-        echo "creating $NIX_LINK" >&2
-        _NIX_DEF_LINK=/nix/var/nix/profiles/default
-        /bin/ln -s "$_NIX_DEF_LINK" "$NIX_LINK"
-    fi
-
-    export PATH="$NIX_LINK/bin:/nix/bin:$PATH"
-fi
-
-
-alias vi=mg
 if [[ "$TERM" == vt100 ]]; then
 	setopt NO_PROMPT_SP
 fi
+
+setopt extended_history

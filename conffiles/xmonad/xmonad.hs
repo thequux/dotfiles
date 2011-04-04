@@ -1,3 +1,4 @@
+-- vim: nolist
 import XMonad
 import qualified Data.Map as M
 import qualified XMonad.Layout.LayoutHints as LayoutHints
@@ -15,6 +16,10 @@ import System.IO.Unsafe (unsafePerformIO)
 import Data.List (isPrefixOf,intercalate)
 import Graphics.X11.ExtraTypes.XF86
 import XMonad.Hooks.ManageHelpers
+import Foreign.C (CChar)
+import XMonad.Layout.PerWorkspace
+import Data.Char ( isSpace, ord)
+import Data.Monoid
 data Amixer = SSet String String
 
 spawnS = spawn . flip (++) " >/dev/null 2>&1"
@@ -26,8 +31,9 @@ shellQuote foo = "'" ++ concatMap quote1 foo ++ "\'"
 instance Show Amixer where
 	show (SSet control param) = intercalate " " $ map shellQuote ["sset",control,param]
 
-layouts = LayoutHints.layoutHints $ 
-          avoidStruts $ 
+layouts = LayoutHints.layoutHints $
+          avoidStruts $
+          onWorkspace "9" (Mirror $ Tall 1 (1/75) (4/5)) $
           ((Mirror tiled `named` "Horiz")
            ||| (tiled `named` "Vert")
            ||| simpleTabbed
@@ -53,6 +59,26 @@ shescape [] = []
 shescape ('\'':a) = '\'':'\\':'\'':'\'':shescape a
 shescape (a0:a) = a0:shescape a
 
+
+-- | Write a string to a property on the root window.  This property is of
+-- type UTF8_STRING. The string must have been processed by encodeString
+-- (dynamicLogString does this).
+xmonadPropLog' :: String -> String -> X ()
+xmonadPropLog' prop msg = do
+    d <- asks display
+    r <- asks theRoot
+    xlog <- getAtom prop
+    ustring <- getAtom "UTF8_STRING"
+    io $ changeProperty8 d r xlog ustring propModeReplace (encodeCChar msg)
+ where
+    encodeCChar :: String -> [CChar]
+    encodeCChar = map (fromIntegral . ord)
+
+-- | Write a string to the _XMONAD_LOG property on the root window.
+xmonadPropLog :: String -> X ()
+xmonadPropLog = xmonadPropLog' "_XMONAD_LOG"
+
+
 myLogHook :: X ()
 myLogHook = do dynamicLogString logPP >>= xmonadPropLog
                return ()
@@ -77,7 +103,7 @@ myLogHook = do dynamicLogString logPP >>= xmonadPropLog
               where t = concat ["<fc=", fg, if null bg then "" else "," ++ bg, ">"]
 
           -- ??? add an xmobarEscape function?
-                        
+
           -- | Strip xmobar markup. Useful to remove ppHidden color from ppUrgent
           --   field. For example:
           --
@@ -104,7 +130,6 @@ toggle :: IORef Bool -> X a -> X a -> X a
 toggle ref ifTrue ifFalse =
     do val <- io $atomicModifyIORef ref (\x -> (not x,x))
        if val then ifTrue else ifFalse
-      
 
 screenMode :: IORef Bool
 screenMode = unsafePerformIO $ newIORef True
@@ -119,6 +144,7 @@ mykeys (XConfig {modMask = modm}) = M.fromList $
    --, ((modm .|. shiftMask .|. controlMask , xK_space), rescreen)
    , ((modm, xK_b), sendMessage ToggleStruts)
    , ((modm, xK_0), windows $ W.greedyView "IM")
+   , ((modm .|. shiftMask, xK_0), windows $ W.shift "IM")
    -- Audio
    , ((0, xF86XK_AudioLowerVolume), amixer (SSet mixer "1-"))
    , ((0, xF86XK_AudioRaiseVolume), amixer (SSet mixer "1+"))
@@ -127,7 +153,6 @@ mykeys (XConfig {modMask = modm}) = M.fromList $
    , ((0, xF86XK_AudioPrev),	    spawnS "mpc prev")
    , ((0, xF86XK_AudioPlay),	    spawnS "mpc toggle")
    , ((0, xF86XK_AudioNext),	    spawnS "mpc next")
-     
    ]
 	where mixer = "Master,0"
 
@@ -151,6 +176,19 @@ gaps = mkGaps $
     , (0,3,0,0)		-- xbattbar
    -- , (0,0,0,24) 	-- pager
     ] ]
+
+withWorkspaces :: [String] -> XConfig a -> XConfig a
+withWorkspaces ws conf@(XConfig{keys=baseKeys}) =
+    conf{workspaces = ws,
+         keys = wsKeys `mappend` baseKeys}
+        where keySet baseMod = [(baseMod .|. mod,key) | mod <- [0,controlMask,mod1Mask, controlMask .|. mod1Mask]
+                                                      , key <- ([xK_1 .. xK_9] ++ [xK_0])]
+              wsKeys (XConfig{modMask=modm}) =
+                  M.fromList [(key, windows $ f i)
+                                  | (submod,f) <- [(shiftMask,W.shift)
+                                                  ,(0, W.greedyView)]
+                             , (key,i) <- zip (keySet $ submod .|. modm) ws]
+
 main = xmonad $ withUrgencyHook NoUrgencyHook $ ewmh $ defaultConfig
     { borderWidth        = 2
     , terminal           = "urxvt"
@@ -159,7 +197,7 @@ main = xmonad $ withUrgencyHook NoUrgencyHook $ ewmh $ defaultConfig
     -- , workspaces         = words "A B C" ++ [ "d" ++ show x | x <- [4..10] ]
     --                       t b l r
     -- , defaultGaps        = gaps -- [(16,3,0,0)]
-    , keys		 = (\c -> mykeys c `M.union` keys defaultConfig c) 
+    , keys		 = mykeys `mappend` keys defaultConfig
     , manageHook = myManageHook
     , layoutHook = layouts
     , logHook		 = myLogHook

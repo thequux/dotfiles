@@ -1,4 +1,4 @@
-Config { font = "xft:DejaVu Sans Mono-10"
+Config { font = "xft:Inconsolata-11"
        , bgColor = "black"
        , fgColor = "white"
        , position = Bottom
@@ -10,7 +10,7 @@ Config { font = "xft:DejaVu Sans Mono-10"
                     , Run Memory ["-t","Mem: <usedratio>%"] 10
                     , Run Swap [] 10
                     , Run Com "uname" ["-s","-r"] "" 36000
-    		    , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
+                    , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
                     ]
        , sepChar = "%"
        , alignSep = "}{"
