@@ -8,4 +8,4 @@ conffiles/xmonad/xmonad.errors
 conffiles/xmonad/xmonad.hi
 conffiles/xmonad/xmonad.o
 *.orig
-
+.nfs*
