@@ -1,19 +1,3 @@
-All (State 0) Maximize EWMHiWa True
-Style "edesk" ResizeHintOverride,ResizeHintOverride
-All (State 0) Maximize EWMHiWa True 100 100
-All (State 0) Maximize EWMHiWa True 100 90
-All (State 0) Maximize EWMHiWa True 100 100
-All (State 0) Maximize EWMHiWa True 1280p 1024p
-All (State 0) Maximize EWMHiWa True 1280p 1023p
-Restart ~/.xinitrc
-StartEmacs
-StartEmacs
-StartEmacs
-StartEmacs
-StartEmacs
-StartEmacs
-DestroyFunc StartEmacs 
-AddToFunc StartEmacs
 + I Exec exec emacs -name edesk --debug-init
 + I Wait edesk
 + I All (State 0) Maximize EWMHiWa True
@@ -98,3 +82,19 @@ Restart
 Restart
 Restart
 Restart
+DestroyFunc Terminal
+DestroyFunc Terminal
+AddToFunc Terminal
++ I Exec urxvt $*
+Terminal
+DestroyMenu Main
+AddToMenu Main Main Title
++ "&1 Xterm"            Terminal
++ "&2 Firefox"          Exec exec firefox
++ "&R Remote"           Popup Remote
++ "&F File Manager"     Exec exec xnc
++ ""                    Nop
++ "&X Exit"             Popup ExitMenu
+Restart
+AddToFunc StartFunction "I" Module FvwmButtons Launcher -g -0+0
+ Module FvwmButtons Launcher -g -0+0

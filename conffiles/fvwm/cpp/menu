@@ -14,6 +14,7 @@ AddToMenu ExitMenu
 + Title			"Exit?"
 + "&X Exit..."		Module FvwmForm QuitVerify
 + "&1 Only xterm"	Restart xterm
++ "&2 Fluxbox"		Restart fluxbox
 DestroyMenu Remote
 AddToMenu Remote Remote Title
 + "&X Xorn"	Terminal "Xorn"		ssh thequux@linux.ucla.edu
@@ -37,7 +38,7 @@ AddToMenu WindowOps
 + "Move to desk" Popup MoveToDesk
 
 
-Mouse 2 R A 	Menu Main Nop
+Mouse 1 R A 	Menu Main Nop
 Key Space A 4	Menu Main Nop
 Key Space A M	Read '$./menu'
 Key Tab	  A M	-

@@ -19,11 +19,7 @@ Xft.lcdfilter:	lcddefault
 
 Rxvt.background:	rgb:1E/36/35
 Rxvt.foreground:	rgb:ff/ff/ff
-!Rxvt.font:		xft:Monaco-10
-Rxvt.font:		TERM_FONT(medium-r)
-Rxvt.boldFont:		TERM_FONT(bold-r)
-Rxvt.boldItalicFont:	TERM_FONT(bold-o)
-Rxvt.italicFont:	TERM_FONT(medium-o)
+Rxvt.font:		xft:inconsolata:pixelsize=20
 XTerm*metaSendsEscape:		true
 
 Rxvt.color4:	rgb:40/90/c0

@@ -3,7 +3,7 @@ SetEnv c.bg2	rgb:66/66/99
 Setenv c.bg3	rgb:99/99/cc
 setenv c.bg4	rgb:cc/cc/ff
 SetEnv c.fg	white
-Style * BorderWidth 10,HandleWidth 7,SloppyFocus, MouseFocusClickRaises
+Style * BorderWidth 10,HandleWidth 7,SloppyFocus, MouseFocusClickRaisesOff
 Style * DecorateTransient, MwmBorder, HandleWidth 5, BorderWidth 5, Colorset 1, HilightColorset 2, IconTitleRelief 1
 MenuStyle * Fvwm,MenuColorset 3, ActiveColorset 4, AutomaticHotkeys, PopupOffset -2 100
 

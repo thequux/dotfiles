@@ -1,3 +1,6 @@
+;;; custom modes
+(require 'ucode)
+
 ;;; Lisp mode
 (require 'paredit)
 
@@ -50,7 +53,7 @@
 
 (defun page-pp-display-vec ()
   (map 'vector (lambda (x) (make-glyph-code x 'page-pp))
-       "          Page Break          "))
+       "          Page Break          \n"))
 
 (progn
   (unless standard-display-table

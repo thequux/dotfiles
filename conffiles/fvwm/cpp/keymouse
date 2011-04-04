@@ -10,3 +10,24 @@ Mouse 	1 1 N		FvwmMenuOrDelete
 Mouse	1 2 N		Maximize
 Mouse	1 4I N		Iconify
 Mouse	1 3 N		WindowShade
+
+
+DestroyFunc RaiseOrMove
+AddToFunc RaiseOrMove
++ M Move
++ C Raise
+DestroyFunc RaiseOrSize
+AddToFunc RaiseOrSize
++ M Resize Direction SouthEast 
++ C Raise
+Mouse   1 W 4		Function RaiseOrMove
+Mouse   3 W 4		Function RaiseOrSize
+
+#Mouse 1 T   A FuncFvwmRaiseLowerX Move
+#Mouse 1 FS  A FuncFvwmRaiseLowerX Resize
+#Mouse 2 FST A FuncFvwmRaiseLowerX Move
+#AddToFunc FuncFvwmRaiseLowerX
+#+ I Raise
+#+ M $0
+#+ D Lower
+

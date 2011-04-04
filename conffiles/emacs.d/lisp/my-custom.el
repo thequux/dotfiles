@@ -6,6 +6,9 @@
   ;; If there is more than one, they won't work right.
  '(LaTeX-command "latex")
  '(TeX-PDF-mode nil)
+ '(TeX-command-list (quote (("TeX" "%(PDF)%(tex) %`%S%(PDFout)%(mode)%' %t" TeX-run-TeX nil (plain-tex-mode texinfo-mode ams-tex-mode) :help "Run plain TeX") ("LaTeX" "%`%l --shell-escape %(mode)%' %t" TeX-run-TeX nil (latex-mode doctex-mode) :help "Run LaTeX") ("Makeinfo" "makeinfo %t" TeX-run-compile nil (texinfo-mode) :help "Run Makeinfo with Info output") ("Makeinfo HTML" "makeinfo --html %t" TeX-run-compile nil (texinfo-mode) :help "Run Makeinfo with HTML output") ("AmSTeX" "%(PDF)amstex %`%S%(PDFout)%(mode)%' %t" TeX-run-TeX nil (ams-tex-mode) :help "Run AMSTeX") ("ConTeXt" "texexec --once --texutil %(execopts)%t" TeX-run-TeX nil (context-mode) :help "Run ConTeXt once") ("ConTeXt Full" "texexec %(execopts)%t" TeX-run-TeX nil (context-mode) :help "Run ConTeXt until completion") ("BibTeX" "bibtex %s" TeX-run-BibTeX nil t :help "Run BibTeX") ("View" "%V" TeX-run-discard t t :help "Run Viewer") ("Print" "%p" TeX-run-command t t :help "Print the file") ("Queue" "%q" TeX-run-background nil t :help "View the printer queue" :visible TeX-queue-command) ("File" "%(o?)dvips %d -o %f " TeX-run-command t t :help "Generate PostScript file") ("Index" "makeindex %s" TeX-run-command nil t :help "Create index file") ("Check" "lacheck %s" TeX-run-compile nil (latex-mode) :help "Check LaTeX file for correctness") ("Spell" "(TeX-ispell-document \"\")" TeX-run-function nil t :help "Spell-check the document") ("Clean" "TeX-clean" TeX-run-function nil t :help "Delete generated intermediate files") ("Clean All" "(TeX-clean t)" TeX-run-function nil t :help "Delete generated intermediate and output files") ("Other" "" TeX-run-command t t :help "Run an arbitrary command"))))
+ '(agda2-highlight-face-groups (quote default-faces))
+ '(agda2-include-dirs (quote ("." "/home/thequux/src/agda-stdlib" "/home/thequux/src/agda-stdlib/src")))
  '(auto-completion-syntax-alist (quote (reject . word)))
  '(c-basic-offset 8)
  '(completion-resolve-behaviour (quote reject))
@@ -15,6 +18,7 @@
  '(cperl-hairy nil)
  '(cperl-indent-wrt-brace nil)
  '(cperl-lazy-help-time 3)
+ '(dabbrev-case-fold-search nil)
  '(delete-old-versions t)
  '(font-lock-verbose nil)
  '(frame-background-mode (quote dark))
@@ -26,6 +30,7 @@
  '(jit-lock-context-time 0.1)
  '(kept-new-versions 4)
  '(kept-old-versions 3)
+ '(line-number-display-limit-width 2000)
  '(mouse-autoselect-window t)
  '(mouse-yank-at-point t)
  '(muse-project-alist (quote (("WikiPlanner" ("~/plans" "index")))) t)
@@ -40,21 +45,25 @@
  '(predictive-use-buffer-local-dict t)
  '(prolog-program-name "gprolog")
  '(safe-local-variable-values (quote ((Package . DRAKMA) (package . puri) (Syntax . ANSI-Common-Lisp) (Package . CHUNGA) (Base . 10) (Package . FLEXI-STREAMS) (Syntax . COMMON-LISP) (tab-always-indent) (haskell-literate . latex) (add-log-time-zone-rule . t))))
+ '(save-place t nil (saveplace))
  '(scalable-fonts-allowed t)
+ '(scheme-mit-dialect nil)
  '(scheme-program-name "mzscheme")
  '(show-paren-mode t nil (paren))
  '(show-paren-style (quote mixed))
  '(sql-electric-stuff (quote semicolon))
  '(sql-product (quote postgres))
  '(standard-indent 8)
+ '(tags-revert-without-query t)
  '(vc-handled-backends (quote (RCS CVS SVN SCCS HG Arch MCVS)))
- '(version-control t))
+ '(version-control t)
+ '(whitespace-style (quote (trailing empty tab-mark tabs))))
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
- '(default ((t (:stipple nil :background "grey20" :foreground "white" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 101 :width normal :foundry "unknown" :family "Monaco"))))
+ '(default ((t (:inherit nil :stipple nil :background "grey20" :foreground "white" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight semi-light :height 140 :width normal :foundry "unknown" :family "Inconsolata"))))
  '(cursor ((t (:background "white"))))
  '(custom-button ((((type x w32 mac) (class color)) (:background "lightgrey" :foreground "black" :box (:line-width -1 :style released-button)))))
  '(fixed-pitch ((t (:foundry "unknown" :family "Monaco"))))
@@ -77,5 +86,6 @@
  '(region ((t (:foreground "grey60" :inverse-video t))))
  '(tooltip ((((class color)) (:inherit variable-pitch :background "lightyellow" :foreground "black" :foundry "unknown" :family "DejaVu Sans"))))
  '(underline ((((supports :underline t)) (:inherit default :underline t))))
- '(variable-pitch ((t (:family "DejaVu Sans")))))
+ '(variable-pitch ((t (:family "DejaVu Sans"))))
+ '(whitespace-tab ((((class color) (background dark)) (:background "red" :foreground "white")))))
 

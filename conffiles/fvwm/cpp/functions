@@ -27,7 +27,7 @@ AddToFunc StartFunction
 # Terminal
 DestroyFunc Terminal
 AddToFunc Terminal
-+ I Exec Term.sh $*
++ I Exec urxvt $*
 
 DestroyFunc	GenMoveToDesk
 AddToFunc	GenMoveToDesk

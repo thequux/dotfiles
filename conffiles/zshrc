@@ -22,6 +22,8 @@ HISTSIZE=100000
 SAVEHIST=100000
 setopt appendhistory autocd HIST_IGNORE_DUPS INTERACTIVE_COMMENTS extendedglob
 unsetopt beep nomatch bang_hist
+setopt extendedglob prompt_subst
+
 bindkey -e
 # End of lines configured by zsh-newuser-install
 
@@ -29,7 +31,7 @@ env_name="`cat /.chroot-name 2>/dev/null || echo "jailbroken"`"
 
 # if I'm in emacs, certain things should be changed...
 if [[ -z "${INSIDE_EMACS}" ]]; then
-   PROMPT=$'%{\e[1;32m%}%n%{\e[0;39m%}@%{\e[1;31m%}%m%{\e[0;39m%} <%{\e[1;36m%}%~%{\e[0;39m%}> (%{\e[1;33m%}'"$env_name"$'%{\e[0m%})\n%{\e[%(#.31.1)m%}[%?]%{\e[0m%}$ '
+   PROMPT=$'%{\e[1;32m%}%n%{\e[0;39m%}@%{\e[1;31m%}%m%{\e[0;39m%} <%{\e[1;36m%}%~%{\e[0;39m%}> (%{\e[1;33m%}$(cat /.chroot-name 2>/dev/null || echo "jailbroken")%{\e[0m%})\n%{\e[%(#.31.1)m%}[%?]%{\e[0m%}$ '
    export EDITOR=emacsclient
    export ALTERNATE_EDITOR=""
 else
@@ -40,6 +42,12 @@ unset env_name
 
 export PATH="$HOME/bin:$HOME/local/bin:$PATH"
 export LD_LIBRARY_PATH="$HOME/lib:$HOME/local/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"
+
+case $(hostname) in
+	vulcan)
+		export INFOPATH=/usr/share/info/emacs-23:
+		;|
+esac
 
 if [[ "$TERM" == vt100 ]]; then
 	setopt NO_PROMPT_SP

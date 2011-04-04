@@ -1,9 +1,99 @@
 ;;; Basic setup...
+(package-initialize)
+(add-to-list 'package-archives '("elpa" . "http://tromey.com/elpa/"))
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(LaTeX-command "latex")
+ '(TeX-PDF-mode nil)
+ '(TeX-command-list (quote (("TeX" "%(PDF)%(tex) %`%S%(PDFout)%(mode)%' %t" TeX-run-TeX nil (plain-tex-mode texinfo-mode ams-tex-mode) :help "Run plain TeX") ("LaTeX" "%`%l --shell-escape %(mode)%' %t" TeX-run-TeX nil (latex-mode doctex-mode) :help "Run LaTeX") ("Makeinfo" "makeinfo %t" TeX-run-compile nil (texinfo-mode) :help "Run Makeinfo with Info output") ("Makeinfo HTML" "makeinfo --html %t" TeX-run-compile nil (texinfo-mode) :help "Run Makeinfo with HTML output") ("AmSTeX" "%(PDF)amstex %`%S%(PDFout)%(mode)%' %t" TeX-run-TeX nil (ams-tex-mode) :help "Run AMSTeX") ("ConTeXt" "texexec --once --texutil %(execopts)%t" TeX-run-TeX nil (context-mode) :help "Run ConTeXt once") ("ConTeXt Full" "texexec %(execopts)%t" TeX-run-TeX nil (context-mode) :help "Run ConTeXt until completion") ("BibTeX" "bibtex %s" TeX-run-BibTeX nil t :help "Run BibTeX") ("View" "%V" TeX-run-discard t t :help "Run Viewer") ("Print" "%p" TeX-run-command t t :help "Print the file") ("Queue" "%q" TeX-run-background nil t :help "View the printer queue" :visible TeX-queue-command) ("File" "%(o?)dvips %d -o %f " TeX-run-command t t :help "Generate PostScript file") ("Index" "makeindex %s" TeX-run-command nil t :help "Create index file") ("Check" "lacheck %s" TeX-run-compile nil (latex-mode) :help "Check LaTeX file for correctness") ("Spell" "(TeX-ispell-document \"\")" TeX-run-function nil t :help "Spell-check the document") ("Clean" "TeX-clean" TeX-run-function nil t :help "Delete generated intermediate files") ("Clean All" "(TeX-clean t)" TeX-run-function nil t :help "Delete generated intermediate and output files") ("Other" "" TeX-run-command t t :help "Run an arbitrary command"))))
+ '(agda2-highlight-face-groups (quote default-faces))
+ '(agda2-include-dirs (quote ("." "/home/thequux/src/agda-stdlib" "/home/thequux/src/agda-stdlib/src")))
+ '(auto-completion-syntax-alist (quote (reject . word)))
+ '(before-save-hook (quote (delete-trailing-whitespace)))
+ '(c-basic-offset 8)
+ '(completion-resolve-behaviour (quote reject))
+ '(completion-use-hotkeys nil)
+ '(cperl-autoindent-on-semi t)
+ '(cperl-font-lock t)
+ '(cperl-hairy nil)
+ '(cperl-indent-wrt-brace nil)
+ '(cperl-lazy-help-time 3)
+ '(dabbrev-case-fold-search nil)
+ '(delete-old-versions t)
+ '(font-lock-verbose nil)
+ '(haskell-doc-show-global-types t)
+ '(haskell-font-lock-symbols nil)
+ '(haskell-mode-hook (quote (turn-on-haskell-indent turn-on-eldoc-mode)) t)
+ '(indent-tabs-mode t)
+ '(inhibit-startup-screen t)
+ '(jit-lock-context-time 0.1)
+ '(kept-new-versions 4)
+ '(kept-old-versions 3)
+ '(line-number-display-limit-width 2000)
+ '(mouse-autoselect-window t)
+ '(mouse-yank-at-point t)
+ '(muse-project-alist (quote (("WikiPlanner" ("~/plans" "index")))) t)
+ '(nxml-bind-meta-tab-to-complete-flag t)
+ '(nxml-slash-auto-complete-flag t)
+ '(predictive-add-to-dict-ask nil t)
+ '(predictive-auto-add-to-dict t t)
+ '(predictive-auto-learn t t)
+ '(predictive-dict-autosave t)
+ '(predictive-flush-auto-learn-delay 1)
+ '(predictive-main-dict (quote dict-local) t)
+ '(predictive-use-buffer-local-dict t)
+ '(prolog-program-name "gprolog")
+ '(safe-local-variable-values (quote ((Package . DRAKMA) (package . puri) (Syntax . ANSI-Common-Lisp) (Package . CHUNGA) (Base . 10) (Package . FLEXI-STREAMS) (Syntax . COMMON-LISP) (tab-always-indent) (haskell-literate . latex) (add-log-time-zone-rule . t))))
+ '(save-place t nil (saveplace))
+ '(scalable-fonts-allowed t)
+ '(scheme-mit-dialect nil)
+ '(scheme-program-name "mzscheme")
+ '(show-paren-mode t nil (paren))
+ '(show-paren-style (quote mixed))
+ '(sql-electric-stuff (quote semicolon))
+ '(sql-product (quote postgres))
+ '(standard-indent 8)
+ '(tags-revert-without-query t)
+ '(vc-handled-backends (quote (RCS CVS SVN SCCS HG Arch MCVS)))
+ '(version-control t)
+ '(whitespace-style (quote (trailing empty tab-mark tabs))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:inherit nil :stipple nil :background "grey20" :foreground "white" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight semi-light :height 140 :width normal :foundry "unknown" :family "Inconsolata"))))
+ '(cursor ((t (:background "white"))))
+ '(custom-button ((((type x w32 mac) (class color)) (:background "lightgrey" :foreground "black" :box (:line-width -1 :style released-button)))))
+ '(fixed-pitch ((t (:foundry "unknown" :family "Monaco"))))
+ '(font-lock-builtin-face ((((class color) (min-colors 88) (background dark)) (:foreground "#ff80ff" :weight bold))))
+ '(font-lock-comment-face ((((class color) (min-colors 88) (background dark)) (:foreground "#80a0ff"))))
+ '(font-lock-constant-face ((((class color) (min-colors 88) (background dark)) (:foreground "#ff80ff"))))
+ '(font-lock-function-name-face ((((class color) (min-colors 88) (background dark)) (:foreground "#40ffff" :weight bold))))
+ '(font-lock-keyword-face ((((class color) (min-colors 88) (background dark)) (:foreground "#ffff80" :weight bold))))
+ '(font-lock-string-face ((((class color) (min-colors 88) (background dark)) (:background "black" :foreground "#ffa0a0"))))
+ '(font-lock-type-face ((((class color) (min-colors 88) (background dark)) (:foreground "Green" :weight bold))))
+ '(font-lock-variable-name-face ((((class color) (min-colors 88) (background dark)) (:foreground "#ff6" :weight bold))))
+ '(fringe ((((class color) (background dark)) (:background "grey40"))))
+ '(highlight ((t (:background "grey60"))))
+ '(isearch ((((class color) (min-colors 88) (background dark)) (:inverse-video nil))))
+ '(lazy-highlight ((((class color) (min-colors 88) (background dark)) (:background "yellow" :foreground "black"))))
+ '(mode-line ((t (:background "grey80" :foreground "Black" :box (:line-width -1 :color "grey" :style released-button)))))
+ '(mode-line-highlight ((((class color) (min-colors 88)) (:box (:line-width 2 :style released-button)))))
+ '(mode-line-inactive ((default (:inherit mode-line)) (((class color) (min-colors 88) (background dark)) (:background "grey70" :box nil :weight light))))
+ '(mouse ((t (:background "White"))))
+ '(region ((t (:foreground "grey60" :inverse-video t))))
+ '(tooltip ((((class color)) (:inherit variable-pitch :background "lightyellow" :foreground "black" :foundry "unknown" :family "DejaVu Sans"))))
+ '(underline ((((supports :underline t)) (:inherit default :underline t))))
+ '(variable-pitch ((t (:family "DejaVu Sans"))))
+ '(whitespace-tab ((((class color) (background dark)) (:background "red" :foreground "white")))))
+
 
 (require 'cl)
-
-(setq custom-file "~/.emacs.d/lisp/my-custom.el")
-;(load custom-file)
 
 
 (add-to-list 'load-path "~/.emacs.d/lisp")
@@ -11,9 +101,12 @@
 ; (add-to-list 'load-path "~/.emacs.d/lisp/slime-2.0")
 ; (add-to-list 'load-path "~/.emacs.d/externs/swank-clojure")
 ;(add-to-list 'load-path "~/.emacs.d/externs/slime")
-(load "my-custom")
-(load "modes")
-(load "planner-rc")
+
+;(load "my-custom")
+(set-background-color "grey20")
+(set-foreground-color "white")
+;(load "modes")
+;(load "planner-rc")
 ;(load "edesk")
 ;(require 'erc)
 
@@ -27,25 +120,27 @@
 (defun noop ()
   (interactive))
 ;; This sucks with literate haskell
-;(global-set-key [?\r ] 'newline-and-indent)
+(global-set-key [?\r ] 'newline-and-indent)
 (global-set-key [?\M-: ] 'vim-warning)
 ;(global-set-key [?\C-w ] 'backward-kill-word)
 (global-set-key [?\e ?`] 'noop)
 (global-set-key [?\e ?\e ?`] 'noop)
+
 
 ; Lisp stuff...
 ;	  (lambda ()
 ;    (set (make-local-variable 'lisp-indent-function)
 ; 'common-lisp-indent-function)))
 
-(autoload 'predictive-mode "predictive" "predictive" t)
+;(autoload 'predictive-mode "predictive" "predictive" t)
 ;(set-default 'predictive-auto-add-to-dict t)
-(setq predictive-main-dict 'tq-dict
-      predictive-auto-learn t
-      predictive-add-to-dict-ask nil
-      predictive-use-auto-learn-cache nil
-      predictive-which-dict t)
+; (setq predictive-main-dict 'tq-dict
+;      predictive-auto-learn t
+;      predictive-add-to-dict-ask nil
+;      predictive-use-auto-learn-cache nil
+;      predictive-which-dict t)
 
+; (setq show-trailing-whitespace t)
 
 (setq visible-bell 'top-bottom)
 ;; Planner stuff...
@@ -66,3 +161,7 @@
 
 
 (put 'overwrite-mode 'disabled t)
+
+;(load-file (let ((coding-system-for-read 'utf-8))
+;               (shell-command-to-string "agda-mode locate")))
+

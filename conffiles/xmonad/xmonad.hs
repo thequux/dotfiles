@@ -5,9 +5,11 @@ import qualified XMonad.Layout.LayoutHints as LayoutHints
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Layout.Reflect
 import XMonad.Layout.LayoutScreens
+import XMonad.Layout.SimpleFloat
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.UrgencyHook
+import XMonad.Util.WindowProperties (getProp32)
 import XMonad.Layout.Tabbed hiding (fontName)
 import qualified XMonad.Layout.Named
 import Data.IORef
@@ -20,6 +22,8 @@ import Foreign.C (CChar)
 import XMonad.Layout.PerWorkspace
 import Data.Char ( isSpace, ord)
 import Data.Monoid
+import Data.Maybe
+
 data Amixer = SSet String String
 
 spawnS = spawn . flip (++) " >/dev/null 2>&1"
@@ -37,9 +41,9 @@ layouts = LayoutHints.layoutHints $
           ((Mirror tiled `named` "Horiz")
            ||| (tiled `named` "Vert")
            ||| simpleTabbed
-           ||| Full)
+           ||| simpleFloat)
   where tiled = reflectHoriz $ Tall nmaster delta ratio
-  	nmaster = 2
+        nmaster = 2
 	ratio = 3/4
 	delta = 3/100
         -- threecol = dragPaneSp Horizontal 0.2 0.5 2
@@ -171,6 +175,22 @@ myManageHook = composeOne $
 	[ isFullscreen -?> doFullFloat
 	]
 
+withEventHook :: (Event -> X All) -> XConfig a -> XConfig a
+withEventHook hook config = config{handleEventHook=handleEventHook config `mappend` hook}
+withStartupHook :: (X ()) -> XConfig a -> XConfig a
+withStartupHook hook config = config{startupHook=startupHook config `mappend` hook}
+
+addFullscreen :: XConfig a -> XConfig a
+addFullscreen = withEventHook fullscreenEventHook . withStartupHook fsStartupHook
+	where fsStartupHook = withDisplay $ \dpy -> do
+		fullsc <- getAtom "_NET_WM_STATE_FULLSCREEN"
+		supp <- getAtom "_NET_SUPPORTED"
+		aAtom <- getAtom "ATOM"
+		r <- asks theRoot
+		oldSupp <- fromMaybe [] `fmap` getProp32 supp r
+		io $ changeProperty32 dpy r supp aAtom propModeReplace (fromIntegral fullsc : oldSupp)
+	
+
 gaps = mkGaps $
   [ [ (16,0,0,0)	-- dzen
     , (0,3,0,0)		-- xbattbar
@@ -189,7 +209,10 @@ withWorkspaces ws conf@(XConfig{keys=baseKeys}) =
                                                   ,(0, W.greedyView)]
                              , (key,i) <- zip (keySet $ submod .|. modm) ws]
 
-main = xmonad $ withUrgencyHook NoUrgencyHook $ ewmh $ defaultConfig
+main = xmonad . withUrgencyHook NoUrgencyHook 
+              . addFullscreen
+              . ewmh
+              $ defaultConfig
     { borderWidth        = 2
     , terminal           = "urxvt"
     , modMask		 = mod4Mask

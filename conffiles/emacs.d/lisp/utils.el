@@ -1,0 +1,63 @@
+(defun make-dlist (&optional lst)
+  "Make a dlist out of lst, and returns it. If lst is given, it will be modified."
+  (let* ((dl (cons nil lst))
+         (end dl))
+    (while (and (consp end)
+                (consp (cdr end)))
+      (setq end (cdr end)))
+    (assert (eql (cdr end) '()))
+    (setcar dl end)
+    dl))
+
+(defun dl-to-list (dl)
+  (cdr dl))
+
+(defun dl-car (dl)
+  (car (dl-to-list dl)))
+(defun dl-cdr (dl)
+  (let ((r (cons (car dl)
+                 (cddr dl))))
+    (when (eq (cdr r)
+              nil)
+      (setcar r r))
+    r))
+(defun dl-push (dl item)
+  (setcdr (car dl)
+          (cons item nil))
+  (setcar dl (cdar dl))
+  dl)
+
+(defun foldsyms (fn &optional start)
+  (let ((obj start))
+    (mapatoms (lambda (x)
+                (setq obj (funcall fn obj x))))
+    obj))
+
+(defun mapsyms (fn)
+  (foldsyms (lambda (acc new)
+              (cons (funcall fn new) acc)) nil))
+
+(defun foldhash (fn start table)
+  (let ((obj start))
+    (maphash (lambda (k v)
+               (setq obj (funcall fn obj k v)))
+             table)
+    obj))
+
+(defun hash-table-keys (table)
+  (foldhash (lambda (l k v)
+              (cons k l))
+            nil table))
+
+(defun format-symbol (sym)
+  (map 'string (lambda (x)
+                 (if (funcall (car x) sym)
+                     (cdr x) ?-))
+       `((boundp . ?b)
+         (fboundp . ?f)
+         (,(lambda (x)
+                   (get x 'variable-documentation)) . ?v)
+         )))
+
+
+
