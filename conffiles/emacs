@@ -13,7 +13,6 @@
  '(agda2-highlight-face-groups (quote default-faces))
  '(agda2-include-dirs (quote ("." "/home/thequux/src/agda-stdlib" "/home/thequux/src/agda-stdlib/src")))
  '(auto-completion-syntax-alist (quote (reject . word)))
- '(before-save-hook (quote (delete-trailing-whitespace)))
  '(c-basic-offset 8)
  '(completion-resolve-behaviour (quote reject))
  '(completion-use-hotkeys nil)
