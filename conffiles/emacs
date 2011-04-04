@@ -58,7 +58,7 @@
  '(sql-product (quote postgres))
  '(standard-indent 8)
  '(tags-revert-without-query t)
- '(vc-handled-backends (quote (RCS CVS SVN SCCS HG Arch MCVS)))
+ '(vc-handled-backends (quote (RCS CVS SVN SCCS HG Arch MCVS Git)))
  '(version-control t)
  '(whitespace-style (quote (trailing empty tab-mark tabs))))
 (custom-set-faces
@@ -148,11 +148,8 @@
 ;(global-set-key)
 
 
+(load-library "compile")
 (load-library "go-mode")
-(let ((m go-mode-map))
- (define-key m "\C-f" 'gofmt)
- (define-key m "k" 'compile)
- (define-key m "\C-k" 'recompile))
 
 (progn
   (push '(go "^\\(\\([^:\n]*\\):\\([0-9]*\\)\\)\\(?:\\[[^]\n]*\\]\\)?: " 2 3 nil nil 1) compilation-error-regexp-alist-alist)

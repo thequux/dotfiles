@@ -117,6 +117,9 @@ built-ins, functions, and some types.")
     (define-key m ":" #'go-mode-delayed-electric)
     ;; In case we get : indentation wrong, correct ourselves
     (define-key m "=" #'go-mode-insert-and-indent)
+    (define-key m "\C-c\C-f" 'gofmt)
+    (define-key m "\C-c\M-k" 'compile)
+    (define-key m "\C-c\C-k" 'recompile)
     m)
   "Keymap used by Go mode to implement electric keys.")
 
@@ -404,6 +407,10 @@ indented one level."
           (when (looking-at "\\<case\\>\\|\\<default\\>\\|\\w+\\s *:\\(\\S.\\|$\\)")
             (decf indent tab-width))
 
+          ;; Probably inside a literal; cancel the previous outdent
+          (when (looking-at "\\w+\\s *:\\S.[^\n]*\\S [{,]")
+             (incf indent tab-width))
+
           ;; Continuation lines are indented 1 level
           (forward-comment (- (buffer-size)))
           (when (case (char-before)
@@ -502,7 +509,7 @@ Useful for development work."
 
 (defun gofmt ()
   "Pipe the current buffer through the external tool `gofmt`."
-  
+
   (interactive)
   ;; for some reason save-excursion isn't working
   ;; probably because shell-command-on-region deletes the contents of the
