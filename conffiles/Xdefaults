@@ -4,6 +4,13 @@
 
 #define TERM_FONT(mid)	-xos4-terminus-mid-*-*-16-*-*-*-*-*-iso10646-1
 
+#ifdef SRVR_vulcan_home_thequux_com
+# define TERM_FONT_SZ 20
+#else
+# define TERM_FONT_SZ 15
+#endif
+
+
 !XTerm.vt100.background:	rgb:6B/81/92
 !XTerm.vt100.background:	rgb:32/5b/58
 XTerm*vt100.background:		TERM_BG
@@ -19,7 +26,7 @@ Xft.lcdfilter:	lcddefault
 
 Rxvt.background:	rgb:1E/36/35
 Rxvt.foreground:	rgb:ff/ff/ff
-Rxvt.font:		xft:inconsolata:pixelsize=20
+Rxvt.font:		xft:inconsolata:pixelsize=TERM_FONT_SZ
 XTerm*metaSendsEscape:		true
 
 Rxvt.color4:	rgb:40/90/c0
