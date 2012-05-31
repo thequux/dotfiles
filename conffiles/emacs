@@ -13,7 +13,7 @@
  '(agda2-highlight-face-groups (quote default-faces))
  '(agda2-include-dirs (quote ("." "/home/thequux/src/agda-stdlib" "/home/thequux/src/agda-stdlib/src")))
  '(auto-completion-syntax-alist (quote (reject . word)))
- '(c-basic-offset 8)
+ '(c-basic-offset 2)
  '(completion-resolve-behaviour (quote reject))
  '(completion-use-hotkeys nil)
  '(cperl-autoindent-on-semi t)
@@ -65,7 +65,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "grey20" :foreground "white" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight semi-light :height 140 :width normal :foundry "unknown" :family "Inconsolata"))))
+ '(default ((t (:inherit nil :stipple nil :background "grey20" :foreground "white" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight semi-light :height 100 :width normal :foundry "unknown" :family "Droid Sans Mono"))))
  '(cursor ((t (:background "white"))))
  '(custom-button ((((type x w32 mac) (class color)) (:background "lightgrey" :foreground "black" :box (:line-width -1 :style released-button)))))
  '(fixed-pitch ((t (:foundry "unknown" :family "Monaco"))))
@@ -144,8 +144,15 @@
 (setq visible-bell 'top-bottom)
 ;; Planner stuff...
 
-;(global-set-key)
-
+(global-set-key '[?\C-c ?\C-k] 'recompile)
+(global-set-key '[?\C-c ?k] 'compile)
+
+(progn
+  (global-set-key '[?\C-x C-left] 'windmove-left)
+  (global-set-key '[?\C-x C-right] 'windmove-right)
+  (global-set-key '[?\C-x C-up] 'windmove-up)
+  (global-set-key '[?\C-x C-down] 'windmove-down))
+
 
 (load-library "compile")
 (load-library "go-mode")
@@ -161,3 +168,4 @@
 ;(load-file (let ((coding-system-for-read 'utf-8))
 ;               (shell-command-to-string "agda-mode locate")))
 
+(global-set-key '[?\C-x ?\C-c] 'delete-frame)

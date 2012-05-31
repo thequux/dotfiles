@@ -54,3 +54,7 @@ if [[ "$TERM" == vt100 ]]; then
 fi
 
 setopt extended_history
+
+function e() { "${EDITOR:-editor}" "$@"; }
+alias ls="ls --color=auto"
+eval "`dircolors ~/.dircolors`"
