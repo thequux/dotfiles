@@ -1,0 +1,9 @@
+[alias]
+	st = status
+[user]
+	email = thequux@thequux.com
+	name = Dan Hirsch
+[color]
+	ui = always
+[color "status"]
+	untracked = bold red
