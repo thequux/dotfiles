@@ -8,15 +8,13 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(LaTeX-command "latex")
- '(LaTeX-verbatim-environments (quote ("verbatim" "verbatim*" "Verbatim")))
- '(TeX-PDF-mode t)
+ '(TeX-PDF-mode nil)
  '(TeX-command-list (quote (("TeX" "%(PDF)%(tex) %`%S%(PDFout)%(mode)%' %t" TeX-run-TeX nil (plain-tex-mode texinfo-mode ams-tex-mode) :help "Run plain TeX") ("LaTeX" "%`%l --shell-escape %(mode)%' %t" TeX-run-TeX nil (latex-mode doctex-mode) :help "Run LaTeX") ("Makeinfo" "makeinfo %t" TeX-run-compile nil (texinfo-mode) :help "Run Makeinfo with Info output") ("Makeinfo HTML" "makeinfo --html %t" TeX-run-compile nil (texinfo-mode) :help "Run Makeinfo with HTML output") ("AmSTeX" "%(PDF)amstex %`%S%(PDFout)%(mode)%' %t" TeX-run-TeX nil (ams-tex-mode) :help "Run AMSTeX") ("ConTeXt" "texexec --once --texutil %(execopts)%t" TeX-run-TeX nil (context-mode) :help "Run ConTeXt once") ("ConTeXt Full" "texexec %(execopts)%t" TeX-run-TeX nil (context-mode) :help "Run ConTeXt until completion") ("BibTeX" "bibtex %s" TeX-run-BibTeX nil t :help "Run BibTeX") ("View" "%V" TeX-run-discard t t :help "Run Viewer") ("Print" "%p" TeX-run-command t t :help "Print the file") ("Queue" "%q" TeX-run-background nil t :help "View the printer queue" :visible TeX-queue-command) ("File" "%(o?)dvips %d -o %f " TeX-run-command t t :help "Generate PostScript file") ("Index" "makeindex %s" TeX-run-command nil t :help "Create index file") ("Check" "lacheck %s" TeX-run-compile nil (latex-mode) :help "Check LaTeX file for correctness") ("Spell" "(TeX-ispell-document \"\")" TeX-run-function nil t :help "Spell-check the document") ("Clean" "TeX-clean" TeX-run-function nil t :help "Delete generated intermediate files") ("Clean All" "(TeX-clean t)" TeX-run-function nil t :help "Delete generated intermediate and output files") ("Other" "" TeX-run-command t t :help "Run an arbitrary command"))))
  '(TeX-engine (quote xetex))
  '(agda2-highlight-face-groups (quote default-faces))
  '(agda2-include-dirs (quote ("." "/home/thequux/src/agda-stdlib" "/home/thequux/src/agda-stdlib/src")))
  '(auto-completion-syntax-alist (quote (reject . word)))
- '(before-save-hook (quote (delete-trailing-whitespace)))
- '(c-basic-offset 8)
+ '(c-basic-offset 2)
  '(completion-resolve-behaviour (quote reject))
  '(completion-use-hotkeys nil)
  '(cperl-autoindent-on-semi t)
@@ -72,7 +70,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "grey20" :foreground "white" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight semi-light :height 140 :width normal :foundry "unknown" :family "Inconsolata"))))
+ '(default ((t (:inherit nil :stipple nil :background "grey20" :foreground "white" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight semi-light :height 100 :width normal :foundry "unknown" :family "Droid Sans Mono"))))
  '(cursor ((t (:background "white"))))
  '(custom-button ((((type x w32 mac) (class color)) (:background "lightgrey" :foreground "black" :box (:line-width -1 :style released-button)))))
  '(fixed-pitch ((t (:foundry "unknown" :family "Monaco"))))
@@ -151,8 +149,15 @@
 (setq visible-bell 'top-bottom)
 ;; Planner stuff...
 
-;(global-set-key)
-
+(global-set-key '[?\C-c ?\C-k] 'recompile)
+(global-set-key '[?\C-c ?k] 'compile)
+
+(progn
+  (global-set-key '[?\C-x C-left] 'windmove-left)
+  (global-set-key '[?\C-x C-right] 'windmove-right)
+  (global-set-key '[?\C-x C-up] 'windmove-up)
+  (global-set-key '[?\C-x C-down] 'windmove-down))
+
 
 (load-library "compile")
 (load-library "go-mode")
@@ -168,5 +173,4 @@
 ;(load-file (let ((coding-system-for-read 'utf-8))
 ;               (shell-command-to-string "agda-mode locate")))
 
-(add-to-list 'load-path "~/.emacs.d/vendor/coffee-mode")
-(load-library "coffee-mode")
+(global-set-key '[?\C-x ?\C-c] 'delete-frame)
