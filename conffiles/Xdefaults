@@ -7,7 +7,7 @@
 #ifdef SRVR_vulcan_home_thequux_com
 # define TERM_FONT_SZ 20
 #else
-# define TERM_FONT_SZ 15
+# define TERM_FONT_SZ 12
 #endif
 
 
@@ -26,7 +26,7 @@ Xft.lcdfilter:	lcddefault
 
 Rxvt.background:	rgb:1E/36/35
 Rxvt.foreground:	rgb:ff/ff/ff
-Rxvt.font:		xft:inconsolata:pixelsize=TERM_FONT_SZ
+Rxvt.font:		xft:Droid Sans Mono:pixelsize=TERM_FONT_SZ
 XTerm*metaSendsEscape:		true
 
 Rxvt.color4:	rgb:40/90/c0
@@ -34,4 +34,6 @@ Rxvt.color8:	rgb:60/60/60
 Rxvt.color12:	rgb:00/90/ff
 Rxvt.saveLines:	4096
 Rxvt.secondaryScroll: no
+URxvt.urgentOnBell: true
 
+xscreensaver.locak: true

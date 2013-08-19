@@ -1,6 +1,12 @@
-#!/bin/sh
+#!/bin/bash
 # vim: nolist
 export PATH="$HOME/bin:$HOME/local/bin:$HOME/.cabal/bin:$PATH"
+if [[ -x /bin/systemd ]]; then
+	echo "Systemd mode starting in $PWD"
+	exec /bin/systemd --user --unit=graphical.target
+fi
+
+echo "foo"
 xmodmap ~/.xmodmaprc
 function first_executable() {
     for x in "$@"; do
@@ -15,16 +21,20 @@ if test -z "$DBUS_SESSION_BUS_ADDRESS"; then
 	eval `dbus-launch --sh-syntax --exit-with-session`
 fi
 
-eval $(gpg-agent --daemon)
+eval $(gpg-agent --daemon --enable-ssh-support)
+
+setxkbmap -option 'grp:shifts_toggle,lv3:ralt_switch' 'us,de'
+
+emacs --daemon
 
 case `hostname -f` in
-    peewee.dorm-thequux.com)
-	xbattbar &
-	[ -d "/usr/share/fonts/X11/genera/" ] && xset fp+ "/usr/share/fonts/X11/genera/"
-	socat -U SYSTEM:"dzen2 -fn genera-jess14",end-close UNIX-LISTEN:"$HOME/.xmonad/dzen2-${DISPLAY//:/\\:}",reuseaddr,fork &
+    peewee.thequux.com)
 	xbattbar-acpi &
 	xscreensaver -no-splash &
-	WM=xmonad
+	xchat &
+	pidgin &
+	gmpc &
+	WM=awesome
 	;;
     krogoth.dorm-thequux.com)
 	WM=xmonad
@@ -39,6 +49,8 @@ case `hostname -f` in
 	;;
 esac
 	
+/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
+xrdb .Xdefaults
 $WM &>.xsession-errors-wm
 
 exec xterm

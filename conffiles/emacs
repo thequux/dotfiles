@@ -1,6 +1,8 @@
 ;;; Basic setup...
 (package-initialize)
 (add-to-list 'package-archives '("elpa" . "http://tromey.com/elpa/"))
+(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -8,10 +10,47 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(LaTeX-command "latex")
- '(TeX-PDF-mode nil)
- '(TeX-command-list (quote (("TeX" "%(PDF)%(tex) %`%S%(PDFout)%(mode)%' %t" TeX-run-TeX nil (plain-tex-mode texinfo-mode ams-tex-mode) :help "Run plain TeX") ("LaTeX" "%`%l --shell-escape %(mode)%' %t" TeX-run-TeX nil (latex-mode doctex-mode) :help "Run LaTeX") ("Makeinfo" "makeinfo %t" TeX-run-compile nil (texinfo-mode) :help "Run Makeinfo with Info output") ("Makeinfo HTML" "makeinfo --html %t" TeX-run-compile nil (texinfo-mode) :help "Run Makeinfo with HTML output") ("AmSTeX" "%(PDF)amstex %`%S%(PDFout)%(mode)%' %t" TeX-run-TeX nil (ams-tex-mode) :help "Run AMSTeX") ("ConTeXt" "texexec --once --texutil %(execopts)%t" TeX-run-TeX nil (context-mode) :help "Run ConTeXt once") ("ConTeXt Full" "texexec %(execopts)%t" TeX-run-TeX nil (context-mode) :help "Run ConTeXt until completion") ("BibTeX" "bibtex %s" TeX-run-BibTeX nil t :help "Run BibTeX") ("View" "%V" TeX-run-discard t t :help "Run Viewer") ("Print" "%p" TeX-run-command t t :help "Print the file") ("Queue" "%q" TeX-run-background nil t :help "View the printer queue" :visible TeX-queue-command) ("File" "%(o?)dvips %d -o %f " TeX-run-command t t :help "Generate PostScript file") ("Index" "makeindex %s" TeX-run-command nil t :help "Create index file") ("Check" "lacheck %s" TeX-run-compile nil (latex-mode) :help "Check LaTeX file for correctness") ("Spell" "(TeX-ispell-document \"\")" TeX-run-function nil t :help "Spell-check the document") ("Clean" "TeX-clean" TeX-run-function nil t :help "Delete generated intermediate files") ("Clean All" "(TeX-clean t)" TeX-run-function nil t :help "Delete generated intermediate and output files") ("Other" "" TeX-run-command t t :help "Run an arbitrary command"))))
+ '(TeX-PDF-mode t)
+ '(TeX-command-list
+   (quote
+    (("TeX" "%(PDF)%(tex) %`%S%(PDFout)%(mode)%' %t" TeX-run-TeX nil
+      (plain-tex-mode texinfo-mode ams-tex-mode)
+      :help "Run plain TeX")
+     ("LaTeX" "%`%l --shell-escape %(mode)%' %t" TeX-run-TeX nil
+      (latex-mode doctex-mode)
+      :help "Run LaTeX")
+     ("Makeinfo" "makeinfo %t" TeX-run-compile nil
+      (texinfo-mode)
+      :help "Run Makeinfo with Info output")
+     ("Makeinfo HTML" "makeinfo --html %t" TeX-run-compile nil
+      (texinfo-mode)
+      :help "Run Makeinfo with HTML output")
+     ("AmSTeX" "%(PDF)amstex %`%S%(PDFout)%(mode)%' %t" TeX-run-TeX nil
+      (ams-tex-mode)
+      :help "Run AMSTeX")
+     ("ConTeXt" "texexec --once --texutil %(execopts)%t" TeX-run-TeX nil
+      (context-mode)
+      :help "Run ConTeXt once")
+     ("ConTeXt Full" "texexec %(execopts)%t" TeX-run-TeX nil
+      (context-mode)
+      :help "Run ConTeXt until completion")
+     ("BibTeX" "bibtex %s" TeX-run-BibTeX nil t :help "Run BibTeX")
+     ("View" "%V" TeX-run-discard t t :help "Run Viewer")
+     ("Print" "%p" TeX-run-command t t :help "Print the file")
+     ("Queue" "%q" TeX-run-background nil t :help "View the printer queue" :visible TeX-queue-command)
+     ("File" "%(o?)dvips %d -o %f " TeX-run-command t t :help "Generate PostScript file")
+     ("Index" "makeindex %s" TeX-run-command nil t :help "Create index file")
+     ("Check" "lacheck %s" TeX-run-compile nil
+      (latex-mode)
+      :help "Check LaTeX file for correctness")
+     ("Spell" "(TeX-ispell-document \"\")" TeX-run-function nil t :help "Spell-check the document")
+     ("Clean" "TeX-clean" TeX-run-function nil t :help "Delete generated intermediate files")
+     ("Clean All" "(TeX-clean t)" TeX-run-function nil t :help "Delete generated intermediate and output files")
+     ("Other" "" TeX-run-command t t :help "Run an arbitrary command"))))
  '(agda2-highlight-face-groups (quote default-faces))
- '(agda2-include-dirs (quote ("." "/home/thequux/src/agda-stdlib" "/home/thequux/src/agda-stdlib/src")))
+ '(agda2-include-dirs
+   (quote
+    ("." "/home/thequux/src/agda-stdlib" "/home/thequux/src/agda-stdlib/src")))
  '(auto-completion-syntax-alist (quote (reject . word)))
  '(c-basic-offset 2)
  '(completion-resolve-behaviour (quote reject))
@@ -27,6 +66,8 @@
  '(haskell-doc-show-global-types t)
  '(haskell-font-lock-symbols nil)
  '(haskell-mode-hook (quote (turn-on-haskell-indent turn-on-eldoc-mode)) t)
+ '(ido-default-buffer-method (quote selected-window))
+ '(ido-default-file-method (quote selected-window))
  '(indent-tabs-mode t)
  '(inhibit-startup-screen t)
  '(jit-lock-context-time 0.1)
@@ -38,6 +79,7 @@
  '(muse-project-alist (quote (("WikiPlanner" ("~/plans" "index")))) t)
  '(nxml-bind-meta-tab-to-complete-flag t)
  '(nxml-slash-auto-complete-flag t)
+ '(perl-prettify-symbols nil)
  '(predictive-add-to-dict-ask nil t)
  '(predictive-auto-add-to-dict t t)
  '(predictive-auto-learn t t)
@@ -46,7 +88,18 @@
  '(predictive-main-dict (quote dict-local) t)
  '(predictive-use-buffer-local-dict t)
  '(prolog-program-name "gprolog")
- '(safe-local-variable-values (quote ((Package . DRAKMA) (package . puri) (Syntax . ANSI-Common-Lisp) (Package . CHUNGA) (Base . 10) (Package . FLEXI-STREAMS) (Syntax . COMMON-LISP) (tab-always-indent) (haskell-literate . latex) (add-log-time-zone-rule . t))))
+ '(safe-local-variable-values
+   (quote
+    ((Package . DRAKMA)
+     (package . puri)
+     (Syntax . ANSI-Common-Lisp)
+     (Package . CHUNGA)
+     (Base . 10)
+     (Package . FLEXI-STREAMS)
+     (Syntax . COMMON-LISP)
+     (tab-always-indent)
+     (haskell-literate . latex)
+     (add-log-time-zone-rule . t))))
  '(save-place t nil (saveplace))
  '(scalable-fonts-allowed t)
  '(scheme-mit-dialect nil)
@@ -81,6 +134,11 @@
  '(highlight ((t (:background "grey60"))))
  '(isearch ((((class color) (min-colors 88) (background dark)) (:inverse-video nil))))
  '(lazy-highlight ((((class color) (min-colors 88) (background dark)) (:background "yellow" :foreground "black"))))
+ '(markup-meta-face ((t (:stipple nil :foreground "gray50" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :width normal :foundry "unknown"))))
+ '(markup-meta-hide-face ((t (:inherit markup-meta-face :foreground "gray40"))))
+ '(markup-title-0-face ((t (:inherit markup-gen-face :height 2.5))))
+ '(markup-title-1-face ((t (:inherit markup-gen-face :height 2.1))))
+ '(markup-typewriter-face ((t (:inherit markup-gen-face :background "gray15"))))
  '(mode-line ((t (:background "grey80" :foreground "Black" :box (:line-width -1 :color "grey" :style released-button)))))
  '(mode-line-highlight ((((class color) (min-colors 88)) (:box (:line-width 2 :style released-button)))))
  '(mode-line-inactive ((default (:inherit mode-line)) (((class color) (min-colors 88) (background dark)) (:background "grey70" :box nil :weight light))))
@@ -96,18 +154,10 @@
 
 
 (add-to-list 'load-path "~/.emacs.d/lisp")
-; (add-to-list 'load-path "~/.emacs.d/externs/clojure-mode")
-; (add-to-list 'load-path "~/.emacs.d/lisp/slime-2.0")
-; (add-to-list 'load-path "~/.emacs.d/externs/swank-clojure")
-;(add-to-list 'load-path "~/.emacs.d/externs/slime")
 
 ;(load "my-custom")
 (set-background-color "grey20")
 (set-foreground-color "white")
-;(load "modes")
-;(load "planner-rc")
-;(load "edesk")
-;(require 'erc)
 
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
@@ -169,3 +219,34 @@
 ;               (shell-command-to-string "agda-mode locate")))
 
 (global-set-key '[?\C-x ?\C-c] 'delete-frame)
+(add-to-list 'auto-mode-alist '( "\\.pp\\'" . puppet-mode ))
+
+(defun insert-underline (char)
+  "Insert an appropriately sized underline of the specified character on the current line. Assumes that it's on a blank line"
+  (interactive "cUnderline character: ")
+  (if (eq (line-beginning-position) (line-end-position))
+      ; on a blank line. Add a newline after the underline
+      (let ((width (- (line-end-position 0)
+		      (line-beginning-position 0))))
+	(insert-char char width)
+	(insert-char ?\n 1))
+    (let ((width (- (line-end-position)
+		    (line-beginning-position))))
+      (insert-char ?\n 1)
+      (insert-char char width))))
+
+(global-set-key [?\C-x ?_] 'insert-underline)
+
+(defun mpc-toggle ()
+  (interactive)
+  (mpc-status-refresh)
+  (if (string-equal (cdr (assoc 'state mpc-status)) "pause")
+      (mpc-play)
+    (mpc-pause)))
+
+(setq org-agenda-files (list "~/NOTES.org/upstandinghackers.org"
+                             "~/NOTES.org/projects.org" 
+                             "~/NOTES.org/personal.org"))
+
+(global-set-key [?\C-c ?a ?t] 'org-todo-list)
+(ido-mode)

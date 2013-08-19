@@ -1,2 +1,7 @@
 filetype plugin on
 set grepprg=grep\ -nH\ $*
+colorscheme evening
+syntax on
+set guioptions-=T
+set guioptions-=m
+set guifont="Droid Sans Mono 10"
