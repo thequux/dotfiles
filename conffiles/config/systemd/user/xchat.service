@@ -1,0 +1,8 @@
+[Unit]
+Description=XChat
+
+[Service]
+ExecStart=/usr/bin/xchat
+
+[Install]
+WantedBy=graphical.target

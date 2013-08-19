@@ -1,0 +1,9 @@
+[Unit]
+Description=Awesome window manager
+
+[Service]
+WorkingDirectory=/home/thequux
+ExecStart=/usr/bin/awesome
+
+[Install]
+WantedBy=graphical.target

@@ -1,0 +1,8 @@
+[Unit]
+Description=Xbattbar
+
+[Service]
+ExecStart=/usr/bin/xbattbar -c -a
+
+[Install]
+WantedBy=graphical.target

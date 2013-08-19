@@ -1,0 +1,8 @@
+[Unit]
+Description=
+
+[Service]
+ExecStart=/usr/bin/emacs --daemon
+
+[Install]
+WantedBy=graphical.target

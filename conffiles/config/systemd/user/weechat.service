@@ -1,0 +1,8 @@
+[Unit]
+Description=WeeChat IRC client
+
+[Service]
+ExecStart=/usr/bin/x-terminal-emulator -e weechat-curses
+
+[Install]
+WantedBy=graphical.target

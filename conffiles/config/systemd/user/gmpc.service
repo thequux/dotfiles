@@ -1,0 +1,8 @@
+[Unit]
+Description=Gnome media player client
+
+[Service]
+ExecStart=/usr/bin/gmpc
+
+[Install]
+WantedBy=graphical.target

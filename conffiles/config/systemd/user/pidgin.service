@@ -1,0 +1,8 @@
+[Unit]
+Description=Pidgin
+
+[Service]
+ExecStart=/usr/bin/pidgin
+
+[Install]
+WantedBy=graphical.target
