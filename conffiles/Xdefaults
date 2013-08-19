@@ -4,10 +4,13 @@
 
 #define TERM_FONT(mid)	-xos4-terminus-mid-*-*-16-*-*-*-*-*-iso10646-1
 
+#ifdef SRVR_vulcan
+#define SRVR_vulcan_home_thequux_com
+#endif
 #ifdef SRVR_vulcan_home_thequux_com
-# define TERM_FONT_SZ 20
+Xft.dpi: 101
 #else
-# define TERM_FONT_SZ 12
+Xft.dpi: 96
 #endif
 
 
@@ -17,7 +20,6 @@ XTerm*vt100.background:		TERM_BG
 XTerm*vt100.foreground:		TERM_FG
 XTerm*allowSendEvents:		true
 XTerm*vt100.font: 		TERM_FONT(medium-r)
-Xft.dpi:	96
 Xft.antialias:	1
 Xft.hinting:	1
 Xft.hintstyle:	hintmedium
@@ -26,7 +28,7 @@ Xft.lcdfilter:	lcddefault
 
 Rxvt.background:	rgb:1E/36/35
 Rxvt.foreground:	rgb:ff/ff/ff
-Rxvt.font:		xft:Droid Sans Mono:pixelsize=TERM_FONT_SZ
+Rxvt.font:		xft:Droid Sans Mono:pixelsize=12
 XTerm*metaSendsEscape:		true
 
 Rxvt.color4:	rgb:40/90/c0

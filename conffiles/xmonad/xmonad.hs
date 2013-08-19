@@ -2,7 +2,7 @@
 import XMonad
 import qualified Data.Map as M
 import qualified XMonad.Layout.LayoutHints as LayoutHints
-import XMonad.Hooks.EwmhDesktops
+import XMonad.Hooks.EwmhDesktops hiding (fullscreenEventHook)
 import XMonad.Layout.Reflect
 import XMonad.Layout.LayoutScreens
 import XMonad.Layout.SimpleFloat
@@ -23,6 +23,8 @@ import XMonad.Layout.PerWorkspace
 import Data.Char ( isSpace, ord)
 import Data.Monoid
 import Data.Maybe
+import XMonad.Hooks.SetWMName
+import XMonad.Layout.Fullscreen
 
 data Amixer = SSet String String
 
@@ -35,9 +37,10 @@ shellQuote foo = "'" ++ concatMap quote1 foo ++ "\'"
 instance Show Amixer where
 	show (SSet control param) = intercalate " " $ map shellQuote ["sset",control,param]
 
-layouts = LayoutHints.layoutHints $
+layouts = fullscreenFull $
+          LayoutHints.layoutHints $
           avoidStruts $
-          onWorkspace "9" (Mirror $ Tall 1 (1/75) (4/5)) $
+          --onWorkspace "9" (Mirror $ Tall 1 (1/75) (4/5)) $
           ((Mirror tiled `named` "Horiz")
            ||| (tiled `named` "Vert")
            ||| simpleTabbed
@@ -54,8 +57,8 @@ fontName :: String
 fontName = "genera-jess14"
 
 dmenu_cmd :: String
-dmenu_cmd = "exe=`dmenu_path | dmenu -fn " 
-	    ++ fontName 
+dmenu_cmd = "exe=`dmenu_path | dmenu -fn "
+	    ++ fontName
 	    ++ "` && eval \"exec $exe\""
 
 shescape :: String -> String
@@ -79,8 +82,8 @@ xmonadPropLog' prop msg = do
     encodeCChar = map (fromIntegral . ord)
 
 -- | Write a string to the _XMONAD_LOG property on the root window.
-xmonadPropLog :: String -> X ()
-xmonadPropLog = xmonadPropLog' "_XMONAD_LOG"
+--xmonadPropLog :: String -> X ()
+--xmonadPropLog = xmonadPropLog' "_XMONAD_LOG"
 
 
 myLogHook :: X ()
@@ -179,9 +182,12 @@ withEventHook :: (Event -> X All) -> XConfig a -> XConfig a
 withEventHook hook config = config{handleEventHook=handleEventHook config `mappend` hook}
 withStartupHook :: (X ()) -> XConfig a -> XConfig a
 withStartupHook hook config = config{startupHook=startupHook config `mappend` hook}
+withManageHook hook config = config{manageHook=manageHook config `mappend` hook}
 
 addFullscreen :: XConfig a -> XConfig a
-addFullscreen = withEventHook fullscreenEventHook . withStartupHook fsStartupHook
+addFullscreen = withEventHook fullscreenEventHook .
+                withManageHook fullscreenManageHook .
+                withStartupHook fsStartupHook
 	where fsStartupHook = withDisplay $ \dpy -> do
 		fullsc <- getAtom "_NET_WM_STATE_FULLSCREEN"
 		supp <- getAtom "_NET_SUPPORTED"
@@ -189,7 +195,7 @@ addFullscreen = withEventHook fullscreenEventHook . withStartupHook fsStartupHoo
 		r <- asks theRoot
 		oldSupp <- fromMaybe [] `fmap` getProp32 supp r
 		io $ changeProperty32 dpy r supp aAtom propModeReplace (fromIntegral fullsc : oldSupp)
-	
+
 
 gaps = mkGaps $
   [ [ (16,0,0,0)	-- dzen
@@ -209,7 +215,8 @@ withWorkspaces ws conf@(XConfig{keys=baseKeys}) =
                                                   ,(0, W.greedyView)]
                              , (key,i) <- zip (keySet $ submod .|. modm) ws]
 
-main = xmonad . withUrgencyHook NoUrgencyHook 
+main = xmonad . withUrgencyHook NoUrgencyHook
+	      . withStartupHook (setWMName "LG3D")
               . addFullscreen
               . ewmh
               $ defaultConfig

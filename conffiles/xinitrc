@@ -40,7 +40,7 @@ case `hostname -f` in
 	WM=xmonad
 	;;
     vulcan.home.thequux.com)
-	WM=xmonad
+	WM=awesome
 	xmobar &
 	fbsetbg -l
 	;;
