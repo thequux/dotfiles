@@ -61,6 +61,9 @@ function extra_info() {
 	if [[ ${#env_name} -gt 0 ]]; then
 		infostr env "$(print -o "${(kO@)env_name}")"
 	fi
+	if [[ ${+VIRTUAL_ENV} -ne 0 ]]; then
+		infostr virtualenv "${VIRTUAL_ENV:t}"
+	fi
 }
 
 # if I'm in emacs, certain things should be changed...
@@ -98,5 +101,6 @@ function lastcmd() {
 	echo "${history[$((${#history}))]}"
 }
 
-
+VIRTUAL_ENV_DISABLE_PROMPT=1
+[[ -f /etc/bash_completion.d/virtualenvwrapper ]] && source /etc/bash_completion.d/virtualenvwrapper
 eval `perl -Mlocal::lib=$HOME/local`
