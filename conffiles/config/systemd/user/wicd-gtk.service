@@ -1,0 +1,8 @@
+[Unit]
+Description=Network manager applet
+
+[Service]
+ExecStart=/usr/bin/wicd-gtk -t
+
+[Install]
+WantedBy=graphical.target

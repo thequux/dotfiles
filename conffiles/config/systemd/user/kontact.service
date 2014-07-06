@@ -1,0 +1,8 @@
+[Unit]
+Description=KDE PIM
+
+[Service]
+ExecStart=/usr/bin/kontact --nofork
+
+[Install]
+WantedBy=graphical.target

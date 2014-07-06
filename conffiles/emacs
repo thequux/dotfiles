@@ -3,6 +3,8 @@
 (add-to-list 'package-archives '("elpa" . "http://tromey.com/elpa/"))
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
+(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(setq tq-missing-packages ())
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -11,48 +13,15 @@
  ;; If there is more than one, they won't work right.
  '(LaTeX-command "latex")
  '(TeX-PDF-mode t)
- '(TeX-command-list
-   (quote
-    (("TeX" "%(PDF)%(tex) %`%S%(PDFout)%(mode)%' %t" TeX-run-TeX nil
-      (plain-tex-mode texinfo-mode ams-tex-mode)
-      :help "Run plain TeX")
-     ("LaTeX" "%`%l --shell-escape %(mode)%' %t" TeX-run-TeX nil
-      (latex-mode doctex-mode)
-      :help "Run LaTeX")
-     ("Makeinfo" "makeinfo %t" TeX-run-compile nil
-      (texinfo-mode)
-      :help "Run Makeinfo with Info output")
-     ("Makeinfo HTML" "makeinfo --html %t" TeX-run-compile nil
-      (texinfo-mode)
-      :help "Run Makeinfo with HTML output")
-     ("AmSTeX" "%(PDF)amstex %`%S%(PDFout)%(mode)%' %t" TeX-run-TeX nil
-      (ams-tex-mode)
-      :help "Run AMSTeX")
-     ("ConTeXt" "texexec --once --texutil %(execopts)%t" TeX-run-TeX nil
-      (context-mode)
-      :help "Run ConTeXt once")
-     ("ConTeXt Full" "texexec %(execopts)%t" TeX-run-TeX nil
-      (context-mode)
-      :help "Run ConTeXt until completion")
-     ("BibTeX" "bibtex %s" TeX-run-BibTeX nil t :help "Run BibTeX")
-     ("View" "%V" TeX-run-discard t t :help "Run Viewer")
-     ("Print" "%p" TeX-run-command t t :help "Print the file")
-     ("Queue" "%q" TeX-run-background nil t :help "View the printer queue" :visible TeX-queue-command)
-     ("File" "%(o?)dvips %d -o %f " TeX-run-command t t :help "Generate PostScript file")
-     ("Index" "makeindex %s" TeX-run-command nil t :help "Create index file")
-     ("Check" "lacheck %s" TeX-run-compile nil
-      (latex-mode)
-      :help "Check LaTeX file for correctness")
-     ("Spell" "(TeX-ispell-document \"\")" TeX-run-function nil t :help "Spell-check the document")
-     ("Clean" "TeX-clean" TeX-run-function nil t :help "Delete generated intermediate files")
-     ("Clean All" "(TeX-clean t)" TeX-run-function nil t :help "Delete generated intermediate and output files")
-     ("Other" "" TeX-run-command t t :help "Run an arbitrary command"))))
+ '(TeX-command-list (quote (("TeX" "%(PDF)%(tex) %`%S%(PDFout)%(mode)%' %t" TeX-run-TeX nil (plain-tex-mode texinfo-mode ams-tex-mode) :help "Run plain TeX") ("LaTeX" "%`%l --shell-escape %(mode)%' %t" TeX-run-TeX nil (latex-mode doctex-mode) :help "Run LaTeX") ("Makeinfo" "makeinfo %t" TeX-run-compile nil (texinfo-mode) :help "Run Makeinfo with Info output") ("Makeinfo HTML" "makeinfo --html %t" TeX-run-compile nil (texinfo-mode) :help "Run Makeinfo with HTML output") ("AmSTeX" "%(PDF)amstex %`%S%(PDFout)%(mode)%' %t" TeX-run-TeX nil (ams-tex-mode) :help "Run AMSTeX") ("ConTeXt" "texexec --once --texutil %(execopts)%t" TeX-run-TeX nil (context-mode) :help "Run ConTeXt once") ("ConTeXt Full" "texexec %(execopts)%t" TeX-run-TeX nil (context-mode) :help "Run ConTeXt until completion") ("BibTeX" "bibtex %s" TeX-run-BibTeX nil t :help "Run BibTeX") ("View" "%V" TeX-run-discard t t :help "Run Viewer") ("Print" "%p" TeX-run-command t t :help "Print the file") ("Queue" "%q" TeX-run-background nil t :help "View the printer queue" :visible TeX-queue-command) ("File" "%(o?)dvips %d -o %f " TeX-run-command t t :help "Generate PostScript file") ("Index" "makeindex %s" TeX-run-command nil t :help "Create index file") ("Check" "lacheck %s" TeX-run-compile nil (latex-mode) :help "Check LaTeX file for correctness") ("Spell" "(TeX-ispell-document \"\")" TeX-run-function nil t :help "Spell-check the document") ("Clean" "TeX-clean" TeX-run-function nil t :help "Delete generated intermediate files") ("Clean All" "(TeX-clean t)" TeX-run-function nil t :help "Delete generated intermediate and output files") ("Other" "" TeX-run-command t t :help "Run an arbitrary command"))))
+ '(ac-auto-show-menu 0.3)
+ '(ac-delay 0.0)
  '(agda2-highlight-face-groups (quote default-faces))
- '(agda2-include-dirs
-   (quote
-    ("." "/home/thequux/src/agda-stdlib" "/home/thequux/src/agda-stdlib/src")))
+ '(agda2-include-dirs (quote ("." "/home/thequux/src/agda-stdlib" "/home/thequux/src/agda-stdlib/src")))
  '(auto-completion-syntax-alist (quote (reject . word)))
  '(c-basic-offset 2)
+ '(coffee-command "iced")
+ '(coffee-tab-width 4)
  '(completion-resolve-behaviour (quote reject))
  '(completion-use-hotkeys nil)
  '(cperl-autoindent-on-semi t)
@@ -62,6 +31,9 @@
  '(cperl-lazy-help-time 3)
  '(dabbrev-case-fold-search nil)
  '(delete-old-versions t)
+ '(erc-modules (quote (autojoin button completion fill irccontrols list match menu move-to-prompt netsplit networks noncommands readonly ring stamp track)))
+ '(erc-nick "thequux")
+ '(erc-server "irc.upstandinghackers.com")
  '(font-lock-verbose nil)
  '(haskell-doc-show-global-types t)
  '(haskell-font-lock-symbols nil)
@@ -77,7 +49,7 @@
  '(line-number-display-limit-width 2000)
  '(mouse-autoselect-window t)
  '(mouse-yank-at-point t)
- '(muse-project-alist (quote (("WikiPlanner" ("~/plans" "index")))) t)
+ '(muse-project-alist (quote (("WikiPlanner" ("~/plans" "index")))))
  '(nxml-bind-meta-tab-to-complete-flag t)
  '(nxml-slash-auto-complete-flag t)
  '(perl-prettify-symbols nil)
@@ -89,24 +61,16 @@
  '(predictive-main-dict (quote dict-local) t)
  '(predictive-use-buffer-local-dict t)
  '(prolog-program-name "gprolog")
- '(safe-local-variable-values
-   (quote
-    ((Package . DRAKMA)
-     (package . puri)
-     (Syntax . ANSI-Common-Lisp)
-     (Package . CHUNGA)
-     (Base . 10)
-     (Package . FLEXI-STREAMS)
-     (Syntax . COMMON-LISP)
-     (tab-always-indent)
-     (haskell-literate . latex)
-     (add-log-time-zone-rule . t))))
+ '(safe-local-variable-values (quote ((coffee-tab-width . 4) (TeX-master . sicp\.tex) (Package . DRAKMA) (package . puri) (Syntax . ANSI-Common-Lisp) (Package . CHUNGA) (Base . 10) (Package . FLEXI-STREAMS) (Syntax . COMMON-LISP) (tab-always-indent) (haskell-literate . latex) (add-log-time-zone-rule . t))))
  '(save-place t nil (saveplace))
  '(scalable-fonts-allowed t)
  '(scheme-mit-dialect nil)
  '(scheme-program-name "mzscheme")
+ '(scss-compile-at-save t)
+ '(scss-sass-command "sass")
  '(show-paren-mode t nil (paren))
  '(show-paren-style (quote mixed))
+ '(slime-complete-symbol*-fancy t)
  '(sql-electric-stuff (quote semicolon))
  '(sql-product (quote postgres))
  '(standard-indent 8)
@@ -125,7 +89,7 @@
  '(custom-button ((((type x w32 mac) (class color)) (:background "lightgrey" :foreground "black" :box (:line-width -1 :style released-button)))))
  '(fixed-pitch ((t (:foundry "unknown" :family "Monaco"))))
  '(font-lock-builtin-face ((((class color) (min-colors 88) (background dark)) (:foreground "#ff80ff" :weight bold))))
- '(font-lock-comment-face ((((class color) (min-colors 88) (background dark)) (:foreground "#80a0ff"))))
+ '(font-lock-comment-face ((t (:foreground "SteelBlue1" :slant oblique :family "DejaVu Sans"))))
  '(font-lock-constant-face ((((class color) (min-colors 88) (background dark)) (:foreground "#ff80ff"))))
  '(font-lock-function-name-face ((((class color) (min-colors 88) (background dark)) (:foreground "#40ffff" :weight bold))))
  '(font-lock-keyword-face ((((class color) (min-colors 88) (background dark)) (:foreground "#ffff80" :weight bold))))
@@ -146,6 +110,8 @@
  '(mode-line-inactive ((default (:inherit mode-line)) (((class color) (min-colors 88) (background dark)) (:background "grey70" :box nil :weight light))))
  '(mouse ((t (:background "White"))))
  '(region ((t (:foreground "grey60" :inverse-video t))))
+ '(slime-highlight-edits-face ((t (:background "grey10"))))
+ '(slime-repl-inputed-output-face ((t (:foreground "orange"))))
  '(tooltip ((((class color)) (:inherit variable-pitch :background "lightyellow" :foreground "black" :foundry "unknown" :family "DejaVu Sans"))))
  '(underline ((((supports :underline t)) (:inherit default :underline t))))
  '(variable-pitch ((t (:family "DejaVu Sans"))))
@@ -156,6 +122,52 @@
 
 
 (add-to-list 'load-path "~/.emacs.d/lisp")
+(add-to-list 'load-path "~/.emacs.d/lisp/slime")
+
+;; Useful utilities
+(defun first-existing (flist &optional predicate)
+  (car (remove-if-not (or predicate #'file-exists-p)
+		      flist)))
+
+
+(defun find-in-path (prgm)
+  (first-existing (mapcar (lambda (x)
+			    (concat x "/" prgm))
+			  exec-path)
+		  #'file-executable-p))
+
+(defmacro when-package (package-name &rest body)
+  (let ((tag (gensym))
+	(plist (if (listp package-name)
+		   package-name
+		   (list package-name))))
+    `(catch ',tag
+       (condition-case nil
+	   (progn ,@(mapcar (lambda (x)
+			      `(require ',x))
+			    plist))
+	 (error ,@(mapcar (lambda (x)
+			    (add-to-list 'tq-missing-packages ',x))
+			  plist)))
+	 
+       ,@body)))
+  
+
+
+(defmacro let-when (var val &rest body)
+  `(let ((,var ,val))
+     (when ,var
+       ,@body)))
+
+
+(put 'when-package 'lisp-indent-function 1)
+(put 'let-when 'lisp-indent-function 2)
+
+
+(load-library "slime")
+(slime-setup '(slime-repl slime-fancy slime-highlight-edits))
+(setq inferior-lisp-program "sbcl")
+
 
 ;(load "my-custom")
 (set-background-color "grey20")
@@ -170,6 +182,7 @@
   (beep))
 (defun noop ()
   (interactive))
+
 ;; This sucks with literate haskell
 (global-set-key [?\r ] 'newline-and-indent)
 (global-set-key [?\M-: ] 'vim-warning)
@@ -177,19 +190,59 @@
 (global-set-key [?\e ?`] 'noop)
 (global-set-key [?\e ?\e ?`] 'noop)
 
+(progn
+  ;; Setup for ocaml
+  
+  (when (find-in-path "opam")
+    (dolist (var (car (read-from-string
+		       (shell-command-to-string "opam config env --sexp"))))
+      (setenv (car var)
+	      (cadr var)))
+    (setq exec-path (split-string (getenv "PATH") path-separator)))
 
-; Lisp stuff...
-;	  (lambda ()
-;    (set (make-local-variable 'lisp-indent-function)
-; 'common-lisp-indent-function)))
+  (when (getenv "OCAML_TOPLEVEL_PATH")
+    (push (concat (shell-command-to-string "opam config var share")
+		  
+		  "/emacs/site-lisp")
+	  load-path))
+  (when-package merlin
+    (add-hook 'tuareg-mode-hook 'merlin-mode)
+    (define-key merlin-mode-map
+	(kbd "C-c <up>") 'merlin-type-enclosing-go-up)
+    (define-key merlin-mode-map
+	(kbd "C-c <down>") 'merlin-type-enclosing-go-down))
+  
+  
+  (condition-case err
+      (require 'ocp-indent)
+    (file-error nil))
 
-;(autoload 'predictive-mode "predictive" "predictive" t)
-;(set-default 'predictive-auto-add-to-dict t)
-; (setq predictive-main-dict 'tq-dict
-;      predictive-auto-learn t
-;      predictive-add-to-dict-ask nil
-;      predictive-use-auto-learn-cache nil
-;      predictive-which-dict t)
+ 
+  (when (find-in-path "utop")
+    (autoload 'utop "utop" "Toplevel for OCaml" t)
+    (autoload 'utop-setup-ocaml-buffer "utop" "Toplevel for OCaml" t)
+    (add-hook 'tuareg-mode-hook 'utop-setup-ocaml-buffer))
+
+  (autoload 'tuareg "tuareg" "Tuareg mode for ocaml")
+  (add-to-list 'auto-mode-alist '("\\.ml[ily]?$" . tuareg-mode))
+  (add-to-list 'auto-mode-alist '("\\.ml[ily]?$" . tuareg-mode)))
+
+
+
+;; Set up Go
+(when (find-in-path "go")
+  (message "Setting up go")
+  ;;  (setenv "GOROOT" (shell-command-to-string "go env GOROOT"))
+  (let-when oracle-el (first-existing '("/usr/share/gocode/src/code.google.com/p/go.tools/cmd/oracle/oracle.el"))
+    (require 'go-oracle oracle-el)
+    (add-hook 'go-mode-hook 'go-oracle-mode))
+  (when-package flymake-go
+    (add-hook 'go-mode-hook 'flymake-go-init))
+  (when-package (auto-complete go-autocomplete)
+    (add-hook 'go-mode-hook 'auto-complete-mode))
+  (when-package go-eldoc
+    (add-hook 'go-mode-hook 'go-eldoc-setup)))
+
 
 ; (setq show-trailing-whitespace t)
 
@@ -237,6 +290,7 @@
       (insert-char ?\n 1)
       (insert-char char width))))
 
+
 (global-set-key [?\C-x ?_] 'insert-underline)
 
 (defun mpc-toggle ()
@@ -252,3 +306,57 @@
 
 (global-set-key [?\C-c ?a ?t] 'org-todo-list)
 (ido-mode)
+
+(setq TeX-auto-save t)
+(setq TeX-parse-self t)
+(setq-default TeX-master nil)
+
+;; Fix indentation
+(defun gimme-local-map ()
+  (or (current-local-map)
+      ;; The following creates a map, returns
+      ;; nil and falls through.
+      (use-local-map (make-sparse-keymap))
+      (current-local-map)))
+
+(defun my-lisp-mode-hook ()
+  (set (make-local-variable 'lisp-indent-function)
+       'common-lisp-indent-function)
+  (paredit-mode)
+  (define-key (gimme-local-map)
+    "\t" (lexical-let ((tab-mode 0)
+		       (timer nil)
+		       (pfx nil)
+		       (reset-fn (lambda ()
+				   (setq tab-mode 0))))
+	   (lambda ()
+	     (interactive)
+	     (case tab-mode
+	       (0 (funcall indent-line-function)
+		  (setq pfx current-prefix-arg))
+	       (1 (save-excursion
+		    (beginning-of-defun)
+		    (setq current-prefix-arg pfx)
+		    (call-interactively 'indent-pp-sexp)))
+	       (t nil))
+	     (setq tab-mode (1+ tab-mode))
+		
+	     (when timer
+	       (cancel-timer timer))
+	     (setq timer
+		   (run-at-time .5 nil
+				(lambda () (setq tab-mode 0))))))))
+
+(add-hook 'lisp-mode-hook
+	  'my-lisp-mode-hook)
+(add-hook 'emacs-lisp-mode-hook
+	  'my-lisp-mode-hook)
+(add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
+
+;;;; (add-to-list 'tramp-default-proxies-alist
+;;;; '("\\." "\\`root\\'" "/ssh:%h:"))
+
+(when tq-missing-packages
+  (message "You may be missing the following packages: ")
+  (dolist (pkg tq-missing-packages)
+    (message " - %s" pkg)))

@@ -2,11 +2,14 @@
 	st = status
 [user]
 	email = thequux@upstandinghackers.com
-	name = Dan Hirsch
+	name = TQ Hirsch
 [color]
 	ui = always
 [color "status"]
 	untracked = bold red
+[color "diff"]
+	old = bold red
+	new = bold green
 [giggle]
 	main-window-maximized = false
 	main-window-geometry = 1364x747+0+19

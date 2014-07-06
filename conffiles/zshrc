@@ -27,6 +27,8 @@ setopt extendedglob prompt_subst
 bindkey -e
 # End of lines configured by zsh-newuser-install
 
+(( ${+_load_timestamp} )) || _load_timestamp=`mktemp --tmpdir zsh_loadts.XXXXXXXXXX`
+touch $_load_timestamp
 typeset -A env_name
 
 function env- () {
@@ -49,6 +51,10 @@ function infostr() {
 	printf "(%s%s%s:%s%s%s)" "$tagstart" "$1" "$tagend" "$msgstart" "$2" "$msgend"
 }
 
+function xtitle() {
+	printf "\e]0;%s\a" "$*"
+}
+
 function extra_info() {
 	if [[ -d $(printf "%s" ./(../)#.git/) || -n $GIT_DIR ]]; then
 		infostr git "$(git name-rev --always --name-only HEAD)" 
@@ -61,9 +67,10 @@ function extra_info() {
 	if [[ ${#env_name} -gt 0 ]]; then
 		infostr env "$(print -o "${(kO@)env_name}")"
 	fi
-	if [[ ${+VIRTUAL_ENV} -ne 0 ]]; then
-		infostr virtualenv "${VIRTUAL_ENV:t}"
-	fi
+	(( ${+VIRTUAL_ENV} )) && infostr virtualenv "${VIRTUAL_ENV:t}"
+	(( ${+RUBY_VERSION} )) && infostr ruby "${RUBY_VERSION}"
+	[[ "$_load_timestamp" -ot ~/.zshrc ]] && infostr 'zshrc' 'needs reloaded'
+	 
 }
 
 # if I'm in emacs, certain things should be changed...
@@ -104,3 +111,60 @@ function lastcmd() {
 VIRTUAL_ENV_DISABLE_PROMPT=1
 [[ -f /etc/bash_completion.d/virtualenvwrapper ]] && source /etc/bash_completion.d/virtualenvwrapper
 eval `perl -Mlocal::lib=$HOME/local`
+
+###-begin-npm-completion-###
+#
+# npm command completion script
+#
+# Installation: npm completion >> ~/.bashrc  (or ~/.zshrc)
+# Or, maybe: npm completion > /usr/local/etc/bash_completion.d/npm
+#
+
+COMP_WORDBREAKS=${COMP_WORDBREAKS/=/}
+COMP_WORDBREAKS=${COMP_WORDBREAKS/@/}
+export COMP_WORDBREAKS
+
+if type complete &>/dev/null; then
+  _npm_completion () {
+    local si="$IFS"
+    IFS=$'\n' COMPREPLY=($(COMP_CWORD="$COMP_CWORD" \
+                           COMP_LINE="$COMP_LINE" \
+                           COMP_POINT="$COMP_POINT" \
+                           npm completion -- "${COMP_WORDS[@]}" \
+                           2>/dev/null)) || return $?
+    IFS="$si"
+  }
+  complete -F _npm_completion npm
+elif type compdef &>/dev/null; then
+  _npm_completion() {
+    si=$IFS
+    compadd -- $(COMP_CWORD=$((CURRENT-1)) \
+                 COMP_LINE=$BUFFER \
+                 COMP_POINT=0 \
+                 npm completion -- "${words[@]}" \
+                 2>/dev/null)
+    IFS=$si
+  }
+  compdef _npm_completion npm
+elif type compctl &>/dev/null; then
+  _npm_completion () {
+    local cword line point words si
+    read -Ac words
+    read -cn cword
+    let cword-=1
+    read -l line
+    read -ln point
+    si="$IFS"
+    IFS=$'\n' reply=($(COMP_CWORD="$cword" \
+                       COMP_LINE="$line" \
+                       COMP_POINT="$point" \
+                       npm completion -- "${words[@]}" \
+                       2>/dev/null)) || return $?
+    IFS="$si"
+  }
+  compctl -K _npm_completion npm
+fi
+###-end-npm-completion-###
+
+# OPAM configuration
+. /home/thequux/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true

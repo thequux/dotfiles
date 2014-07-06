@@ -1,0 +1,8 @@
+[Unit]
+Description=IRSSI IRC client
+
+[Service]
+ExecStart=/usr/bin/x-terminal-emulator -e irssi -c %i
+
+[Install]
+WantedBy=graphical.target

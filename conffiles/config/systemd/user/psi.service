@@ -1,0 +1,8 @@
+[Unit]
+Description=Psi
+
+[Service]
+ExecStart=/usr/bin/psi-plus
+
+[Install]
+WantedBy=graphical.target

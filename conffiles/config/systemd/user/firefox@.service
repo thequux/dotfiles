@@ -1,0 +1,8 @@
+[Unit]
+Description=Iceweasel
+
+[Service]
+ExecStart=/usr/local/bin/firefox -P %i -new-instance
+
+[Install]
+WantedBy=graphical.target

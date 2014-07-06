@@ -1,0 +1,9 @@
+[Unit]
+Description=KDE Semantic Desktop
+
+[Service]
+Type=forking
+ExecStart=/usr/bin/nepomukctl start
+
+[Install]
+WantedBy=graphical.target

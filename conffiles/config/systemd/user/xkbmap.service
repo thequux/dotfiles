@@ -1,0 +1,10 @@
+[Unit]
+Description=
+
+[Service]
+ExecStart=/usr/bin/setxkbmap -option '' -option 'grp:shifts_toggle,lv3:ralt_switch,compose:ralt' 'us,de'
+RemainAfterExit=yes
+Type=oneshot
+
+[Install]
+WantedBy=graphical.target

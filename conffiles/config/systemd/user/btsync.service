@@ -1,0 +1,8 @@
+[Unit]
+Description=BitTorrent Sync
+
+[Service]
+ExecStart=/home/thequux/local/bin/btsync --nodaemon --config /home/thequux/.config/btsync.conf
+
+[Install]
+WantedBy=graphical.target
