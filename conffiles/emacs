@@ -172,9 +172,10 @@
 (put 'let-when 'lisp-indent-function 2)
 
 
-(load-library "slime")
-(slime-setup '(slime-repl slime-fancy slime-highlight-edits))
-(setq inferior-lisp-program "sbcl")
+;; TODO: figure out how to run this under when-package
+;(load-library "slime")
+;(slime-setup '(slime-repl slime-fancy slime-highlight-edits))
+;(setq inferior-lisp-program "sbcl")
 
 
 ;(load "my-custom")
