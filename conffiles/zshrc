@@ -1,4 +1,4 @@
-# -*- mode: sh; sh-shell-file: /bin/zsh -*-
+# -*- mode: sh; sh-shell-file: /bin/zsh; sh-basic-offset: 8 -*-
 # The following lines were added by compinstall
 
 if [[ "$TERM" == "dumb" ]]; then
@@ -31,13 +31,34 @@ bindkey -e
 touch $_load_timestamp
 typeset -A env_name
 
+ZENV=$HOME/.../conffiles/zenv
+
 function env- () {
-	(( --env_name[$1] > 0 )) || unset env_name[$1]
+	if (( ${env_name[$1]-0} > 0 )); then
+		if (( --env_name[$1] <= 0 )); then
+			unset env_name[$1]
+			if [[ -x "${ZENV}/$1" ]]; then
+				source "${ZENV}/$1" disable
+			fi
+		fi
+	fi
 }	
 
 function env+ () {
-	# Work even with -e
-	: $(( ++env_name[$1] ))
+	if (( ++env_name[$1] == 1 )); then
+		if [[ -x "${ZENV}/$1" ]]; then
+			source "${ZENV}/$1" enable
+		fi
+	fi
+}
+
+function 'env?'() {
+	for x in ${ZENV}/*; do
+		if [[ $x:t =~ ".*~" ]]; then
+			continue
+		fi
+		[[ -x $x ]] && printf "%s\t%s\n" ${x:t} "$(sed -ne '1s/^# */- /p' "$x")" || true
+	done
 }
 
 function infostr() {

@@ -1,0 +1,18 @@
+The first line of each script in this directory should be a comment containing
+a description of the environment that it sets up. The rest is a bog-standard
+shell script, which is sourced with $1 being either "enable" or "disable" as
+appropriate.
+
+You are guaranteed that each environment will be enabled once and only once,
+unless it is disabled. I.e., the following sequence of env+- calls will have
+the following results:
+
+env+ foo | foo enable
+env+ foo | -
+env+ bar | bar enable
+env- foo | -
+env- foo | foo disable
+env- bar | bar disable
+env- qux | error
+
+Only executable scripts will be listed by env?

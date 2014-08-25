@@ -1,0 +1,12 @@
+# Configuration for Mer SDK on Vulcan
+
+case $1 in
+    enable)
+	export MER_ROOT=$HOME/mer
+	alias sdk=$MER_ROOT/sdks/sdk/mer-sdk-chroot
+	;;
+    disable)
+	unset MER_ROOT
+	unalias sdk
+	;;
+esac
