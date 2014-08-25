@@ -354,3 +354,6 @@
 # setenv DISPLAY ''
 
 caption always '%{+r}%-w%{dg} %n %t %{dd} %+w'
+
+zmodem catch
+zmodem recvcmd "!!! rz -vv -b -E"

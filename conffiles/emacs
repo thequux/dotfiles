@@ -122,6 +122,7 @@
 
 
 (add-to-list 'load-path "~/.emacs.d/lisp")
+(add-to-list 'load-path "~/.emacs.d/habitrpg/habitrpg")
 (add-to-list 'load-path "~/.emacs.d/lisp/slime")
 
 ;; Useful utilities
@@ -136,6 +137,12 @@
 			  exec-path)
 		  #'file-executable-p))
 
+;; TODO: replace this with elisp
+(defun read-ini (file section entry)
+  ;; Read a value from an INI file (using Python's configparser)
+  (car (process-lines "python" "-c" "import ConfigParser, sys; c=ConfigParser.ConfigParser(); c.read(sys.argv[1]); print c.get(sys.argv[2], sys.argv[3])" (expand-file-name file) section entry)))
+
+
 (defmacro when-package (package-name &rest body)
   (let ((tag (gensym))
 	(plist (if (listp package-name)
@@ -147,8 +154,9 @@
 			      `(require ',x))
 			    plist))
 	 (error ,@(mapcar (lambda (x)
-			    (add-to-list 'tq-missing-packages ',x))
-			  plist)))
+			    `(add-to-list 'tq-missing-packages ',x))
+			  plist)
+		(throw ',tag nil)))
 	 
        ,@body)))
   
@@ -228,6 +236,44 @@
   (add-to-list 'auto-mode-alist '("\\.ml[ily]?$" . tuareg-mode)))
 
 
+(when-package habitrpg
+  
+  (add-hook 'org-after-todo-state-change-hook 'habitrpg-add 'append)
+;; For adding tasks from org mode
+  (global-set-key (kbd "C-c C-x h") 'habitrpg-add)
+;; Status buffer - use C-h m to see the keybindings
+;; C-c C-c - upvote task or buy reward
+;; C-c C-d - downvote task
+;; t - bring up manage menu, which adds or deletes tasks
+  (global-set-key (kbd "<f9> a") 'habitrpg-status)
+;; Continuously update a habit attache to a clocking task
+  (add-hook 'org-clock-in-hook 'habitrpg-clock-in)
+  (add-hook 'org-clock-out-hook 'habitrpg-clock-out)
+;; List of habits to check for when clocking a task
+  (add-to-list 'hrpg-tags-list "PROGRAMMING")
+  (add-to-list 'hrpg-tags-list "WORK")
+  (let ((config-file "~/.config/habitrpg/config"))
+    (when (file-exists-p config-file)
+      (setq habitrpg-api-user (read-ini config-file "Auth" "UserID")
+	    habitrpg-api-token (read-ini config-file "Auth" "APIToken"))))
+
+  (defvar tq-habitrpg-command-count 0
+    "The number of commands executed since the last productivity upvote")
+  (defvar tq-habitrpg-productivity-count 0
+    "The number of actual upvotes that have been triggered during this session")
+
+  (defconst tq-habitrpg-command-limit 1000
+    "The number of commands per productivity upvote")
+
+  (defun tq-habitrpg-upvote-productivity ()
+    (interactive)
+    (when (>= (incf tq-habitrpg-command-count) tq-habitrpg-command-limit)
+      (setq tq-habitrpg-command-count 0)
+      (incf tq-habitrpg-productivity-count)
+      (habitrpg-upvote "productivity"))
+    nil)
+
+  (add-hook 'post-command-hook 'tq-habitrpg-upvote-productivity))
 
 ;; Set up Go
 (when (find-in-path "go")
@@ -360,3 +406,5 @@
   (message "You may be missing the following packages: ")
   (dolist (pkg tq-missing-packages)
     (message " - %s" pkg)))
+
+

@@ -1,0 +1,4 @@
+#!/bin/sh
+git submodule foreach git fetch origin
+git submodule foreach git merge --ff origin/master
+git submodule foreach 'cd $toplevel && git add $path'

@@ -10,3 +10,6 @@
 [submodule "conffiles/emacs.d/vendor/coffee-mode"]
 	path = conffiles/emacs.d/vendor/coffee-mode
 	url = https://github.com/defunkt/coffee-mode.git
+[submodule "conffiles/emacs.d/habitrpg/habitrpg"]
+	path = conffiles/emacs.d/habitrpg/habitrpg
+	url = http://github.com/ryjm/habitrpg.el.git
