@@ -27,6 +27,7 @@ setxkbmap -option 'grp:shifts_toggle,lv3:ralt_switch' 'us,de'
 
 emacs --daemon
 
+which btsync &>/dev/null && btsync
 case `hostname -f` in
     peewee.thequux.com)
 	xbattbar-acpi &
@@ -41,7 +42,7 @@ case `hostname -f` in
 	;;
     vulcan.home.thequux.com)
 	WM=awesome
-	xmobar &
+	#xmobar &
 	fbsetbg -l
 	;;
     *)
