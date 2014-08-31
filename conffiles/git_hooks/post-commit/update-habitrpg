@@ -11,4 +11,4 @@ CFG="$HOME/.config/habitrpg/config"
 [[ -e $CFG ]] && curl -X POST \
 	-H "X-Api-User: $(initool $CFG Auth UserID)" \
 	-H "X-Api-Key: $(initool $CFG Auth APIToken)" \
-	https://habitrpg.com/api/v2/user/tasks/git-commit/up &>/dev/null
+	https://habitrpg.com/api/v2/user/tasks/git-commit/up &>/dev/null & disown
