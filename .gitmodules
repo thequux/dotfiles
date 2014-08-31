@@ -13,3 +13,6 @@
 [submodule "conffiles/emacs.d/habitrpg/habitrpg"]
 	path = conffiles/emacs.d/habitrpg/habitrpg
 	url = http://github.com/ryjm/habitrpg.el.git
+[submodule "vendor/git-hooks"]
+	path = vendor/git-hooks
+	url = https://github.com/icefox/git-hooks
