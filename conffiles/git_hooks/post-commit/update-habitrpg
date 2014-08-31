@@ -8,8 +8,7 @@ fi
 PATH="$HOME/.../bin:$PATH"
 CFG="$HOME/.config/habitrpg/config"
 
-curl -X POST \
+[[ -e $CFG ]] && curl -X POST \
 	-H "X-Api-User: $(initool $CFG Auth UserID)" \
 	-H "X-Api-Key: $(initool $CFG Auth APIToken)" \
-	https://habitrpg.com/api/v2/user/tasks/git-commit/up
-	
+	https://habitrpg.com/api/v2/user/tasks/git-commit/up &>/dev/null
