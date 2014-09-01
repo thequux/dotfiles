@@ -89,7 +89,7 @@
  '(custom-button ((((type x w32 mac) (class color)) (:background "lightgrey" :foreground "black" :box (:line-width -1 :style released-button)))))
  '(fixed-pitch ((t (:foundry "unknown" :family "Monaco"))))
  '(font-lock-builtin-face ((((class color) (min-colors 88) (background dark)) (:foreground "#ff80ff" :weight bold))))
- '(font-lock-comment-face ((t (:foreground "SteelBlue1" :slant oblique :family "DejaVu Sans"))))
+ '(font-lock-comment-face ((t (:foreground "SteelBlue1" :slant oblique))))
  '(font-lock-constant-face ((((class color) (min-colors 88) (background dark)) (:foreground "#ff80ff"))))
  '(font-lock-function-name-face ((((class color) (min-colors 88) (background dark)) (:foreground "#40ffff" :weight bold))))
  '(font-lock-keyword-face ((((class color) (min-colors 88) (background dark)) (:foreground "#ffff80" :weight bold))))
