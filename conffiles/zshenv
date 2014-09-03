@@ -1,0 +1,21 @@
+if ! (( ${+SYSTEM_PATH} )); then
+   export SYSTEM_PATH="$PATH"
+else
+   PATH="$SYSTEM_PATH"
+fi
+
+export EC2_HOME=$HOME/local/opt/ec2-api-tools-1.6.6.0
+path=(
+	${EC2_HOME}/bin
+	/home/thequux/.rvm/bin
+	/home/thequux/local/bin
+	/home/thequux/.../bin
+	$path
+)
+
+export GOPATH="${HOME}/Projects/go"
+export GOBIN="${HOME}/local/bin"
+export P4CONFIG="${HOME}/.p4config"
+export URBIT_HOME=/home/thequux/src/urbit/urb
+export GS_LIB="${HOME}/local/share/ghostscript"
+export LD_LIBRARY_PATH="$HOME/lib:$HOME/local/lib:/usr/local/lib:/usr/lib/llvm-3.2/lib"
