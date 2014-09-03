@@ -1,0 +1,8 @@
+#!/usr/bin/python
+
+from ConfigParser import ConfigParser
+import sys
+c = ConfigParser()
+c.read(sys.argv[1])
+print c.get(sys.argv[2], sys.argv[3])
+
