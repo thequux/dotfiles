@@ -283,12 +283,13 @@
   (let-when oracle-el (first-existing '("/usr/share/gocode/src/code.google.com/p/go.tools/cmd/oracle/oracle.el"))
     (require 'go-oracle oracle-el)
     (add-hook 'go-mode-hook 'go-oracle-mode))
-  (when-package flymake-go
-    (add-hook 'go-mode-hook 'flymake-go-init))
-  (when-package (auto-complete go-autocomplete)
-    (add-hook 'go-mode-hook 'auto-complete-mode))
-  (when-package go-eldoc
-    (add-hook 'go-mode-hook 'go-eldoc-setup)))
+  (when-package go-mode
+    (when-package flymake-go
+      (add-hook 'go-mode-hook 'flymake-go-init))
+    (when-package (auto-complete go-autocomplete)
+      (add-hook 'go-mode-hook 'auto-complete-mode))
+    (when-package go-eldoc
+      (add-hook 'go-mode-hook 'go-eldoc-setup))))
 
 
 ; (setq show-trailing-whitespace t)
@@ -307,7 +308,6 @@
 
 
 (load-library "compile")
-(load-library "go-mode")
 
 (progn
   (push '(go "^\\(\\([^:\n]*\\):\\([0-9]*\\)\\)\\(?:\\[[^]\n]*\\]\\)?: " 2 3 nil nil 1) compilation-error-regexp-alist-alist)
@@ -369,7 +369,8 @@
 (defun my-lisp-mode-hook ()
   (set (make-local-variable 'lisp-indent-function)
        'common-lisp-indent-function)
-  (paredit-mode)
+  (when-package paredit
+    (paredit-mode))
   (define-key (gimme-local-map)
     "\t" (lexical-let ((tab-mode 0)
 		       (timer nil)
