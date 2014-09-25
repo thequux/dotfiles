@@ -1,3 +1,20 @@
+# -*- mode: sh -*-
+
+# THIS FILE MUST REMAIN IDEMPOTENT! As it is modified, it can be rerun
+# automatically, and it bothers me when various path envvars grow
+# without bound.
+
+# _tq_envfile_ts contains a list of the timestamps of various init
+# files. It is used by the reinit command in zshrc and in the shell
+# prompt.
+typeset -A _tq_envfile_ts
+function _tq_update_envfile_ts() {
+    local f=$1
+    _tq_envfile_ts[$f]="$(stat -Lc "%Y" "$f")"
+}
+
+_tq_update_envfile_ts "$HOME/.zshenv"
+
 if ! (( ${+SYSTEM_PATH} )); then
    export SYSTEM_PATH="$PATH"
 else

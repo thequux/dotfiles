@@ -27,8 +27,9 @@ setopt extendedglob prompt_subst
 bindkey -e
 # End of lines configured by zsh-newuser-install
 
-(( ${+_load_timestamp} )) || _load_timestamp=`mktemp --tmpdir zsh_loadts.XXXXXXXXXX`
-touch $_load_timestamp
+# We depend on .zshenv having been run
+_tq_update_envfile_ts "${HOME}/.zshrc"
+
 typeset -A env_name
 
 ZENV=$HOME/.../conffiles/zenv
@@ -61,6 +62,13 @@ function 'env?'() {
 	done
 }
 
+function reinit() {
+	for x in "${(ok@)_tq_envfile_ts}"; do
+		echo "$x"
+		. "$x"
+	done
+}
+
 function infostr() {
 	local tagstart tagend msgstart msgend
 	if (( 1 - $SIMPLE_PROMPT )); then
@@ -90,8 +98,15 @@ function extra_info() {
 	fi
 	(( ${+VIRTUAL_ENV} )) && infostr virtualenv "${VIRTUAL_ENV:t}"
 	(( ${+RUBY_VERSION} )) && infostr ruby "${RUBY_VERSION}"
-	[[ "$_load_timestamp" -ot ~/.zshrc ]] && infostr 'zshrc' 'needs reloaded'
-	 
+	typeset -A needs_updated
+	for envfile ts in "${(vk)_tq_envfile_ts[@]}"; do
+		if [[ ${ts} -lt $( stat -Lc "%Y" "$envfile" ) ]]; then
+			needs_updated[$envfile]=y
+		fi
+	done
+	if (( ${#needs_updated} )); then
+		infostr "old cfg" "`print ${(oDk@)needs_updated}`"
+	fi
 }
 
 # if I'm in emacs, certain things should be changed...

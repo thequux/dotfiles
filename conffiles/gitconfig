@@ -18,3 +18,5 @@
 	file-view-vpane-position = 217
 [push]
 	default = upstream
+[init]
+	templatedir = /home/thequux/.git-template-with-git-hooks
