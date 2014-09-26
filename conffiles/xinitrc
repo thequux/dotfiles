@@ -1,10 +1,6 @@
-#!/bin/bash
+#!/bin/zsh
 # vim: nolist
 export PATH="$HOME/bin:$HOME/local/bin:$HOME/.cabal/bin:$PATH"
-if [[ -x /bin/systemd ]]; then
-	echo "Systemd mode starting in $PWD"
-	exec /bin/systemd --user --unit=graphical.target
-fi
 
 echo "foo"
 xmodmap ~/.xmodmaprc
