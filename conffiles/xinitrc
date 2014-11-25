@@ -1,16 +1,26 @@
 #!/bin/zsh
 # vim: nolist
 export PATH="$HOME/bin:$HOME/local/bin:$HOME/.cabal/bin:$PATH"
+xrdb .Xdefaults
 
-echo "foo"
-xmodmap ~/.xmodmaprc
+# The following broke with systemd v208.
+#if [[ -x /bin/systemd ]]; then
+#	echo "Systemd mode starting in $PWD"
+#	exec /bin/systemd --user --unit=graphical.target
+#fi
+
+#xmodmap ~/.xmodmaprc
 function first_executable() {
     for x in "$@"; do
 	if command which "$x" &>/dev/null; then
 	    echo "$x"
-	    return 1;
+	    return 0
 	fi
     done
+    return 1
+}
+function have() {
+	command which "$1" &>/dev/null
 }
 
 if test -z "$DBUS_SESSION_BUS_ADDRESS"; then
@@ -19,18 +29,22 @@ fi
 
 eval $(gpg-agent --daemon --enable-ssh-support)
 
-setxkbmap -option 'grp:shifts_toggle,lv3:ralt_switch' 'us,de'
+/usr/bin/setxkbmap -option '' -option 'grp:shifts_toggle,lv3:ralt_switch,compose:ralt' 'us,de'
 
 emacs --daemon
 
-which btsync &>/dev/null && btsync
+have synergys && synergys  -1 -a 127.0.0.1:24800
+have btsync && btsync --config /home/thequux/.config/btsync.conf
+
 case `hostname -f` in
-    peewee.thequux.com)
-	xbattbar-acpi &
+    peewee.*)
+	xbattbar -ca &
 	xscreensaver -no-splash &
-	xchat &
-	pidgin &
+	google-chrome --user-data-dir=$HOME/.no-git-control/chromium/default &
+	nm-applet &
+	psi-plus &
 	gmpc &
+	wmname compiz
 	WM=awesome
 	;;
     krogoth.dorm-thequux.com)
@@ -47,7 +61,6 @@ case `hostname -f` in
 esac
 	
 /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
-xrdb .Xdefaults
 $WM &>.xsession-errors-wm
 
 exec xterm
