@@ -195,6 +195,18 @@ root.buttons(awful.util.table.join(
 ))
 -- }}}
 
+function delay_raise ()
+   -- 5 ms ages in computer time, but I won't notice it.
+   local raise_timer = timer { timeout = 0.005 }
+   raise_timer:add_signal("timeout",
+			 function()
+			    if client.focus then
+			       client.focus:raise()
+			    end
+			    raise_timer:stop()
+   end)
+   raise_timer:start()
+end
 -- {{{ Key bindings
 globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev       ),
@@ -204,12 +216,12 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "j",
         function ()
             awful.client.focus.byidx( 1)
-            if client.focus then client.focus:raise() end
+            delay_raise()
         end),
     awful.key({ modkey,           }, "k",
         function ()
             awful.client.focus.byidx(-1)
-            if client.focus then client.focus:raise() end
+            delay_raise()
         end),
     awful.key({ modkey,           }, "w", function () mymainmenu:show({keygrabber=true}) end),
 
@@ -220,12 +232,10 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "k", function () awful.screen.focus_relative(-1) end),
     awful.key({ modkey,           }, "u", awful.client.urgent.jumpto),
     awful.key({ modkey,           }, "Tab",
-        function ()
-            awful.client.focus.history.previous()
-            if client.focus then
-                client.focus:raise()
-            end
-        end),
+       function ()
+	  awful.client.focus.history.previous()
+	  delay_raise()
+    end),
 
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
@@ -377,6 +387,3 @@ client.add_signal("unfocus", function(c) c.border_color = beautiful.border_norma
 -- }}}
 
 local r = require("runonce")
-
-#r.run("xbattbar -a -c")
-#r.run("nm-applet")
