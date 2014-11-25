@@ -36,3 +36,5 @@ export P4CONFIG="${HOME}/.p4config"
 export URBIT_HOME=/home/thequux/src/urbit/urb
 export GS_LIB="${HOME}/local/share/ghostscript"
 export LD_LIBRARY_PATH="$HOME/lib:$HOME/local/lib:/usr/local/lib:/usr/lib/llvm-3.2/lib"
+
+export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
