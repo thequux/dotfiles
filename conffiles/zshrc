@@ -85,7 +85,7 @@ function xtitle() {
 }
 
 function extra_info() {
-	if [[ -d $(printf "%s" ./(../)#.git/) || -n $GIT_DIR ]]; then
+	if [[ -d $(printf "%s" ./(../)#.git/(#qY1)) || -n $GIT_DIR ]]; then
 		infostr git "$(git name-rev --always --name-only HEAD)" 
 	fi
 

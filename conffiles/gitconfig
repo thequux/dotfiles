@@ -1,10 +1,10 @@
 [alias]
-	st = status
+	st = "!git status -bs; git submodule foreach git status -bs"
 [user]
 	email = thequux@upstandinghackers.com
 	name = TQ Hirsch
 [color]
-	ui = always
+	ui = auto
 [color "status"]
 	untracked = bold red
 [color "diff"]
