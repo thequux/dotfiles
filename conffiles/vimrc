@@ -5,3 +5,6 @@ syntax on
 set guioptions-=T
 set guioptions-=m
 set guifont="Droid Sans Mono 10"
+set modeline
+
+execute pathogen#infect()
