@@ -1,0 +1,50 @@
+#!/usr/bin/python3
+
+# TODO: This should really be written in Go, for faster startup
+
+def get_memusage(pid):
+    usage = {}
+    with open("/proc/%s/smaps" % (pid,), "r") as smaps:
+        for line in smaps:
+            line = line.split()
+            if len(line) != 3:
+                # skip over header lines and (most) VmFlags
+                continue
+            if line[0] == "VmFlags:":
+                continue
+            if line[2] != 'kB':
+                print("Unknown unit %s" % line[2])
+            counter = line[0].strip(':')
+            usage[counter] = usage.get(counter, 0) + int(line[1]) * 1024
+    return usage
+
+human_suffixes = (
+    (0, '  '),
+    (1, 'Ki'),
+    (2, 'Mi'),
+    (3, 'Gi'),
+    (4, 'Ti'),
+    (5, 'Pi'),
+)
+human_suffixes = tuple((1024**exp, suff) for exp,suff in human_suffixes)
+
+def human_size(sz, unit='B'):
+    for scale, suffix in human_suffixes:
+        test_sz = sz / scale
+        # We could use 1000, but that yields exp notation for
+        # 999.5-10000
+        if test_sz < 999.5:
+            # This seems appropriate
+            return "%.3g%s%s" % (test_sz, suffix, unit)
+
+# TODO: Write general table output routine
+
+if __name__ == '__main__':
+    import sys
+    print("PID       RSS     SWAP")
+    for pid in sys.argv[1:]:
+        usage = get_memusage(pid)
+        if not usage:
+            usage['Rss'] = usage['Swap'] = 0
+        print("%-7d %7s %7s" % (int(pid), human_size(usage['Rss']), human_size(usage['Swap'])))
+        

@@ -1,0 +1,19 @@
+#!/bin/bash
+
+function usage() {
+	echo "Usage: $0 <hostname>"
+}
+
+if (( $# != 1 )); then
+	usage >&2
+	exit
+fi
+
+# Sets $target and possibly $display
+eval "`echo "$1" | sed -e 's/\(.*\):\(.*\)/target=\1\ndisplay=\2/;t' -e 's/.*/target=&/'`"
+
+if [[ -z "$display" ]]; then
+	ENV_SETTINGS="DISPLAY=:$display"
+fi
+
+exec ssh -R24800:127.0.0.1:24800 "${target}" "env $ENV_SETTINGS synergyc -f -n 'remote' localhost"
