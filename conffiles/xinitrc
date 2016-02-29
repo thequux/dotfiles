@@ -27,20 +27,23 @@ if test -z "$DBUS_SESSION_BUS_ADDRESS"; then
 	eval `dbus-launch --sh-syntax --exit-with-session`
 fi
 
-eval $(gpg-agent --daemon --enable-ssh-support)
+eval $(gpg-agent --daemon)
 
-/usr/bin/setxkbmap -option '' -option 'grp:shifts_toggle,lv3:ralt_switch,compose:ralt' 'us,de'
+/usr/bin/setxkbmap -option '' -option 'grp:shifts_toggle,lv3:ralt_switch,compose:ralt' 'us'
 
 emacs --daemon
 
-have synergys && synergys  -1 -a 127.0.0.1:24800
+#have synergys && synergys  -1 -a 127.0.0.1:24800
 have btsync && btsync --config /home/thequux/.config/btsync.conf
+have xsettingsd && xsettingsd &
+/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
+have fbsetbg && fbsetbg -l
 
 case `hostname -f` in
     peewee.*)
-	xbattbar -ca &
+	xbattbar3 &
 	xscreensaver -no-splash &
-	google-chrome --user-data-dir=$HOME/.no-git-control/chromium/default &
+	google-chrome &
 	nm-applet &
 	psi-plus &
 	gmpc &
@@ -60,7 +63,6 @@ case `hostname -f` in
 	;;
 esac
 	
-/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
 $WM &>.xsession-errors-wm
 
 exec xterm

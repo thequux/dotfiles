@@ -1,0 +1,7 @@
+# Don't automatically switch venvs
+
+case "$1" in
+    disable)
+	chpwd_venv_hook
+	;;
+esac

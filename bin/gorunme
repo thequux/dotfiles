@@ -1,0 +1,8 @@
+#!/bin/bash
+
+bin="$0".bin
+src="$0".go
+if [[ "$bin" -ot "$src" || ! -e "$bin" ]]; then
+	go build -o "$bin" "$src"
+fi
+exec "$bin"

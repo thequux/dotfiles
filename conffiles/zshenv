@@ -24,8 +24,10 @@ fi
 export EC2_HOME=$HOME/local/opt/ec2-api-tools-1.6.6.0
 path=(
 	${EC2_HOME}/bin
+	/home/thequux/.gem/ruby/*/bin
 	/home/thequux/.rvm/bin
 	/home/thequux/local/bin
+	${HOME}/.cargo/bin
 	/home/thequux/.../bin
 	$path
 )
@@ -37,4 +39,4 @@ export URBIT_HOME=/home/thequux/src/urbit/urb
 export GS_LIB="${HOME}/local/share/ghostscript"
 export LD_LIBRARY_PATH="$HOME/lib:$HOME/local/lib:/usr/local/lib:/usr/lib/llvm-3.2/lib"
 
-export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
+#export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'

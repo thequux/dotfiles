@@ -20,3 +20,21 @@
 	default = upstream
 [init]
 	templatedir = /home/thequux/.git-template-with-git-hooks
+
+[credential "https://github.com"]
+	username = thequux
+
+[credential]
+	helper = store
+[core]
+	autocrlf = input
+
+[merge "mps"]
+	name = MPS merge driver
+	driver = "\"/home/thequux/.MPS32/config/mps-merger.sh\" %O %A %B %L"
+[transfer]
+	fsckObjects = true
+[fetch]
+	fsckObjects = true
+[receive]
+	fsckObjects = true

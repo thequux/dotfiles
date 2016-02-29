@@ -84,9 +84,25 @@ function xtitle() {
 	printf "\e]0;%s\a" "$*"
 }
 
+function add_hook() {
+	# This could be better implemented with var[(r)$2]
+	if ! [[ -n ${(MP)${:-$1_hook_functions}:#$2} ]]; then
+	    set -A $1_hook_functions "${(@P)${:-$1_hook_functions}}" "$2"
+	fi
+}
+
+function chpwd_venv_hook() {
+	(( ${+env_name[manual_venv]} )) && return # Return early if manual venv
+	local activate_name=$(printf "%s" ./(../)#.venv/bin/activate(#qY1)
+	      ) # Work around a bug in zsh's indentation engine
+	. ${activate_name}
+}
+
+[[ -n ${(M)chpwd_hook_functions:#chpwd_venv_hook} ]]
+
 function extra_info() {
 	if [[ -d $(printf "%s" ./(../)#.git/(#qY1)) || -n $GIT_DIR ]]; then
-		infostr git "$(git name-rev --always --name-only HEAD)" 
+		infostr git "$(git rev-parse --abbrev-ref HEAD 2>/dev/null)"
 	fi
 
 	if [[ -f /.chroot-name ]]; then
@@ -204,3 +220,4 @@ fi
 
 # OPAM configuration
 . $HOME/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+source $HOME/.rvm/scripts/rvm

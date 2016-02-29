@@ -1,0 +1,12 @@
+# S4py development framework
+
+local vepath="${HOME}/Projects/sims4/linvenv"
+case $1 in
+    enable)
+	. "${vepath}/bin/activate"
+	;;
+    disable)
+	deactivate
+	;;
+esac
+

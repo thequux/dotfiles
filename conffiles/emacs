@@ -13,11 +13,63 @@
  ;; If there is more than one, they won't work right.
  '(LaTeX-command "latex")
  '(TeX-PDF-mode t)
- '(TeX-command-list (quote (("TeX" "%(PDF)%(tex) %`%S%(PDFout)%(mode)%' %t" TeX-run-TeX nil (plain-tex-mode texinfo-mode ams-tex-mode) :help "Run plain TeX") ("LaTeX" "%`%l --shell-escape %(mode)%' %t" TeX-run-TeX nil (latex-mode doctex-mode) :help "Run LaTeX") ("Makeinfo" "makeinfo %t" TeX-run-compile nil (texinfo-mode) :help "Run Makeinfo with Info output") ("Makeinfo HTML" "makeinfo --html %t" TeX-run-compile nil (texinfo-mode) :help "Run Makeinfo with HTML output") ("AmSTeX" "%(PDF)amstex %`%S%(PDFout)%(mode)%' %t" TeX-run-TeX nil (ams-tex-mode) :help "Run AMSTeX") ("ConTeXt" "texexec --once --texutil %(execopts)%t" TeX-run-TeX nil (context-mode) :help "Run ConTeXt once") ("ConTeXt Full" "texexec %(execopts)%t" TeX-run-TeX nil (context-mode) :help "Run ConTeXt until completion") ("BibTeX" "bibtex %s" TeX-run-BibTeX nil t :help "Run BibTeX") ("View" "%V" TeX-run-discard t t :help "Run Viewer") ("Print" "%p" TeX-run-command t t :help "Print the file") ("Queue" "%q" TeX-run-background nil t :help "View the printer queue" :visible TeX-queue-command) ("File" "%(o?)dvips %d -o %f " TeX-run-command t t :help "Generate PostScript file") ("Index" "makeindex %s" TeX-run-command nil t :help "Create index file") ("Check" "lacheck %s" TeX-run-compile nil (latex-mode) :help "Check LaTeX file for correctness") ("Spell" "(TeX-ispell-document \"\")" TeX-run-function nil t :help "Spell-check the document") ("Clean" "TeX-clean" TeX-run-function nil t :help "Delete generated intermediate files") ("Clean All" "(TeX-clean t)" TeX-run-function nil t :help "Delete generated intermediate and output files") ("Other" "" TeX-run-command t t :help "Run an arbitrary command"))))
+ '(TeX-command-list
+   (quote
+    (("TeX" "%(PDF)%(tex) %`%S%(PDFout)%(mode)%' %t" TeX-run-TeX nil
+	    (plain-tex-mode texinfo-mode ams-tex-mode)
+	    :help "Run plain TeX")
+     ("LaTeX" "%`%l --shell-escape %(mode)%' %t" TeX-run-TeX nil
+	      (latex-mode doctex-mode)
+	      :help "Run LaTeX")
+     ("Makeinfo" "makeinfo %t" TeX-run-compile nil
+		 (texinfo-mode)
+		 :help "Run Makeinfo with Info output")
+     ("Makeinfo HTML" "makeinfo --html %t" TeX-run-compile nil
+		      (texinfo-mode)
+		      :help "Run Makeinfo with HTML output")
+     ("AmSTeX" "%(PDF)amstex %`%S%(PDFout)%(mode)%' %t" TeX-run-TeX nil
+	       (ams-tex-mode)
+	       :help "Run AMSTeX")
+     ("ConTeXt" "texexec --once --texutil %(execopts)%t" TeX-run-TeX nil
+		(context-mode)
+		:help "Run ConTeXt once")
+     ("ConTeXt Full" "texexec %(execopts)%t" TeX-run-TeX nil
+		     (context-mode)
+		     :help "Run ConTeXt until completion")
+     ("BibTeX" "bibtex %s" TeX-run-BibTeX nil t :help "Run BibTeX")
+     ("View" "%V" TeX-run-discard t t :help "Run Viewer")
+     ("Print" "%p" TeX-run-command t t :help "Print the file")
+     ("Queue" "%q" TeX-run-background nil t :help "View the printer queue" :visible TeX-queue-command)
+     ("File" "%(o?)dvips %d -o %f " TeX-run-command t t :help "Generate PostScript file")
+     ("Index" "makeindex %s" TeX-run-command nil t :help "Create index file")
+     ("Check" "lacheck %s" TeX-run-compile nil
+	      (latex-mode)
+	      :help "Check LaTeX file for correctness")
+     ("Spell" "(TeX-ispell-document \"\")" TeX-run-function nil t :help "Spell-check the document")
+     ("Clean" "TeX-clean" TeX-run-function nil t :help "Delete generated intermediate files")
+     ("Clean All" "(TeX-clean t)" TeX-run-function nil t :help "Delete generated intermediate and output files")
+     ("Other" "" TeX-run-command t t :help "Run an arbitrary command"))))
+ '(TeX-view-program-list
+   (quote
+    (("Atril"
+      ("atril"
+       (mode-io-correlate " -p %(outpage)")
+       " %o")
+      "atril"))))
+ '(TeX-view-program-selection
+   (quote
+    (((output-dvi style-pstricks)
+      "dvips and gv")
+     (output-dvi "xdvi")
+     (output-pdf "Atril")
+     (output-pdf "Evince")
+     (output-html "xdg-open"))))
  '(ac-auto-show-menu 0.3)
  '(ac-delay 0.0)
  '(agda2-highlight-face-groups (quote default-faces))
- '(agda2-include-dirs (quote ("." "/home/thequux/src/agda-stdlib" "/home/thequux/src/agda-stdlib/src")))
+ '(agda2-include-dirs
+   (quote
+    ("." "/home/thequux/src/agda-stdlib" "/home/thequux/src/agda-stdlib/src")))
  '(auto-completion-syntax-alist (quote (reject . word)))
  '(c-basic-offset 2)
  '(coffee-command "iced")
@@ -31,7 +83,9 @@
  '(cperl-lazy-help-time 3)
  '(dabbrev-case-fold-search nil)
  '(delete-old-versions t)
- '(erc-modules (quote (autojoin button completion fill irccontrols list match menu move-to-prompt netsplit networks noncommands readonly ring stamp track)))
+ '(erc-modules
+   (quote
+    (autojoin button completion fill irccontrols list match menu move-to-prompt netsplit networks noncommands readonly ring stamp track)))
  '(erc-nick "thequux")
  '(erc-server "irc.upstandinghackers.com")
  '(font-lock-verbose nil)
@@ -61,12 +115,26 @@
  '(predictive-main-dict (quote dict-local) t)
  '(predictive-use-buffer-local-dict t)
  '(prolog-program-name "gprolog")
- '(safe-local-variable-values (quote ((coffee-tab-width . 4) (TeX-master . sicp\.tex) (Package . DRAKMA) (package . puri) (Syntax . ANSI-Common-Lisp) (Package . CHUNGA) (Base . 10) (Package . FLEXI-STREAMS) (Syntax . COMMON-LISP) (tab-always-indent) (haskell-literate . latex) (add-log-time-zone-rule . t))))
+ '(safe-local-variable-values
+   (quote
+    ((TeX-master . justone\.tex)
+     (coffee-tab-width . 4)
+     (TeX-master . sicp\.tex)
+     (Package . DRAKMA)
+     (package . puri)
+     (Syntax . ANSI-Common-Lisp)
+     (Package . CHUNGA)
+     (Base . 10)
+     (Package . FLEXI-STREAMS)
+     (Syntax . COMMON-LISP)
+     (tab-always-indent)
+     (haskell-literate . latex)
+     (add-log-time-zone-rule . t))))
  '(save-place t nil (saveplace))
  '(scalable-fonts-allowed t)
  '(scheme-mit-dialect nil)
  '(scheme-program-name "mzscheme")
- '(scss-compile-at-save t)
+ '(scss-compile-at-save nil)
  '(scss-sass-command "sass")
  '(show-paren-mode t nil (paren))
  '(show-paren-style (quote mixed))
@@ -84,7 +152,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "grey20" :foreground "white" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight semi-light :height 100 :width normal :foundry "unknown" :family "Droid Sans Mono"))))
+ '(default ((t (:inherit nil :stipple nil :background "grey20" :foreground "white" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 98 :width normal :foundry "unknown" :family "Droid Sans Mono Slashed"))))
  '(cursor ((t (:background "white"))))
  '(custom-button ((((type x w32 mac) (class color)) (:background "lightgrey" :foreground "black" :box (:line-width -1 :style released-button)))))
  '(fixed-pitch ((t (:foundry "unknown" :family "Monaco"))))
@@ -123,7 +191,7 @@
 
 (add-to-list 'load-path "~/.emacs.d/lisp")
 (add-to-list 'load-path "~/.emacs.d/habitrpg/habitrpg")
-(add-to-list 'load-path "~/.emacs.d/lisp/slime")
+;(add-to-list 'load-path "~/.emacs.d/lisp/slime")
 
 ;; Useful utilities
 (defun first-existing (flist &optional predicate)
@@ -173,9 +241,11 @@
 
 
 ;; TODO: figure out how to run this under when-package
-;(load-library "slime")
-;(slime-setup '(slime-repl slime-fancy slime-highlight-edits))
-;(setq inferior-lisp-program "sbcl")
+(setq inferior-lisp-program "sbcl")
+(setq slime-contribs '(slime-fancy slime-repl slime-highlight-edits))
+;; (when-package slime
+;;   (slime-setup '(slime-repl slime-fancy slime-highlight-edits)
+;;   (setq inferior-lisp-program "sbcl"))
 
 
 ;(load "my-custom")
@@ -289,7 +359,9 @@
     (when-package (auto-complete go-autocomplete)
       (add-hook 'go-mode-hook 'auto-complete-mode))
     (when-package go-eldoc
-      (add-hook 'go-mode-hook 'go-eldoc-setup))))
+      (add-hook 'go-mode-hook 'go-eldoc-setup))
+    (define-key go-mode-map (kbd "C-c C-f") 'gofmt)))
+
 
 
 ; (setq show-trailing-whitespace t)
@@ -400,6 +472,9 @@
 (add-hook 'emacs-lisp-mode-hook
 	  'my-lisp-mode-hook)
 (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
+(when-package elisp-slime-nav
+  (add-hook 'emacs-lisp-mode-hook 'turn-on-elisp-slime-nav-mode)
+  (add-hook 'ielm-mode-hook 'turn-on-elisp-slime-nav-mode))
 
 ;;;; (add-to-list 'tramp-default-proxies-alist
 ;;;; '("\\." "\\`root\\'" "/ssh:%h:"))

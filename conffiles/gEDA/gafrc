@@ -1,2 +1,2 @@
-(component-library "${HOME}/gaf/gschem-sym")
+(component-library "${HOME}/Projects/hardware/symbols")
 

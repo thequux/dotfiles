@@ -1,0 +1,17 @@
+#!/usr/bin/perl -w
+
+open(my $rgbtxt, "</etc/X11/rgb.txt");
+
+if ($#ARGV < 0) {
+	print(STDERR "Usage: $0 NAME\n");
+	exit(1);
+}
+while (<$rgbtxt>) {
+	my ($r,$g,$b, $name) = split;
+	if ($name eq $ARGV[0]) {
+		printf("#%02x%02x%02x", $r,$g,$b);
+		exit(0);
+	}
+}
+close($rgbtxt);
+exit(1);
