@@ -1,0 +1,74 @@
+#!/bin/bash
+
+# Set a default for RUSTUP_HOME
+: ${RUSTUP_HOME:=${HOME}/.multirust}
+: ${RUST_SOURCE_ROOT:=${RUSTUP_HOME}/src}
+
+[[ -d ${RUST_SOURCE_ROOT} ]] || mkdir -p "${RUST_SOURCE_ROOT}"
+
+if [[ "x${NEXT_RACER}" == "x" ]]; then
+    SELF_FOUND=0
+    # TODO: This doesn't deal well with path entries that contain spaces
+    for cmd in $(which -a "$(basename "$0")"); do
+	if (( $SELF_FOUND == 1 )); then
+	    NEXT_RACER="${cmd}"
+	elif [[ "${cmd}" -ef "$0" ]]; then
+	    SELF_FOUND=1
+	fi
+    done
+fi
+if ! (( $SELF_FOUND )); then
+   : ${NEXT_RACER:=racer}
+fi
+
+repo_updated=no
+function update_repo() {
+    if [[ $repo_updated == "no" ]]; then
+	# Ensure that pull will actually work
+	for remote in $(git config --name-only --get-regexp 'remote\.[^.]*\.url' |cut -d. -f2); do
+	    git config --replace-all "remote.${remote}.fetch" "+refs/*:refs/remote/${remote}/*"
+	done
+	git fetch --all &>/dev/null && touch "${GIT_DIR}/HEAD"
+	repo_updated=yes
+    fi
+}
+
+function vivify() {
+    HASH=$1
+    export GIT_DIR="$RUSTUP_HOME/src/git"
+    if ! [[ -d "${GIT_DIR}" ]]; then
+	git clone --bare --quiet https://github.com/rust-lang/rust "${GIT_DIR}"
+    fi
+    
+    if (( $(date +%s) - 3600*12 > $(stat -c %Z "${GIT_DIR}/HEAD") )); then
+	update_repo
+    fi 
+    
+    TREE="$(git rev-parse --verify --quiet "${HASH}^{tree}")"
+    if [[ $? -ne 0 ]]; then
+	# Try again; multirust 
+	update_repo
+	TREE="$(git rev-parse --verify --quiet "${HASH}^{tree}")"
+	if [[ $? -ne 0 ]]; then
+	    echo "Unable to resolve ${HASH}" >/dev/stderr
+	    exit 1
+	fi
+    fi
+    
+    if ! [[ -d "${RUST_SOURCE_ROOT}/rust-${TREE}" ]]; then
+	git archive --prefix=rust-"${TREE}/" ${HASH} | tar xC "${RUST_SOURCE_ROOT}"
+    fi
+    readlink -f "${RUST_SOURCE_ROOT}/rust-${TREE}"
+}
+
+function rust_version() {
+    # Get the current rust compiler version
+    local RUST_COMMIT="$(rustc -vV 2>/dev/null |awk '($1 == "commit-hash:") { print $2 }')"
+    if (( $? )); then
+	echo "Rust isn't installed!" >/dev/stderr
+	exit 2
+    fi
+    echo $RUST_COMMIT
+}
+
+exec env RUST_SRC_PATH="$(vivify "$(rust_version)")/src" "${NEXT_RACER}" "$@"
