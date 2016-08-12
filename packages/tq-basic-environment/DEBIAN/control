@@ -4,5 +4,5 @@ Section: base
 Priority: optional
 Architecture: all
 Maintainer: thequux@thequux.com
-Depends: less, zsh, mg, liblocal-lib-perl, git
+Depends: less, zsh, mg, liblocal-lib-perl, git, rxvt-unicode, emacs
 Description: Metapackage for everything TQ likes in his environment
