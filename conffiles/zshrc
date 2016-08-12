@@ -220,4 +220,4 @@ fi
 
 # OPAM configuration
 . $HOME/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
-source $HOME/.rvm/scripts/rvm
+[[ -f $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
