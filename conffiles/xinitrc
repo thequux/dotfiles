@@ -3,6 +3,10 @@
 export PATH="$HOME/bin:$HOME/local/bin:$HOME/.cabal/bin:$PATH"
 xrdb .Xdefaults
 
+# We don't want terminals to start with SHLVL=2...
+export SHLVL=0
+
+
 # The following broke with systemd v208.
 #if [[ -x /bin/systemd ]]; then
 #	echo "Systemd mode starting in $PWD"
@@ -58,8 +62,16 @@ case `hostname -f` in
 	#xmobar &
 	fbsetbg -l
 	;;
+    bruxelles.*)
+	WM=awesome
+	hexchat &
+	google-chrome &
+	psi-plus &
+	spotify &
+	qbittorrent &
+	;;
     *)
-	WM="`first_executable xmonad fluxbox ion3 fluxbox twm`"
+	WM="`first_executable awesome xmonad fluxbox ion3 fluxbox twm`"
 	;;
 esac
 	
