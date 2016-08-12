@@ -7,6 +7,7 @@
 # _tq_envfile_ts contains a list of the timestamps of various init
 # files. It is used by the reinit command in zshrc and in the shell
 # prompt.
+setopt EXTENDED_GLOB
 typeset -A _tq_envfile_ts
 function _tq_update_envfile_ts() {
     local f=$1
@@ -21,16 +22,24 @@ else
    PATH="$SYSTEM_PATH"
 fi
 
+function path+() {
+	for dir in "$@"; do
+		if [[ -d "$dir" ]]; then
+			path=( "$dir" "${path[@]}" )
+		fi
+	done
+}
 export EC2_HOME=$HOME/local/opt/ec2-api-tools-1.6.6.0
-path=(
-	${EC2_HOME}/bin
-	/home/thequux/.gem/ruby/*/bin
-	/home/thequux/.rvm/bin
-	/home/thequux/local/bin
-	${HOME}/.cargo/bin
-	/home/thequux/.../bin
-	$path
-)
+
+path+ ~/.gem/ruby/*/bin(#qN)
+path+ ~/.rvm/bin
+path+ ~/.cargo/bin
+path+ ${EC2_HOME}/bin
+path+ ~/.multirust/bin
+
+path+ ~/local/bin
+path+ ~/.../bin
+
 
 export GOPATH="${HOME}/Projects/go"
 export GOBIN="${HOME}/local/bin"
