@@ -71,4 +71,14 @@ function rust_version() {
     echo $RUST_COMMIT
 }
 
-exec env RUST_SRC_PATH="$(vivify "$(rust_version)")/src" "${NEXT_RACER}" "$@"
+RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
+if ! [[ -d "${RUST_SRC_PATH}" ]]; then
+	RUST_SRC_PATH="$(vivify "$(rust_version)")/src"
+fi
+
+if [[ -d "${RUST_SRC_PATH}" ]]; then
+	exec env RUST_SRC_PATH="${RUST_SRC_PATH}" "${NEXT_RACER}" "$@"
+else
+	echo "Rust sources not installed. Try \"rustup component add rust-src\"" >&2
+	exit 1
+fi
