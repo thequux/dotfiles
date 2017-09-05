@@ -74,6 +74,8 @@
  '(c-basic-offset 2)
  '(coffee-command "iced")
  '(coffee-tab-width 4)
+ '(company-racer-executable "~/.../bin/racer")
+ '(company-racer-rust-src nil)
  '(completion-resolve-behaviour (quote reject))
  '(completion-use-hotkeys nil)
  '(cperl-autoindent-on-semi t)
@@ -89,9 +91,10 @@
  '(erc-nick "thequux")
  '(erc-server "irc.upstandinghackers.com")
  '(font-lock-verbose nil)
+ '(go-packages-function (quote go-packages-go-list))
  '(haskell-doc-show-global-types t)
  '(haskell-font-lock-symbols nil)
- '(haskell-mode-hook (quote (turn-on-haskell-indent turn-on-eldoc-mode)) t)
+ '(haskell-mode-hook (quote (turn-on-haskell-indent turn-on-eldoc-mode)))
  '(ido-auto-merge-work-directories-length -1)
  '(ido-default-buffer-method (quote selected-window))
  '(ido-default-file-method (quote selected-window))
@@ -115,6 +118,8 @@
  '(predictive-main-dict (quote dict-local) t)
  '(predictive-use-buffer-local-dict t)
  '(prolog-program-name "gprolog")
+ '(racer-cmd "/home/thequux/.../bin/racer")
+ '(racer-rust-src-path "/home/thequux/.multirust/src/")
  '(safe-local-variable-values
    (quote
     ((TeX-master . justone\.tex)
@@ -212,22 +217,30 @@
 
 
 (defmacro when-package (package-name &rest body)
-  (let ((tag (gensym))
+  (let ((failed-pkgs (gensym))
 	(plist (if (listp package-name)
 		   package-name
 		   (list package-name))))
-    `(catch ',tag
-       (condition-case nil
-	   (progn ,@(mapcar (lambda (x)
-			      `(require ',x))
-			    plist))
-	 (error ,@(mapcar (lambda (x)
-			    `(add-to-list 'tq-missing-packages ',x))
-			  plist)
-		(throw ',tag nil)))
+    `(let ((,failed-pkgs (remove-if #'(lambda (pkg)
+					(ignore-errors (require pkg)))
+				    ',plist)))
+       (if (not (null ,failed-pkgs))
+	   (dolist (pkg ,failed-pkgs nil)
+	     (add-to-list 'tq-missing-packages pkg))
+	   ,@body))))
+"
+`(catch ',tag
+   (condition-case nil
+       (progn ,@(mapcar (lambda (x)
+			  `(require ',x))
+			plist))
+     (error ,@(mapcar (lambda (x)
+			`(add-to-list 'tq-missing-packages ',x))
+		      plist)
+	    (throw ',tag nil)))
 	 
-       ,@body)))
-  
+   ,@body)
+ " 
 
 
 (defmacro let-when (var val &rest body)
@@ -306,6 +319,8 @@
   (add-to-list 'auto-mode-alist '("\\.ml[ily]?$" . tuareg-mode))
   (add-to-list 'auto-mode-alist '("\\.ml[ily]?$" . tuareg-mode)))
 
+(when-package jsx-mode
+  (add-to-list 'auto-mode-alist '("\\.jsx\\'" . jsx-mode)))
 
 (when-package habitrpg
   
@@ -342,25 +357,24 @@
       (setq tq-habitrpg-command-count 0)
       (incf tq-habitrpg-productivity-count)
       (habitrpg-upvote "productivity"))
-    nil)
-
-  (add-hook 'post-command-hook 'tq-habitrpg-upvote-productivity))
+    nil))
 
 ;; Set up Go
 (when (find-in-path "go")
   (message "Setting up go")
   ;;  (setenv "GOROOT" (shell-command-to-string "go env GOROOT"))
-  (let-when oracle-el (first-existing '("/usr/share/gocode/src/code.google.com/p/go.tools/cmd/oracle/oracle.el"))
-    (require 'go-oracle oracle-el)
-    (add-hook 'go-mode-hook 'go-oracle-mode))
   (when-package go-mode
-    (when-package flymake-go
-      (add-hook 'go-mode-hook 'flymake-go-init))
+    (add-hook 'before-save-hook 'gofmt-before-save)
+    (let-when oracle-el (first-existing '("/usr/share/gocode/src/golang.org/x/tools/cmd/oracle/oracle.el"))
+      (require 'go-oracle oracle-el))
+    ; (when-package flymake-go (add-hook 'go-mode-hook 'flymake-go-init))
     (when-package (auto-complete go-autocomplete)
       (add-hook 'go-mode-hook 'auto-complete-mode))
+    
     (when-package go-eldoc
       (add-hook 'go-mode-hook 'go-eldoc-setup))
-    (define-key go-mode-map (kbd "C-c C-f") 'gofmt)))
+    (define-key go-mode-map (kbd "C-c C-f") 'gofmt)
+    (define-key go-mode-map (kbd "M-.") 'godef-jump)))
 
 
 
@@ -476,6 +490,14 @@
   (add-hook 'emacs-lisp-mode-hook 'turn-on-elisp-slime-nav-mode)
   (add-hook 'ielm-mode-hook 'turn-on-elisp-slime-nav-mode))
 
+;; Rust config
+(when-package (rust-mode racer company-racer company cargo)
+  (defun tq-rust-mode-hook ()
+    (racer-mode t)
+    (company-mode t)
+    (cargo-minor-mode t)
+    (eldoc-mode t))
+  (add-hook 'rust-mode-hook 'tq-rust-mode-hook))
 ;;;; (add-to-list 'tramp-default-proxies-alist
 ;;;; '("\\." "\\`root\\'" "/ssh:%h:"))
 
